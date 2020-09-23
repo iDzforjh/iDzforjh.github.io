@@ -12,21 +12,21 @@
   
 
   <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/iDzforjh/Resource@2.0/images/TCTD2.PNG" type="image/png" />
-  <meta name="description" content="ArrayList 语法ArratList 本质是一个动态数组对象，可以方便存储集合对象，一般来说我们会把同一个类型的数据存储在这个ArrayList里。我们如果要使用ArrayList就必须要先实例化，实例化的语法都是一样的，使用 new 关键字，并且需要指定对象类型。 1234&#x2F;&#x2F; 这里的 Java 对象类型可以是任意的对象类型&#x2F;&#x2F; 比如 String、Integer、House 等&#x2F;&#x2F; 这里">
+  <meta name="description" content="ArrayList 语法ArratList 本质是一个动态数组对象，可以方便存储集合对象，一般来说我们会把同一个类型的数据存储在这个ArrayList里。我们如果要使用ArrayList就必须要先实例化，实例化的语法都是一样的，使用 new 关键字，并且需要指定对象类型。 &#x2F;&#x2F; 这里的 Java 对象类型可以是任意的对象类型 &#x2F;&#x2F; 比如 String、Integer、House 等 &#x2F;&#x2F; 这里的">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ArrayList">
 <meta property="og:url" content="http://idzforjh.top/2020/09/19/ArrayList/index.html">
 <meta property="og:site_name" content="The Division">
-<meta property="og:description" content="ArrayList 语法ArratList 本质是一个动态数组对象，可以方便存储集合对象，一般来说我们会把同一个类型的数据存储在这个ArrayList里。我们如果要使用ArrayList就必须要先实例化，实例化的语法都是一样的，使用 new 关键字，并且需要指定对象类型。 1234&#x2F;&#x2F; 这里的 Java 对象类型可以是任意的对象类型&#x2F;&#x2F; 比如 String、Integer、House 等&#x2F;&#x2F; 这里">
+<meta property="og:description" content="ArrayList 语法ArratList 本质是一个动态数组对象，可以方便存储集合对象，一般来说我们会把同一个类型的数据存储在这个ArrayList里。我们如果要使用ArrayList就必须要先实例化，实例化的语法都是一样的，使用 new 关键字，并且需要指定对象类型。 &#x2F;&#x2F; 这里的 Java 对象类型可以是任意的对象类型 &#x2F;&#x2F; 比如 String、Integer、House 等 &#x2F;&#x2F; 这里的">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-09-19T11:09:06.000Z">
-<meta property="article:modified_time" content="2020-09-19T11:09:52.053Z">
+<meta property="article:modified_time" content="2020-09-23T12:41:55.668Z">
 <meta property="article:author" content="Fraser·&#39;iDzforjh&#39;·Bu">
-<meta property="article:tag" content="Java Base">
+<meta property="article:tag" content="Think of Java">
 <meta name="twitter:card" content="summary">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/gh/nexmoe/nexmoe.github.io@latest/css/style.css,npm/highlight.js@9.15.8/styles/atom-one-dark.css,gh/nexmoe/nexmoe.github.io@latest/lib/mdui_043tiny/css/mdui.css,gh/nexmoe/nexmoe.github.io@latest/lib/iconfont/iconfont.css" crossorigin>
   
-  <!--<link rel="stylesheet" href="http://idzforjh.top/css/style.css?v=1600513813006">-->
+  <!--<link rel="stylesheet" href="http://idzforjh.top/css/style.css?v=1600869397748">-->
 
   
 <meta name="generator" content="Hexo 5.1.1"></head>
@@ -108,7 +108,7 @@
   <div class="nexmoe-widget-wrap">
     <h3 class="nexmoe-widget-title">标签云</h3>
     <div id="randomtagcloud" class="nexmoe-widget tagcloud nexmoe-rainbow">
-      <a href="http://idzforjh.top/tags/Java-Base/" style="font-size: 10px;">Java Base</a>
+      <a href="http://idzforjh.top/tags/Think-of-Java/" style="font-size: 10px;">Think of Java</a>
     </div>
     
   </div>
@@ -144,7 +144,7 @@
   
   <div class="nexmoe-post-meta nexmoe-rainbow" style="margin:10px 0!important;">
     <a><i class="nexmoefont icon-calendar-fill"></i>2020年09月19日</a>
-    <a><i class="nexmoefont icon-areachart"></i>799 字</a>
+    <a><i class="nexmoefont icon-areachart"></i>798 字</a>
     <a><i class="nexmoefont icon-time-circle-fill"></i>大概 3 分钟</a>
 </div>
 
@@ -154,33 +154,81 @@
 
   <article>
     <h1 id="ArrayList-语法"><a href="#ArrayList-语法" class="headerlink" title="ArrayList 语法"></a>ArrayList 语法</h1><p>ArratList 本质是一个动态数组对象，可以方便存储集合对象，一般来说我们会把同一个类型的数据存储在这个ArrayList里。我们如果要使用ArrayList就必须要先实例化，实例化的语法都是一样的，使用 <code>new</code> 关键字，并且需要指定对象类型。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 这里的 Java 对象类型可以是任意的对象类型</span></span><br><span class="line"><span class="comment">// 比如 String、Integer、House 等</span></span><br><span class="line"><span class="comment">// 这里的 &lt;&gt; 是 Java 泛型的规范,记住这个语法就行了</span></span><br><span class="line">ArrayList&lt;Java 对象类型&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br></pre></td></tr></table></figure>
-
+<pre><code class="java">// 这里的 Java 对象类型可以是任意的对象类型
+// 比如 String、Integer、House 等
+// 这里的 &lt;&gt; 是 Java 泛型的规范,记住这个语法就行了
+ArrayList&lt;Java 对象类型&gt; list = new ArrayList&lt;&gt;();</code></pre>
 <blockquote>
 <p>ArrayList 对象是存放在<code>java.util</code>包下的，所以如果需要使用它就需要先进行 <code>import</code> 引入<br><code>import java.util.ArrayList;</code></p>
 </blockquote>
 <h2 id="add-方法"><a href="#add-方法" class="headerlink" title="add 方法"></a>add 方法</h2><p>完成ArrayList实例化之后，就可以使用ArrayList的<code>add</code>方法来进行数据的添加。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ArrayListTest1</span></span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">    <span class="comment">// 创建一个 ArrayList 存储字符串集合</span></span><br><span class="line">    ArrayList&lt;String&gt; strs = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    <span class="comment">// 添加数据到 ArrayList 实例里</span></span><br><span class="line">    strs.add(<span class="string">&quot;张三&quot;</span>);</span><br><span class="line">    strs.add(<span class="string">&quot;李四&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="java">import java.util.ArrayList;
 
+public class ArrayListTest1&#123;
+  public static void main(String[] args)&#123;
+    // 创建一个 ArrayList 存储字符串集合
+    ArrayList&lt;String&gt; strs = new ArrayList&lt;&gt;();
+    // 添加数据到 ArrayList 实例里
+    strs.add(&quot;张三&quot;);
+    strs.add(&quot;李四&quot;);
+  &#125;
+&#125;</code></pre>
 <h2 id="get-size-方法"><a href="#get-size-方法" class="headerlink" title="get/size 方法"></a>get/size 方法</h2><p>ArrayList 是动态数组也就具备如下特点：</p>
 <ul>
 <li>可以获取长度 <code>size()</code></li>
 <li>可以根据索引获取具体的值 <code>get(索引)</code>，ArrayList的索引是从0开始的。</li>
 </ul>
 <p><strong>索引  index:</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 返回指定字符在字符串中第一次出现处的索引，如果此字符串中没有这样的字符，则返回 -1。</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">indexOf</span><span class="params">(<span class="keyword">int</span> ch)</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="comment">//返回从 fromIndex 位置开始查找指定字符在字符串中第一次出现处的索引，如果此字符串中没有这样的字符，则返回 -1。</span></span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">indexOf</span><span class="params">(<span class="keyword">int</span> ch, <span class="keyword">int</span> fromIndex)</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="comment">//返回指定字符在字符串中第一次出现处的索引，如果此字符串中没有这样的字符，则返回 -1。</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">indexOf</span><span class="params">(String str)</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="comment">// 返回从 fromIndex 位置开始查找指定字符在字符串中第一次出现处的索引，如果此字符串中没有这样的字符，则返回 -1</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">indexOf</span><span class="params">(String str, <span class="keyword">int</span> fromIndex)</span></span></span><br></pre></td></tr></table></figure>
+<pre><code class="java">// 返回指定字符在字符串中第一次出现处的索引，如果此字符串中没有这样的字符，则返回 -1。
+public int indexOf(int ch)
 
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ArrayListTest1</span></span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">    <span class="comment">// 创建一个 ArrayList 存储字符串集合</span></span><br><span class="line">    ArrayList&lt;String&gt; strs = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    <span class="comment">// 添加数据到 ArrayList 实例里</span></span><br><span class="line">    strs.add(<span class="string">&quot;张三&quot;</span>);</span><br><span class="line">    strs.add(<span class="string">&quot;李四&quot;</span>);</span><br><span class="line">    <span class="comment">// 获取集合的长度</span></span><br><span class="line">    <span class="keyword">int</span> size = strs.size();</span><br><span class="line">    <span class="comment">// 使用 for 循环迭代每一条记录</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;size;i++)&#123;</span><br><span class="line">       <span class="comment">// 根据索引获取值，值的类型是 String</span></span><br><span class="line">       String str = strs.get(i);</span><br><span class="line">       System.out.println(str);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+//返回从 fromIndex 位置开始查找指定字符在字符串中第一次出现处的索引，如果此字符串中没有这样的字符，则返回 -1。
+public int indexOf(int ch, int fromIndex)
 
+//返回指定字符在字符串中第一次出现处的索引，如果此字符串中没有这样的字符，则返回 -1。
+int indexOf(String str)
 
-<h2 id="for-语句迭代集合"><a href="#for-语句迭代集合" class="headerlink" title="for 语句迭代集合"></a>for 语句迭代集合</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ArrayListTest1</span></span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">    <span class="comment">// 创建一个 ArrayList 存储字符串集合</span></span><br><span class="line">    ArrayList&lt;String&gt; strs = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    <span class="comment">// 添加数据到 ArrayList 实例里</span></span><br><span class="line">    strs.add(<span class="string">&quot;张三&quot;</span>);</span><br><span class="line">    strs.add(<span class="string">&quot;李四&quot;</span>);</span><br><span class="line">    <span class="comment">// 获取集合的长度</span></span><br><span class="line">    <span class="keyword">int</span> size = strs.size();</span><br><span class="line">    <span class="comment">// 使用 for 循环迭代每一条记录</span></span><br><span class="line">    <span class="keyword">for</span>(String str : strs)&#123;</span><br><span class="line">       System.out.println(str);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+// 返回从 fromIndex 位置开始查找指定字符在字符串中第一次出现处的索引，如果此字符串中没有这样的字符，则返回 -1
+int indexOf(String str, int fromIndex)</code></pre>
+<pre><code class="java">import java.util.ArrayList;
+public class ArrayListTest1&#123;
+  public static void main(String[] args)&#123;
+    // 创建一个 ArrayList 存储字符串集合
+    ArrayList&lt;String&gt; strs = new ArrayList&lt;&gt;();
+    // 添加数据到 ArrayList 实例里
+    strs.add(&quot;张三&quot;);
+    strs.add(&quot;李四&quot;);
+    // 获取集合的长度
+    int size = strs.size();
+    // 使用 for 循环迭代每一条记录
+    for(int i=0;i&lt;size;i++)&#123;
+       // 根据索引获取值，值的类型是 String
+       String str = strs.get(i);
+       System.out.println(str);
+    &#125;
+  &#125;
+&#125;</code></pre>
+<h2 id="for-语句迭代集合"><a href="#for-语句迭代集合" class="headerlink" title="for 语句迭代集合"></a>for 语句迭代集合</h2><pre><code class="java">import java.util.ArrayList;
 
+public class ArrayListTest1&#123;
+  public static void main(String[] args)&#123;
+    // 创建一个 ArrayList 存储字符串集合
+    ArrayList&lt;String&gt; strs = new ArrayList&lt;&gt;();
+    // 添加数据到 ArrayList 实例里
+    strs.add(&quot;张三&quot;);
+    strs.add(&quot;李四&quot;);
+    // 获取集合的长度
+    int size = strs.size();
+    // 使用 for 循环迭代每一条记录
+    for(String str : strs)&#123;
+       System.out.println(str);
+    &#125;
+  &#125;
+&#125;</code></pre>
 <p>语法：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>( 集合变量的类型 变量名称 : 集合变量 )</span><br></pre></td></tr></table></figure>
-
+<pre><code class="java">for( 集合变量的类型 变量名称 : 集合变量 )</code></pre>
 <p>在上述例子中使用的集合是字符串集合，所以使用的是</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(String str : strs)&#123; &#125;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="java">for(String str : strs)&#123; &#125;</code></pre>
 <p>与之前的 <code>for i</code> 语句的区别在于，遍历集合的时候能否得到 <code>i</code> 值。</p>
 
   </article>
@@ -188,7 +236,7 @@
   <div class="nexmoe-post-meta nexmoe-rainbow">
     
     
-        <a class="nexmoefont icon-tag-fill -none-link" href="http://idzforjh.top/tags/Java-Base/" rel="tag">Java Base</a>
+        <a class="nexmoefont icon-tag-fill -none-link" href="http://idzforjh.top/tags/Think-of-Java/" rel="tag">Think of Java</a>
     
 </div>
 
@@ -227,7 +275,7 @@
   </div>
   <script src="https://cdn.jsdelivr.net/combine/npm/lazysizes@5.1.0/lazysizes.min.js,gh/highlightjs/cdn-release@9.15.8/build/highlight.min.js,npm/mdui@0.4.3/dist/js/mdui.min.js,gh/nexmoe/nexmoe.github.io@latest/js/app.js"></script>
 <script>hljs.initHighlightingOnLoad();</script>
-<!--<script src="http://idzforjh.top/js/app.js?v=1600513813008"></script>-->
+<!--<script src="http://idzforjh.top/js/app.js?v=1600869397750"></script>-->
 
 
     <script src="https://cdn.jsdelivr.net/gh/xtaodada/xtaodada.github.io@0.0.2/copy.js"></script>
