@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+
+<head>
+  
+  <title>Inheritance - The Division</title>
+  <meta charset="UTF-8">
+  <meta name="description" content="JIT, 2018, Network engineering Undergraduate student">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+  
+  
+
+  <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/iDzforjh/Resource@2.0/images/TCTD2.PNG" type="image/png" />
+  <meta name="description" content="爸爸，儿子，爷爷？！">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Inheritance">
+<meta property="og:url" content="http://idzforjh.top/2020/09/25/Inheritance/index.html">
+<meta property="og:site_name" content="The Division">
+<meta property="og:description" content="爸爸，儿子，爷爷？！">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://style.youkeda.com/img/ham/course/j2/dog.svg">
+<meta property="og:image" content="https://style.youkeda.com/img/ham/course/j2/extends.svg">
+<meta property="og:image" content="https://style.youkeda.com/img/ham/course/j2/dog2.svg">
+<meta property="og:image" content="https://style.youkeda.com/img/ham/course/j2/dog3.svg">
+<meta property="og:image" content="c:/Users/Administrator/AppData/Roaming/Typora/typora-user-images/image-20200925204916560.png">
+<meta property="og:image" content="c:/Users/Administrator/AppData/Roaming/Typora/typora-user-images/image-20200925204431669.png">
+<meta property="article:published_time" content="2020-09-25T11:21:44.000Z">
+<meta property="article:modified_time" content="2020-09-25T12:53:02.031Z">
+<meta property="article:author" content="Fraser·&#39;iDzforjh&#39;·Bu">
+<meta property="article:tag" content="Think of Java">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://style.youkeda.com/img/ham/course/j2/dog.svg">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/gh/nexmoe/nexmoe.github.io@latest/css/style.css,npm/highlight.js@9.15.8/styles/atom-one-dark.css,gh/nexmoe/nexmoe.github.io@latest/lib/mdui_043tiny/css/mdui.css,gh/nexmoe/nexmoe.github.io@latest/lib/iconfont/iconfont.css" crossorigin>
+  
+  <!--<link rel="stylesheet" href="http://idzforjh.top/css/style.css?v=1601038451240">-->
+
+  
+<meta name="generator" content="Hexo 5.1.1"></head>
+
+<body class="mdui-drawer-body-left">
+  
+  <div id="nexmoe-background">
+    <div class="nexmoe-bg" style="background-image: url(https://cdn.jsdelivr.net/gh/iDzforjh/Resource@2.0/images/background.jpg)"></div>
+    <div class="mdui-appbar mdui-shadow-0">
+      <div class="mdui-toolbar">
+        <a mdui-drawer="{target: '#drawer', swipe: true}" title="menu" class="mdui-btn mdui-btn-icon mdui-ripple"><i class="mdui-icon nexmoefont icon-menu"></i></a>
+        <div class="mdui-toolbar-spacer"></div>
+        <!--<a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>-->
+        <a href="http://idzforjh.top/" title="Fraser·&#39;iDzforjh&#39;·Bu" class="mdui-btn mdui-btn-icon"><img src="https://cdn.jsdelivr.net/gh/iDzforjh/Resource@2.0/images/avatar.jpg" alt="Fraser·&#39;iDzforjh&#39;·Bu"></a>
+       </div>
+    </div>
+  </div>
+  <div id="nexmoe-header">
+      <div class="nexmoe-drawer mdui-drawer" id="drawer">
+    <div class="nexmoe-avatar mdui-ripple">
+        <a href="http://idzforjh.top/" title="Fraser·&#39;iDzforjh&#39;·Bu">
+            <img src="https://cdn.jsdelivr.net/gh/iDzforjh/Resource@2.0/images/avatar.jpg" alt="Fraser·&#39;iDzforjh&#39;·Bu" alt="Fraser·&#39;iDzforjh&#39;·Bu">
+        </a>
+    </div>
+    <div class="nexmoe-count">
+        <div><span>文章</span>5</div>
+        <div><span>标签</span>2</div>
+        <div><span>分类</span>0</div>
+    </div>
+    <div class="nexmoe-list mdui-list" mdui-collapse="{accordion: true}">
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="http://idzforjh.top/" title="回到首页">
+            <i class="mdui-list-item-icon nexmoefont icon-home"></i>
+            <div class="mdui-list-item-content">
+                回到首页
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="http://idzforjh.top/archives" title="文章归档">
+            <i class="mdui-list-item-icon nexmoefont icon-container"></i>
+            <div class="mdui-list-item-content">
+                文章归档
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="http://idzforjh.top/about.html" title="关于博客">
+            <i class="mdui-list-item-icon nexmoefont icon-info-circle"></i>
+            <div class="mdui-list-item-content">
+                关于博客
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="http://idzforjh.top/PY.html" title="我的朋友">
+            <i class="mdui-list-item-icon nexmoefont icon-unorderedlist"></i>
+            <div class="mdui-list-item-content">
+                我的朋友
+            </div>
+        </a>
+        
+    </div>
+    <aside id="nexmoe-sidebar">
+  
+  <div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-search">
+        <form id="search_form" action_e="https://cn.bing.com/search?q=site:nexmoe.com" onsubmit="return search();">
+            <label><input id="search_value" name="q" type="search" placeholder="搜索"></label>
+        </form>
+    </div>
+</div>
+  
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">社交按钮</h3>
+    <div class="nexmoe-widget nexmoe-social">
+        <a class="mdui-ripple" href="https://space.bilibili.com/21645780" target="_blank" mdui-tooltip="{content: '哔哩哔哩'}" style="color: rgb(231, 106, 141);background-color: rgba(231, 106, 141, .15);">
+            <i class="nexmoefont icon-bilibili"></i>
+        </a><a class="mdui-ripple" href="https://github.com/iDzforjh" target="_blank" mdui-tooltip="{content: 'GitHub'}" style="color: rgb(25, 23, 23);background-color: rgba(25, 23, 23, .15);">
+            <i class="nexmoefont icon-github"></i>
+        </a>
+    </div>
+</div>
+  
+  
+
+  
+  
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">标签云</h3>
+    <div id="randomtagcloud" class="nexmoe-widget tagcloud nexmoe-rainbow">
+      <a href="http://idzforjh.top/tags/HTML/" style="font-size: 10px;">HTML</a> <a href="http://idzforjh.top/tags/Think-of-Java/" style="font-size: 20px;">Think of Java</a>
+    </div>
+    
+  </div>
+
+  
+  
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">文章归档</h3>
+    <div class="nexmoe-widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="http://idzforjh.top/archives/2020/09/">九月 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+</aside>
+    <div class="nexmoe-copyright">
+        &copy; 2020 Fraser·&#39;iDzforjh&#39;·Bu
+        Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+        & <a href="https://nexmoe.com/hexo-theme-nexmoe.html" target="_blank">Nexmoe</a>
+    </div>
+</div><!-- .nexmoe-drawer -->
+  </div>
+  <div id="nexmoe-content">
+    <div class="nexmoe-primary">
+        <div class="nexmoe-post">
+  
+      <div class="nexmoe-post-cover" style="padding-bottom: 56.25%;"> 
+          <img data-src="https://cdn.jsdelivr.net/gh/iDzforjh/Resource@3.0/images/java.jpg" data-sizes="auto" alt="Inheritance" class="lazyload">
+          <h1>Inheritance</h1>
+      </div>
+  
+  
+  <div class="nexmoe-post-meta nexmoe-rainbow" style="margin:10px 0!important;">
+    <a><i class="nexmoefont icon-calendar-fill"></i>2020年09月25日</a>
+    <a><i class="nexmoefont icon-areachart"></i>1.4k 字</a>
+    <a><i class="nexmoefont icon-time-circle-fill"></i>大概 6 分钟</a>
+</div>
+
+  <div class="nexmoe-post-right">
+    
+  </div>
+
+  <article>
+    <p>爸爸，儿子，爷爷？！</p>
+<a id="more"></a>
+
+<h1 id="Inheritance"><a href="#Inheritance" class="headerlink" title="Inheritance"></a>Inheritance</h1><p>继承已存在的类就是复用（继承）这些类的方法和域。</p>
+<h2 id="继承语法"><a href="#继承语法" class="headerlink" title="继承语法"></a>继承语法</h2><p>生活案例：</p>
+<p><img data-sizes="auto" data-src="https://style.youkeda.com/img/ham/course/j2/dog.svg" alt="img" class="lazyload"></p>
+<p>大多数情况下，动物可以拥有名称、年龄这两个属性，所以我们会发现这三个对象的属性相同。当然这三个动物还有很多其他属性，在此只是举例。</p>
+<p>当我们遇到这样具备相同的属性以及从属某一类别、领域的对象的时候就可以考虑使用 <strong>继承</strong> 来解决问题。</p>
+<p>在 Java 中继承的语法就是在创建类的时候 多添加一个 <strong>extends 关键字</strong></p>
+<p><img data-sizes="auto" data-src="https://style.youkeda.com/img/ham/course/j2/extends.svg" alt="img" class="lazyload"></p>
+<p>如上述实例中，当使用继承以后。Dog 成为 Animal 的 <strong>字类</strong>， Animal 称为 <strong>父类</strong>。</p>
+<p>完整代码：</p>
+<p><strong>Animal.java</strong></p>
+<pre><code class="java">package com.youkeda.model;
+
+public class Animal &#123;
+
+    private String name;
+
+    private int age;
+
+    public String getName() &#123;
+        return name;
+    &#125;
+
+    public void setName(String name) &#123;
+        this.name = name;
+    &#125;
+
+    public int getAge() &#123;
+        return age;
+    &#125;
+
+    public void setAge(int age) &#123;
+        this.age = age;
+    &#125;
+&#125;</code></pre>
+<p><strong>Dog.java</strong></p>
+<pre><code class="java">package com.youkeda.model;
+
+public class Dog extends Animal&#123;
+&#125;</code></pre>
+<p><strong>Cat.java</strong></p>
+<pre><code class="java">package com.youkeda.model;
+
+public class Cat extends Animal&#123;
+&#125;</code></pre>
+<p><strong>Monkey.java</strong></p>
+<pre><code class="java">package com.youkeda.model;
+
+public class Monkey extends Animal&#123;
+&#125;</code></pre>
+<h2 id="UML-继承"><a href="#UML-继承" class="headerlink" title="UML 继承"></a>UML 继承</h2><p>继承关系同样可以使用 UML 来绘制：</p>
+<p><img data-sizes="auto" data-src="https://style.youkeda.com/img/ham/course/j2/dog2.svg" alt="img" class="lazyload"></p>
+<blockquote>
+<p>箭头指向父类，在继承关系中 private 级别的变量或者方法，字类是获取不到的，字类如果想获取父类的变量和方法可以设置父类的变量和方法为 protected 或者 public 访问控制符。</p>
+</blockquote>
+<h2 id="方法覆盖"><a href="#方法覆盖" class="headerlink" title="方法覆盖"></a>方法覆盖</h2><p>我们知道每个动物的饮食习惯都不尽相同，如果把这个行为转变为Java对象，就需要每个 对象 各自去实现 “吃” 这个方法，在父子类中，字类如果想要<strong>重写</strong>父类定义方法的行为称之为：<strong>方法覆盖</strong>。</p>
+<p><img data-sizes="auto" data-src="https://style.youkeda.com/img/ham/course/j2/dog3.svg" alt="img" class="lazyload"></p>
+<p>比如说，在 Dog 对象中覆盖 eat 方法，并打印出：“狗狗喜欢吃骨头”</p>
+<pre><code class="java">package com.youkeda.model;
+
+public class Dog extends Animal&#123;
+
+    public void eat()&#123;
+        System.out.println(&quot;狗狗喜欢吃肉骨头&quot;);
+    &#125;
+
+&#125;</code></pre>
+<p><strong>实例化 Dog 对象</strong></p>
+<pre><code class="java">public class Test &#123;
+  public static void main(String[] args)&#123;
+    // 实例化 dog 对象
+    Dog d = new Dog();
+    d.setName(&quot;小灰&quot;);
+    d.setAge(3);
+    System.out.println(d.getName()+&quot;---&quot;+d.getAge());
+  &#125;
+&#125;</code></pre>
+<p><strong>实例化 Animal 对象</strong></p>
+<p>动物对象是一个抽象的对象，并没有指具体的某个动物，所以一般运用动物对象是要结合子类。</p>
+<pre><code class="java">public class Test &#123;
+  public static void main(String[] args)&#123;
+    // 实例化 dog 对象并赋值给 Animal 对象
+    Animal d = new Dog();
+    d.setName(&quot;小灰&quot;);
+    d.setAge(3);
+    System.out.println(d.getName()+&quot;---&quot;+d.getAge());
+  &#125;
+&#125;</code></pre>
+<p>不同：</p>
+<pre><code class="java">Animal d = new Dog();</code></pre>
+<p>父类对象是可以直接成为子类的实例，如果调用 d.eat() 方法代码依旧可以运行。虽然实例化的对象是Dog 子类，但是我们调用父类一样可以执行。同理，虽然调用了父类的 eat() 方法，但是由于 覆盖的原因直接执行子类的 eat() 方法。</p>
+<blockquote>
+<p>注：子类对象兼容父类对象，但是父类对象不能转化为子类。在上述例子中 </p>
+<p>Dog dog = new Animal() 是错误的。</p>
+<p>警告：在覆盖一个方法的时候，子类的方法不能低于超类方法的可见性。特别是，如果超类方法是 public，子类的方法一定要声明为 public。经常会发生这种错误：在声明子类方法时候，遗漏了 public 修饰符。此时编辑器将会把它理解为试图提供更严格的访问权限。</p>
+</blockquote>
+<h2 id="Super-关键字"><a href="#Super-关键字" class="headerlink" title="Super 关键字"></a>Super 关键字</h2><p>通过 <strong>this</strong> 关键字，可以操作实例内的变量或者方法。</p>
+<p>如果想通过子类操作父类也有这样一个关键字：super。（super 只发生在子类中）</p>
+<pre><code class="java">package com.youkeda.model;
+
+public class Animal &#123;
+    private String name;
+    private int age;
+    public void eat()&#123;
+       System.out.println(&quot;动物要饿肚子啦&quot;);
+    &#125;
+    public String getName() &#123;
+        return name;
+    &#125;
+    public void setName(String name) &#123;
+        this.name = name;
+    &#125;
+    public int getAge() &#123;
+        return age;
+    &#125;
+    public void setAge(int age) &#123;
+        this.age = age;
+    &#125;
+&#125;</code></pre>
+<pre><code class="java">public class Dog extends Animal&#123;
+    public void eat()&#123;
+        // 调用父类的方法
+        super.eat();
+        System.out.println(&quot;狗狗喜欢吃肉骨头&quot;);
+    &#125;
+&#125;</code></pre>
+<p>子类运用 super 调用父类一般会发生在父类有一些通用的逻辑可以被执行。</p>
+<h2 id="子类的构造函数"><a href="#子类的构造函数" class="headerlink" title="子类的构造函数"></a>子类的构造函数</h2><p>当父类只有一个参数的构造函数的时候，子类也必须要具备这个构造函数，或者调用 super 方法来实现新的构造函数。</p>
+<pre><code class="java">public class CustomFile&#123;
+  // 存储文件路径的变量
+  public String filePath;
+  // 存储文件后缀变量，通过后缀来区分文件类型
+  public String ext;
+
+  // 声明一个构造函数，接受文件路径
+  public CustomFile(String filePath)&#123;
+    //给类变量 filePath 赋值
+    //this代表的是当前类的实例
+    this.filePath = filePath;
+  &#125;
+
+  /**
+   * 获取文件名称
+   */
+  public String getName()&#123;
+    // 比如文件路径是 /Users/mac/work/face.png
+    // 把文件路径分隔成数组（分隔符是 / ）
+    // 数组的最后一位就是文件名
+    String[] paths = filePath.split(&quot;/&quot;);
+    // 数组的最后一位需要减1，因为数组是从索引0开始的。
+    return  paths[paths.length-1];
+  &#125;
+&#125;</code></pre>
+<p>比如：</p>
+<pre><code class="java">public class JavaFile extends CustomFile&#123;
+
+  // 声明一个构造函数
+  public JavaFile(String filePath)&#123;
+    super(filePath);
+  &#125;
+&#125;</code></pre>
+<p>如果父类有定义构造函数而子类未定义构造函数：</p>
+<p><img data-sizes="auto" data-src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200925204916560.png" alt="image-20200925204916560" class="lazyload"></p>
+<p><img data-sizes="auto" data-src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200925204431669.png" alt="image-20200925204431669" class="lazyload"></p>
+<p>如果需要定义新的构造函数：</p>
+<pre><code class="java">public class JavaFile extends CustomFile&#123;
+  private String packageName;
+
+  // 声明一个构造函数
+  public JavaFile(String filePath,String packageName)&#123;
+    super(filePath);
+    this.packageName = packageName;
+  &#125;
+
+  public String getPackageName()&#123;
+      return this.packageName;
+  &#125;
+&#125;</code></pre>
+<blockquote>
+<p>注意：构造函数里的 super 方法必须在第一行。</p>
+<p>如果不在第一行会与没有定义构造函数报错一样。</p>
+</blockquote>
+
+  </article>
+
+  <div class="nexmoe-post-meta nexmoe-rainbow">
+    
+    
+        <a class="nexmoefont icon-tag-fill -none-link" href="http://idzforjh.top/tags/Think-of-Java/" rel="tag">Think of Java</a>
+    
+</div>
+
+  <div class="nexmoe-post-footer">
+    
+      
+  <div class="nexmoe-post-copyright">
+    <strong>本文作者：</strong>Fraser·&#39;iDzforjh&#39;·Bu<br>
+    <strong>本文链接：</strong><a href="http://idzforjh.top/2020/09/25/Inheritance/" title="http:&#x2F;&#x2F;idzforjh.top&#x2F;2020&#x2F;09&#x2F;25&#x2F;Inheritance&#x2F;" target="_blank" rel="noopener">http:&#x2F;&#x2F;idzforjh.top&#x2F;2020&#x2F;09&#x2F;25&#x2F;Inheritance&#x2F;</a><br>
+    
+      <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
+    
+  </div>
+
+
+    
+    <section class="nexmoe-comment">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.5.0/dist/gitalk.min.css">
+<div id="gitalk"></div>
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1.5.0/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+    var gitalk = new Gitalk({
+        clientID: '80b2453b6d5f37ad6225',
+        clientSecret: '43e99fa852795c9a7b3eb924b2558c64b84bbdeb',
+        id: window.location.pathname,
+        repo: 'nexmoe.github.io',
+        owner: 'nexmoe',
+        admin: 'nexmoe'
+    })
+    gitalk.render('gitalk')
+</script>
+</section>
+  </div>
+</div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/combine/npm/lazysizes@5.1.0/lazysizes.min.js,gh/highlightjs/cdn-release@9.15.8/build/highlight.min.js,npm/mdui@0.4.3/dist/js/mdui.min.js,gh/nexmoe/nexmoe.github.io@latest/js/app.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<!--<script src="http://idzforjh.top/js/app.js?v=1601038451241"></script>-->
+
+
+    <script src="https://cdn.jsdelivr.net/gh/xtaodada/xtaodada.github.io@0.0.2/copy.js"></script>
+
+
+
+  
+
+
+
+
+
+</body>
+
+</html>
