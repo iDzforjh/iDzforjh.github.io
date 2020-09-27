@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+
+<head>
+  
+  <title>Exception Handing - The Division</title>
+  <meta charset="UTF-8">
+  <meta name="description" content="JIT, 2018, Network engineering Undergraduate student">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+  
+  
+
+  <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/iDzforjh/Resource@2.0/images/TCTD2.PNG" type="image/png" />
+  <meta name="description" content="真实的编程：Bug！Bug！Bug！">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Exception Handing">
+<meta property="og:url" content="http://idzforjh.top/2020/09/27/Exception%20Handing/index.html">
+<meta property="og:site_name" content="The Division">
+<meta property="og:description" content="真实的编程：Bug！Bug！Bug！">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/iDzforjh/Resource@4.1/Java%E5%BC%82%E5%B8%B8/%E5%BC%82%E5%B8%B8%E6%9C%BA%E5%88%B61.svg">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/iDzforjh/Resource@4.1/Java%E5%BC%82%E5%B8%B8/%E5%BC%82%E5%B8%B8%E7%B1%BB1.jpg">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/iDzforjh/Resource@4.1/Java%E5%BC%82%E5%B8%B8/%E5%BC%82%E5%B8%B8UML.svg">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/iDzforjh/Resource@4.1/Java%E5%BC%82%E5%B8%B8/%E8%87%AA%E5%AE%9A%E4%B9%89%E5%BC%82%E5%B8%B81.svg">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/iDzforjh/Resource@4.1/Java%E5%BC%82%E5%B8%B8/%E8%87%AA%E5%AE%9A%E4%B9%89%E5%BC%82%E5%B8%B82.png">
+<meta property="article:published_time" content="2020-09-27T11:30:22.000Z">
+<meta property="article:modified_time" content="2020-09-27T13:00:36.900Z">
+<meta property="article:author" content="Fraser·&#39;iDzforjh&#39;·Bu">
+<meta property="article:tag" content="Think of Java">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/iDzforjh/Resource@4.1/Java%E5%BC%82%E5%B8%B8/%E5%BC%82%E5%B8%B8%E6%9C%BA%E5%88%B61.svg">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/gh/nexmoe/nexmoe.github.io@latest/css/style.css,npm/highlight.js@9.15.8/styles/atom-one-dark.css,gh/nexmoe/nexmoe.github.io@latest/lib/mdui_043tiny/css/mdui.css,gh/nexmoe/nexmoe.github.io@latest/lib/iconfont/iconfont.css" crossorigin>
+  
+  <!--<link rel="stylesheet" href="http://idzforjh.top/css/style.css?v=1601211654420">-->
+
+  
+<meta name="generator" content="Hexo 5.1.1"></head>
+
+<body class="mdui-drawer-body-left">
+  
+  <div id="nexmoe-background">
+    <div class="nexmoe-bg" style="background-image: url(https://cdn.jsdelivr.net/gh/iDzforjh/Resource@2.0/images/background.jpg)"></div>
+    <div class="mdui-appbar mdui-shadow-0">
+      <div class="mdui-toolbar">
+        <a mdui-drawer="{target: '#drawer', swipe: true}" title="menu" class="mdui-btn mdui-btn-icon mdui-ripple"><i class="mdui-icon nexmoefont icon-menu"></i></a>
+        <div class="mdui-toolbar-spacer"></div>
+        <!--<a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>-->
+        <a href="http://idzforjh.top/" title="Fraser·&#39;iDzforjh&#39;·Bu" class="mdui-btn mdui-btn-icon"><img src="https://cdn.jsdelivr.net/gh/iDzforjh/Resource@2.0/images/avatar.jpg" alt="Fraser·&#39;iDzforjh&#39;·Bu"></a>
+       </div>
+    </div>
+  </div>
+  <div id="nexmoe-header">
+      <div class="nexmoe-drawer mdui-drawer" id="drawer">
+    <div class="nexmoe-avatar mdui-ripple">
+        <a href="http://idzforjh.top/" title="Fraser·&#39;iDzforjh&#39;·Bu">
+            <img src="https://cdn.jsdelivr.net/gh/iDzforjh/Resource@2.0/images/avatar.jpg" alt="Fraser·&#39;iDzforjh&#39;·Bu" alt="Fraser·&#39;iDzforjh&#39;·Bu">
+        </a>
+    </div>
+    <div class="nexmoe-count">
+        <div><span>文章</span>7</div>
+        <div><span>标签</span>2</div>
+        <div><span>分类</span>0</div>
+    </div>
+    <div class="nexmoe-list mdui-list" mdui-collapse="{accordion: true}">
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="http://idzforjh.top/" title="回到首页">
+            <i class="mdui-list-item-icon nexmoefont icon-home"></i>
+            <div class="mdui-list-item-content">
+                回到首页
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="http://idzforjh.top/archives" title="文章归档">
+            <i class="mdui-list-item-icon nexmoefont icon-container"></i>
+            <div class="mdui-list-item-content">
+                文章归档
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="http://idzforjh.top/about.html" title="关于博客">
+            <i class="mdui-list-item-icon nexmoefont icon-info-circle"></i>
+            <div class="mdui-list-item-content">
+                关于博客
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="http://idzforjh.top/PY.html" title="我的朋友">
+            <i class="mdui-list-item-icon nexmoefont icon-unorderedlist"></i>
+            <div class="mdui-list-item-content">
+                我的朋友
+            </div>
+        </a>
+        
+    </div>
+    <aside id="nexmoe-sidebar">
+  
+  <div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-search">
+        <form id="search_form" action_e="https://cn.bing.com/search?q=site:nexmoe.com" onsubmit="return search();">
+            <label><input id="search_value" name="q" type="search" placeholder="搜索"></label>
+        </form>
+    </div>
+</div>
+  
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">社交按钮</h3>
+    <div class="nexmoe-widget nexmoe-social">
+        <a class="mdui-ripple" href="https://space.bilibili.com/21645780" target="_blank" mdui-tooltip="{content: '哔哩哔哩'}" style="color: rgb(231, 106, 141);background-color: rgba(231, 106, 141, .15);">
+            <i class="nexmoefont icon-bilibili"></i>
+        </a><a class="mdui-ripple" href="https://github.com/iDzforjh" target="_blank" mdui-tooltip="{content: 'GitHub'}" style="color: rgb(25, 23, 23);background-color: rgba(25, 23, 23, .15);">
+            <i class="nexmoefont icon-github"></i>
+        </a>
+    </div>
+</div>
+  
+  
+
+  
+  
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">标签云</h3>
+    <div id="randomtagcloud" class="nexmoe-widget tagcloud nexmoe-rainbow">
+      <a href="http://idzforjh.top/tags/HTML/" style="font-size: 10px;">HTML</a> <a href="http://idzforjh.top/tags/Think-of-Java/" style="font-size: 20px;">Think of Java</a>
+    </div>
+    
+  </div>
+
+  
+  
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">文章归档</h3>
+    <div class="nexmoe-widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="http://idzforjh.top/archives/2020/09/">九月 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+</aside>
+    <div class="nexmoe-copyright">
+        &copy; 2020 Fraser·&#39;iDzforjh&#39;·Bu
+        Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+        & <a href="https://nexmoe.com/hexo-theme-nexmoe.html" target="_blank">Nexmoe</a>
+    </div>
+</div><!-- .nexmoe-drawer -->
+  </div>
+  <div id="nexmoe-content">
+    <div class="nexmoe-primary">
+        <div class="nexmoe-post">
+  
+      <div class="nexmoe-post-cover" style="padding-bottom: 56.25%;"> 
+          <img data-src="https://cdn.jsdelivr.net/gh/iDzforjh/Resource@3.0/images/java.jpg" data-sizes="auto" alt="Exception Handing" class="lazyload">
+          <h1>Exception Handing</h1>
+      </div>
+  
+  
+  <div class="nexmoe-post-meta nexmoe-rainbow" style="margin:10px 0!important;">
+    <a><i class="nexmoefont icon-calendar-fill"></i>2020年09月27日</a>
+    <a><i class="nexmoefont icon-areachart"></i>1.9k 字</a>
+    <a><i class="nexmoefont icon-time-circle-fill"></i>大概 8 分钟</a>
+</div>
+
+  <div class="nexmoe-post-right">
+    
+  </div>
+
+  <article>
+    <p>真实的编程：Bug！Bug！Bug！</p>
+<a id="more"></a>
+
+<h1 id="Exception-Handing"><a href="#Exception-Handing" class="headerlink" title="Exception Handing"></a>Exception Handing</h1><p>​    在理想状态下，用户输入数据的格式永远都是正确的，选择打开的文件也一定存在，并且永远不可能出现 Bug 。在绝大多数普通人的眼里，代码似乎永远都处在这样一个理想的环境中。然而现实世界中却充满了不良的数据和带有问题的代码，现在是讨论 Java 程序设计语言处理这些问题机制的时候了。</p>
+<p>基本概念：</p>
+<p><strong>编译错误：</strong></p>
+<p>新手常见错误，主要由代码语法错误造成。</p>
+<p><strong>运行错误：</strong></p>
+<p>比较复杂的错误，只有在代码运行后才会出现。我们将其称之为 <strong>异常</strong> ，对异常进行处理的动作称之为 <strong>捕获</strong> </p>
+<h2 id="Java-异常机制"><a href="#Java-异常机制" class="headerlink" title="Java 异常机制"></a>Java 异常机制</h2><p>例如：java.lang.NullPointerException 这是一种常见的异常，当操作的不是真正的对象而是 null 时，便会抛出 NullPointerException 所以大部分情况下异常的抛出是由系统触发的。</p>
+<blockquote>
+<p>由于 Java 面对对象的特性，异常也可以被定义为 class 类，可以使用不同的类来表示不同的异常情况</p>
+</blockquote>
+<p> 异常捕获的流程：</p>
+<p><img data-sizes="auto" data-src="https://cdn.jsdelivr.net/gh/iDzforjh/Resource@4.1/Java%E5%BC%82%E5%B8%B8/%E5%BC%82%E5%B8%B8%E6%9C%BA%E5%88%B61.svg" alt="https://cdn.jsdelivr.net/gh/iDzforjh/Resource@4.1/Java%E5%BC%82%E5%B8%B8/%E5%BC%82%E5%B8%B8%E6%9C%BA%E5%88%B61.svg" class="lazyload"></p>
+<h2 id="Java-异常类"><a href="#Java-异常类" class="headerlink" title="Java 异常类"></a>Java 异常类</h2><p>如下所示，Java 异常类的基本情况：</p>
+<p><img data-sizes="auto" data-src="https://cdn.jsdelivr.net/gh/iDzforjh/Resource@4.1/Java%E5%BC%82%E5%B8%B8/%E5%BC%82%E5%B8%B8%E7%B1%BB1.jpg" alt="https://cdn.jsdelivr.net/gh/iDzforjh/Resource@4.1/Java%E5%BC%82%E5%B8%B8/%E5%BC%82%E5%B8%B8%E7%B1%BB1.jpg" class="lazyload"></p>
+<p>可以很直观的知道 异常 也属于 Java 的一个 类，所以对象具备的特性它都具备。</p>
+<blockquote>
+<p>Java.lang 包不需要 import。</p>
+</blockquote>
+<h3 id="常见的异常类："><a href="#常见的异常类：" class="headerlink" title="常见的异常类："></a>常见的异常类：</h3><p><strong>IOException</strong></p>
+<p>操作输入流和输出流时可能会出现的异常。</p>
+<p><strong>ArithmeticException</strong></p>
+<p>数字异常，比如将整数除以0（触发异常）。</p>
+<p><strong>NullPointerException</strong></p>
+<p>空指针异常。当引用变量为Null时，试图访问对象的属性或方法就会出现这种异常：</p>
+<pre><code class="java">String d = null;
+System.out.println(d.length()); // 抛出NullPointerException</code></pre>
+<p><strong>ArrayIndexOutOfBoundsException</strong></p>
+<p>数组下标越界异常：</p>
+<pre><code class="java">int[] array = new int[4];
+array[0]=1;
+array[7]=1;    // 抛出 ArrayIndexOutOfBoundsException</code></pre>
+<p><strong>ClassCastException</strong></p>
+<p>类型转化失败异常。</p>
+<p><strong>IllegalArgumentException</strong></p>
+<p>非常参数异常，用来检查方法参数是否合法。</p>
+<h2 id="异常作用域"><a href="#异常作用域" class="headerlink" title="异常作用域"></a>异常作用域</h2><pre><code class="java">public class ExceptionTest2 &#123;
+
+    public static void main(String[] args) &#123;
+        int len = 0;
+        try &#123;
+            len = getStrLength(null);
+        &#125; catch (NullPointerException e) &#123;
+        &#125;
+
+        System.out.println(&quot;程序执行到这&quot;+len);
+    &#125;
+
+    // 获取字符串的长度
+    public static int getStrLength(String str) &#123;
+        return str.length();
+    &#125;
+
+&#125;</code></pre>
+<blockquote>
+<p>变量需在块之前先定义。（Python不需要）</p>
+</blockquote>
+<h2 id="多异常捕获"><a href="#多异常捕获" class="headerlink" title="多异常捕获"></a>多异常捕获</h2><p>实例需求：读取文件内容将其转换为数字使用 Integer.parseInt(str) 方法：</p>
+<pre><code class="java">public class ExceptionTest3 &#123;
+    public static void main(String[] args) &#123;
+        int num = getInt(&quot;20&quot;);
+        System.out.println(num);
+    &#125;
+
+    // 字符串转换为数字
+    public static int getInt(String str) &#123;
+        return Integer.parseInt(str);
+    &#125;
+&#125;</code></pre>
+<p> 如果此时 getInt 方法输入参数是一个字符：</p>
+<pre><code class="java">public class ExceptionTest3 &#123;
+    public static void main(String[] args) &#123;
+        int num = getInt(&quot;小王&quot;);
+        System.out.println(num);
+    &#125;
+
+    // 字符串转换为数字
+    public static int getInt(String str) &#123;
+        return Integer.parseInt(str);
+    &#125;
+&#125;</code></pre>
+<p>出现报错：</p>
+<pre><code class="java">Caused by: java.lang.NumberFormatException: For input string: &quot;小王&quot;</code></pre>
+<p>在没注意到的情况下，有可能会人为的转入 null 对象，导致抛出异常 NullPointException。此时可以使用多次 catch 来解决：</p>
+<pre><code class="java">public class ExceptionTest4 &#123;
+    public static void main(String[] args) &#123;
+        int num = 0;
+        try &#123;
+          num = getInt(&quot;小王&quot;);
+        &#125; catch (NumberFormatException e) &#123;
+        &#125; catch (NullPointerException e) &#123;
+        &#125;
+
+        System.out.println(num);
+    &#125;
+
+    // 字符串转换为数字
+    public static int getInt(String str) &#123;
+        return Integer.parseInt(str);
+    &#125;
+&#125;</code></pre>
+<p>由于 Exceptions 都是继承于 Exception 类，所以可以直接用一个 Exception 来捕获所有异常。</p>
+<pre><code class="java">public class ExceptionTest4 &#123;
+    public static void main(String[] args) &#123;
+        int num = 0;
+        try &#123;
+          num = getInt(&quot;小王&quot;);
+        &#125; catch (Exception e) &#123;
+        &#125;
+        System.out.println(num);
+    &#125;
+
+    // 字符串转换为数字
+    public static int getInt(String str) &#123;
+        return Integer.parseInt(str);
+    &#125;
+
+&#125;</code></pre>
+<h2 id="抛出异常"><a href="#抛出异常" class="headerlink" title="抛出异常"></a>抛出异常</h2><p>场景描述：java.lang.IllegalArgumentException 使用：</p>
+<pre><code class="java">public static int getInt(String str)&#123;
+    if(str == null)&#123;
+        throw new IllegalArgumentException(&quot;姓名不能为空&quot;);
+    &#125;
+    return Integer.parseInt(str);
+&#125;</code></pre>
+<p>运行后你会发现，只需要在你想要抛出异常的地方使用 <strong>关键字：throw</strong> （由于异常也是类，所以需要new 实例化）</p>
+<blockquote>
+<p>异常的错误显示一般称之为 <strong>异常堆栈</strong> ，从堆栈中可以看出出错在哪一行，哪个方法调用的。</p>
+</blockquote>
+<h2 id="RuntimeException"><a href="#RuntimeException" class="headerlink" title="RuntimeException"></a>RuntimeException</h2><p>IllegalArgumentException 的父类 RuntimeException 和其他的 Exception 不同之处在于其并不需要在方法上约定可能抛出的异常：</p>
+<pre><code class="java">public class ExceptionTest6 &#123;
+
+    public static void main(String[] args) &#123;
+        int num = getInt(null);
+        System.out.println(num);
+    &#125;
+
+    public static int getInt(String str)&#123;
+        if(str == null)&#123;
+            throw new Exception(&quot;姓名不能为空&quot;);
+        &#125;
+        return Integer.parseInt(str);
+    &#125;
+&#125;</code></pre>
+<pre><code class="java">未报告的异常错误java.lang.Exception; 必须对其进行捕获或声明以便抛出</code></pre>
+<blockquote>
+<p>如果在哪个方法里抛出了异常，那么就必须要在方法签名上声明。</p>
+</blockquote>
+<pre><code class="java">public class ExceptionTest8 &#123;
+
+    public static void main(String[] args) &#123;
+        int num = 0;
+        try &#123;
+            num = getInt(null);
+        &#125; catch (Exception e) &#123;
+            System.out.println(e.getMessage());
+        &#125;
+        System.out.println(num);
+    &#125;
+
+    public static int getInt(String str) throws Exception &#123;
+        if (str == null) &#123;
+            throw new Exception(&quot;姓名不能为空&quot;);
+        &#125;
+        return Integer.parseInt(str);
+    &#125;
+&#125;</code></pre>
+<p>为了捕获异常信息，还是用了 e.getMessage() 方法来获取异常的字符串信息。</p>
+<blockquote>
+<p>考虑到代码安全性，不建议使用 RuntimeException 异常 因为 它在编译阶段是不做检查的，可能会导致一些不必要的问题在你不经意间产生。</p>
+</blockquote>
+<h2 id="UML-图"><a href="#UML-图" class="headerlink" title="UML 图"></a>UML 图</h2><p><img data-sizes="auto" data-src="https://cdn.jsdelivr.net/gh/iDzforjh/Resource@4.1/Java%E5%BC%82%E5%B8%B8/%E5%BC%82%E5%B8%B8UML.svg" alt="https://cdn.jsdelivr.net/gh/iDzforjh/Resource@4.1/Java%E5%BC%82%E5%B8%B8/%E5%BC%82%E5%B8%B8UML.svg" class="lazyload"></p>
+<pre><code class="java">package com.youkeda.service;
+
+public interface UserService &#123;
+
+  User login(String userName,String password) throws NullPointerException;
+
+&#125;</code></pre>
+<blockquote>
+<p>如果接口定义了异常抛出，那么实现类也需要添加同样的异常抛出。</p>
+</blockquote>
+<h2 id="自定义异常"><a href="#自定义异常" class="headerlink" title="自定义异常"></a>自定义异常</h2><p>如下图所示，我们在 login 上抛出了 Excpetion，这个实在不清楚属于什么异常，所以创建了一个 ParamNullException。</p>
+<p><img data-sizes="auto" data-src="https://cdn.jsdelivr.net/gh/iDzforjh/Resource@4.1/Java%E5%BC%82%E5%B8%B8/%E8%87%AA%E5%AE%9A%E4%B9%89%E5%BC%82%E5%B8%B81.svg" alt="https://cdn.jsdelivr.net/gh/iDzforjh/Resource@4.1/Java%E5%BC%82%E5%B8%B8/%E8%87%AA%E5%AE%9A%E4%B9%89%E5%BC%82%E5%B8%B81.svg" class="lazyload"></p>
+<h3 id="创建异常类"><a href="#创建异常类" class="headerlink" title="创建异常类"></a>创建异常类</h3><p><strong>UserService.java:</strong></p>
+<pre><code class="java">public class ParamNullException extends Exception &#123;&#125;</code></pre>
+<p><strong>UserServiceImpl.java:</strong></p>
+<pre><code class="java">public User login(String userName, 
+                  String password) throws ParamNullException &#123;
+  if (userName == null || password == null) &#123;
+    throw new ParamNullException();
+  &#125;
+  for (User user : USERS) &#123;
+    if (user.getUserName().equals(userName) &amp;&amp; user.getPassword().equals(password)) &#123;
+        return user;
+    &#125;
+  &#125;
+  return null;
+&#125;</code></pre>
+<p><strong>自定义异常类的构造函数:</strong></p>
+<p>此时我们想知道具体的哪个对象为 null：</p>
+<pre><code class="java">public User login(String userName, 
+                  String password) throws ParamNullException &#123;
+  if (userName == null) &#123;
+    throw new ParamNullException(&quot;用户名为空&quot;);
+  &#125;
+
+  if (password == null) &#123;
+    throw new ParamNullException(&quot;密码为空&quot;);
+  &#125;
+
+  for (User user : USERS) &#123;
+    if (user.getUserName().equals(userName) &amp;&amp; user.getPassword().equals(password)) &#123;
+        return user;
+    &#125;
+  &#125;
+  return null;
+&#125;</code></pre>
+<p>出现如下报错：</p>
+<pre><code class="java">./src/main/java/com/youkeda/service/impl/UserServiceImpl.java:34: 错误: 无法将类 ParamNullException中的构造器 ParamNullException应用到给定类型;
+            throw new ParamNullException(&quot;密码为空&quot;);
+                  ^
+  需要: 没有参数
+  找到: String
+  原因: 实际参数列表和形式参数列表长度不同</code></pre>
+<p>因为调用了：</p>
+<pre><code class="java">throw new ParamNullException(&quot;密码为空&quot;);</code></pre>
+<p>在 new 的时候 执行了 自定义报错类的 构造函数，但是没有创建这个方法，所以我们需要新建构造函数，其父类构造函数如下：</p>
+<p><img data-sizes="auto" data-src="https://cdn.jsdelivr.net/gh/iDzforjh/Resource@4.1/Java%E5%BC%82%E5%B8%B8/%E8%87%AA%E5%AE%9A%E4%B9%89%E5%BC%82%E5%B8%B82.png" alt="https://cdn.jsdelivr.net/gh/iDzforjh/Resource@4.1/Java%E5%BC%82%E5%B8%B8/%E8%87%AA%E5%AE%9A%E4%B9%89%E5%BC%82%E5%B8%B82.png" class="lazyload"></p>
+<pre><code class="java">public class ParamNullException extends Exception &#123;
+
+  public ParamNullException() &#123;
+  &#125;
+
+  public ParamNullException(String msg) &#123;
+    super(msg);
+  &#125;
+&#125;</code></pre>
+<p>同时还需要创建一个空的默认构造函数</p>
+<pre><code class="java">  public ParamNullException() &#123;
+  &#125;</code></pre>
+<p>如果不创建会出现 new ParamNullException() 执行报错。</p>
+<h2 id="Finally"><a href="#Finally" class="headerlink" title="Finally"></a>Finally</h2><p>由于异常的出现会导致异常发生后的代码不会执行，这会使得某些不管任何情况下都需要被执行的步骤被忽略，从而影响程序健壮性。</p>
+<p>此时我们便需要使用到 finally 代码块，与 try 组合使用</p>
+<pre><code class="java">public void work() throws LeaveEarlyException &#123;
+    try &#123;
+      开门
+      工作 8个小时 // 可能会抛出异常 DiseaseException
+      关门
+    &#125; catch (DiseaseException e)&#123;
+      throw new LeaveEarlyException();
+    &#125; finally&#123;
+      关门
+    &#125;
+&#125;</code></pre>
+
+  </article>
+
+  <div class="nexmoe-post-meta nexmoe-rainbow">
+    
+    
+        <a class="nexmoefont icon-tag-fill -none-link" href="http://idzforjh.top/tags/Think-of-Java/" rel="tag">Think of Java</a>
+    
+</div>
+
+  <div class="nexmoe-post-footer">
+    
+      
+  <div class="nexmoe-post-copyright">
+    <strong>本文作者：</strong>Fraser·&#39;iDzforjh&#39;·Bu<br>
+    <strong>本文链接：</strong><a href="http://idzforjh.top/2020/09/27/Exception%20Handing/" title="http:&#x2F;&#x2F;idzforjh.top&#x2F;2020&#x2F;09&#x2F;27&#x2F;Exception%20Handing&#x2F;" target="_blank" rel="noopener">http:&#x2F;&#x2F;idzforjh.top&#x2F;2020&#x2F;09&#x2F;27&#x2F;Exception%20Handing&#x2F;</a><br>
+    
+      <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
+    
+  </div>
+
+
+    
+    <section class="nexmoe-comment">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.5.0/dist/gitalk.min.css">
+<div id="gitalk"></div>
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1.5.0/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+    var gitalk = new Gitalk({
+        clientID: '80b2453b6d5f37ad6225',
+        clientSecret: '43e99fa852795c9a7b3eb924b2558c64b84bbdeb',
+        id: window.location.pathname,
+        repo: 'nexmoe.github.io',
+        owner: 'nexmoe',
+        admin: 'nexmoe'
+    })
+    gitalk.render('gitalk')
+</script>
+</section>
+  </div>
+</div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/combine/npm/lazysizes@5.1.0/lazysizes.min.js,gh/highlightjs/cdn-release@9.15.8/build/highlight.min.js,npm/mdui@0.4.3/dist/js/mdui.min.js,gh/nexmoe/nexmoe.github.io@latest/js/app.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<!--<script src="http://idzforjh.top/js/app.js?v=1601211654421"></script>-->
+
+
+    <script src="https://cdn.jsdelivr.net/gh/xtaodada/xtaodada.github.io@0.0.2/copy.js"></script>
+
+
+
+  
+
+
+
+
+
+</body>
+
+</html>
