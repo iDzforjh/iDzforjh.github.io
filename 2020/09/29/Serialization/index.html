@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+
+<head>
+  
+  <title>Serialization - The Division</title>
+  <meta charset="UTF-8">
+  <meta name="description" content="JIT, 2018, Network engineering Undergraduate student">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+  
+  
+
+  <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/iDzforjh/Resource@2.0/images/TCTD2.PNG" type="image/png" />
+  <meta name="description" content="​    把一个Java对象写入到硬盘或者传输到网路上面的其它计算机，这时我们就需要自己去通过Java把相应的对象写成转换成字节流。对于这种通用的操作，我们为什么不使用统一的格式呢？没错，这里就出现了java的序列化的概念。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Serialization">
+<meta property="og:url" content="http://idzforjh.top/2020/09/29/Serialization/index.html">
+<meta property="og:site_name" content="The Division">
+<meta property="og:description" content="​    把一个Java对象写入到硬盘或者传输到网路上面的其它计算机，这时我们就需要自己去通过Java把相应的对象写成转换成字节流。对于这种通用的操作，我们为什么不使用统一的格式呢？没错，这里就出现了java的序列化的概念。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-09-29T07:45:57.000Z">
+<meta property="article:modified_time" content="2020-10-01T11:43:38.147Z">
+<meta property="article:author" content="Fraser·&#39;iDzforjh&#39;·Bu">
+<meta property="article:tag" content="Think of Java">
+<meta name="twitter:card" content="summary">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/gh/nexmoe/nexmoe.github.io@latest/css/style.css,npm/highlight.js@9.15.8/styles/atom-one-dark.css,gh/nexmoe/nexmoe.github.io@latest/lib/mdui_043tiny/css/mdui.css,gh/nexmoe/nexmoe.github.io@latest/lib/iconfont/iconfont.css" crossorigin>
+  
+  <!--<link rel="stylesheet" href="http://idzforjh.top/css/style.css?v=1601552637199">-->
+
+  
+<meta name="generator" content="Hexo 5.1.1"></head>
+
+<body class="mdui-drawer-body-left">
+  
+  <div id="nexmoe-background">
+    <div class="nexmoe-bg" style="background-image: url(https://cdn.jsdelivr.net/gh/iDzforjh/Resource@2.0/images/background.jpg)"></div>
+    <div class="mdui-appbar mdui-shadow-0">
+      <div class="mdui-toolbar">
+        <a mdui-drawer="{target: '#drawer', swipe: true}" title="menu" class="mdui-btn mdui-btn-icon mdui-ripple"><i class="mdui-icon nexmoefont icon-menu"></i></a>
+        <div class="mdui-toolbar-spacer"></div>
+        <!--<a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>-->
+        <a href="http://idzforjh.top/" title="Fraser·&#39;iDzforjh&#39;·Bu" class="mdui-btn mdui-btn-icon"><img src="https://cdn.jsdelivr.net/gh/iDzforjh/Resource@2.0/images/avatar.jpg" alt="Fraser·&#39;iDzforjh&#39;·Bu"></a>
+       </div>
+    </div>
+  </div>
+  <div id="nexmoe-header">
+      <div class="nexmoe-drawer mdui-drawer" id="drawer">
+    <div class="nexmoe-avatar mdui-ripple">
+        <a href="http://idzforjh.top/" title="Fraser·&#39;iDzforjh&#39;·Bu">
+            <img src="https://cdn.jsdelivr.net/gh/iDzforjh/Resource@2.0/images/avatar.jpg" alt="Fraser·&#39;iDzforjh&#39;·Bu" alt="Fraser·&#39;iDzforjh&#39;·Bu">
+        </a>
+    </div>
+    <div class="nexmoe-count">
+        <div><span>文章</span>9</div>
+        <div><span>标签</span>2</div>
+        <div><span>分类</span>1</div>
+    </div>
+    <div class="nexmoe-list mdui-list" mdui-collapse="{accordion: true}">
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="http://idzforjh.top/" title="回到首页">
+            <i class="mdui-list-item-icon nexmoefont icon-home"></i>
+            <div class="mdui-list-item-content">
+                回到首页
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="http://idzforjh.top/archives" title="文章归档">
+            <i class="mdui-list-item-icon nexmoefont icon-container"></i>
+            <div class="mdui-list-item-content">
+                文章归档
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="http://idzforjh.top/about.html" title="关于博客">
+            <i class="mdui-list-item-icon nexmoefont icon-info-circle"></i>
+            <div class="mdui-list-item-content">
+                关于博客
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="http://idzforjh.top/PY.html" title="我的朋友">
+            <i class="mdui-list-item-icon nexmoefont icon-unorderedlist"></i>
+            <div class="mdui-list-item-content">
+                我的朋友
+            </div>
+        </a>
+        
+    </div>
+    <aside id="nexmoe-sidebar">
+  
+  <div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-search">
+        <form id="search_form" action_e="https://cn.bing.com/search?q=site:nexmoe.com" onsubmit="return search();">
+            <label><input id="search_value" name="q" type="search" placeholder="搜索"></label>
+        </form>
+    </div>
+</div>
+  
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">社交按钮</h3>
+    <div class="nexmoe-widget nexmoe-social">
+        <a class="mdui-ripple" href="https://space.bilibili.com/21645780" target="_blank" mdui-tooltip="{content: '哔哩哔哩'}" style="color: rgb(231, 106, 141);background-color: rgba(231, 106, 141, .15);">
+            <i class="nexmoefont icon-bilibili"></i>
+        </a><a class="mdui-ripple" href="https://github.com/iDzforjh" target="_blank" mdui-tooltip="{content: 'GitHub'}" style="color: rgb(25, 23, 23);background-color: rgba(25, 23, 23, .15);">
+            <i class="nexmoefont icon-github"></i>
+        </a>
+    </div>
+</div>
+  
+  
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">文章分类</h3>
+    <div class="nexmoe-widget">
+
+      <ul class="category-list">
+
+        
+
+
+        
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="http://iDzforjh.top/categories/Java基础/">Java基础</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+      </ul>
+
+    </div>
+  </div>
+
+
+  
+  
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">标签云</h3>
+    <div id="randomtagcloud" class="nexmoe-widget tagcloud nexmoe-rainbow">
+      <a href="http://idzforjh.top/tags/HTML/" style="font-size: 10px;">HTML</a> <a href="http://idzforjh.top/tags/Think-of-Java/" style="font-size: 20px;">Think of Java</a>
+    </div>
+    
+  </div>
+
+  
+  
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">文章归档</h3>
+    <div class="nexmoe-widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="http://idzforjh.top/archives/2020/09/">九月 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+</aside>
+    <div class="nexmoe-copyright">
+        &copy; 2020 Fraser·&#39;iDzforjh&#39;·Bu
+        Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+        & <a href="https://nexmoe.com/hexo-theme-nexmoe.html" target="_blank">Nexmoe</a>
+    </div>
+</div><!-- .nexmoe-drawer -->
+  </div>
+  <div id="nexmoe-content">
+    <div class="nexmoe-primary">
+        <div class="nexmoe-post">
+  
+      <div class="nexmoe-post-cover" style="padding-bottom: 56.25%;"> 
+          <img data-src="https://cdn.jsdelivr.net/gh/iDzforjh/Resource@2.0/images/background.jpg" data-sizes="auto" alt="Serialization" class="lazyload">
+          <h1>Serialization</h1>
+      </div>
+  
+  
+  <div class="nexmoe-post-meta nexmoe-rainbow" style="margin:10px 0!important;">
+    <a><i class="nexmoefont icon-calendar-fill"></i>2020年09月29日</a>
+    <a><i class="nexmoefont icon-areachart"></i>1.3k 字</a>
+    <a><i class="nexmoefont icon-time-circle-fill"></i>大概 5 分钟</a>
+</div>
+
+  <div class="nexmoe-post-right">
+    
+  </div>
+
+  <article>
+    <p>​    把一个Java对象写入到硬盘或者传输到网路上面的其它计算机，这时我们就需要自己去通过Java把相应的对象写成转换成字节流。对于这种通用的操作，我们为什么不使用统一的格式呢？没错，这里就出现了java的序列化的概念。</p>
+<a id="more"></a>
+
+<h1 id="序列化-Serialization"><a href="#序列化-Serialization" class="headerlink" title="序列化 (Serialization)"></a>序列化 (Serialization)</h1><p>序列化是将对象的数据和信息转换为可以存储或传输的形式的过程，主要有以下几种情况：</p>
+<ul>
+<li>当内存中的对象需要保存到一个文件中、数据库、缓存中时候；</li>
+<li>当对象需要传输的时候。</li>
+</ul>
+<h2 id="实现-Serialization-接口"><a href="#实现-Serialization-接口" class="headerlink" title="实现 Serialization 接口"></a>实现 Serialization 接口</h2><p>对象实现了 Serialization 接口，就表示其可以被序列化。</p>
+<p>Serialization接口是一个标记接口，也叫空接口。其内部没有任何方法，所以实现了接口也不需要实现方法。</p>
+<pre><code class="java">import java.io.Serializable;
+
+public class Building implements Serializable &#123;
+  // 自定义serialVersionUID
+  private static final long serialVersionUID = 8735132092273200831L;
+
+  private String name;
+  private String address;</code></pre>
+<p>如上代码是一个需要被序列化的例子。其中 serialVersionUID 主要是序列化和反序列化过程中，验证版本用的。</p>
+<blockquote>
+<p>当对象序列化后，如果对其进行修改（新增/删除 属性操作）则再进行反序列化后就会失败，因为对象与类的定义不一致了。为了避免这种情况给  serialVersionUID 进行赋值使对象无论发生了什么变化都能正确反序列化。</p>
+</blockquote>
+<h2 id="自动生成-serialVersionUID"><a href="#自动生成-serialVersionUID" class="headerlink" title="自动生成 serialVersionUID"></a>自动生成 serialVersionUID</h2><p>各个IDE操作方法不同，但现在的大部分都自带此功能，在此不做详细赘述。</p>
+<h2 id="JSON"><a href="#JSON" class="headerlink" title="JSON"></a>JSON</h2><p>JSON(JavaScript Object Notation, JS 对象简谱) 是目前最常用的 执行 对象序列化的方式。</p>
+<p>Json 官方 指定了一套标准，各种语言都支持这个标准，所以 Json 也能作为一种跨语言的文本数据交换格式。</p>
+<p>必须是 对象：</p>
+<pre><code>&#123;  &#125;</code></pre>
+<p>或 数组:</p>
+<pre><code>[  ]</code></pre>
+<p><strong>JSON 语法规则：</strong></p>
+<ul>
+<li>数据用 名称：值（也称键值对）</li>
+<li>名称（键）必须是字符串</li>
+<li>多条数据之间，用逗号 “,” 分隔</li>
+</ul>
+<p><strong>JSON 数值类型：</strong></p>
+<ul>
+<li>数字（整数、浮点数）</li>
+<li>字符串（”  “）</li>
+<li>逻辑值（true 或 false）</li>
+<li>数组（ “[ ]”）</li>
+<li>对象（”{ }”）</li>
+<li>null</li>
+</ul>
+<p>范例：</p>
+<pre><code class="json">&#123;
+    &quot;name&quot;: &quot;韦小宝&quot;,
+    &quot;age&quot;: 26,
+    &quot;height&quot;: 182.4,
+    &quot;birthday&quot;: &quot;1670-7-28&quot;,
+    &quot;isRich&quot;: true,
+    &quot;wifes&quot;: [&quot;阿珂&quot;, &quot;双儿&quot;, &quot;建宁公主&quot;, &quot;苏荃&quot;, &quot;沐剑屏&quot;, &quot;曾柔&quot;, &quot;方怡&quot;],
+    &quot;firstMaster&quot;: &#123;
+      &quot;name&quot;: &quot;陈近南&quot;,
+      &quot;birthday&quot;: &quot;1634-12-1&quot;
+    &#125;
+&#125;</code></pre>
+<h2 id="FastJSON-–-Java"><a href="#FastJSON-–-Java" class="headerlink" title="FastJSON    –   Java"></a>FastJSON    –   Java</h2><p>使用 FastJSON 来操作 JSON 以及完成对象的序列化操作。</p>
+<h3 id="对象序列化："><a href="#对象序列化：" class="headerlink" title="对象序列化："></a>对象序列化：</h3><p>本地IDE环境需在编码前引入依赖：</p>
+<pre><code class="xml">&lt;!-- 在下列地址查询最新的版本：https://mvnrepository.com/artifact/com.alibaba/fastjson --&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;com.alibaba&lt;/groupId&gt;
+    &lt;artifactId&gt;fastjson&lt;/artifactId&gt;
+    &lt;version&gt;1.2.62&lt;/version&gt;
+&lt;/dependency&gt;</code></pre>
+<blockquote>
+<p>​    避免使用 Beta 版本和 Alpha 版本。</p>
+</blockquote>
+<p>使用 FastJSON 打印对象：</p>
+<pre><code class="java">  public static void main(String[] args) &#123;
+    Building b = new Building();
+    b.setName(&quot;创业大厦&quot;);
+    ... ...
+
+    String content = JSON.toJSONString(b);
+    System.out.println(content);
+  &#125;</code></pre>
+<p>主要是 JSON.toJSONString( ) 方法，将对象序列化。</p>
+<h2 id="反序列化"><a href="#反序列化" class="headerlink" title="反序列化"></a>反序列化</h2><p>与序列化一样使用 FastJSON 库。</p>
+<p>反序列化代码:</p>
+<pre><code class="java">    Building b = new Building();
+    ... ...
+    String content = JSON.toJSONString(b);        
+
+    // 转换为一个具体的对象
+    Building b2 = JSON.parseObject(content, Building.class);
+    String name = b2.getName();
+    System.out.println(name);    
+
+    // 特殊情况下，java系统里没有具体对象的 class ，可以反序列化为 Map
+    Map bInfo = JSON.parseObject(content, Map.class);
+    String name2 = (String) bInfo.get(&quot;name&quot;);
+    System.out.println(name2);</code></pre>
+<p>反序列化时，调用：</p>
+<pre><code class="java">JSON.parseObject(content, Building.class)</code></pre>
+<blockquote>
+<ul>
+<li>第一个参数是字符串内容，</li>
+<li>第二个参数是目标类。</li>
+</ul>
+</blockquote>
+<p>把字符串转换为 Java 对象，转为具体的对象后就可以使用对象的属性和方法了，比如调用 b2.getName(); 取值。</p>
+<h3 id="反序列化为-MAP"><a href="#反序列化为-MAP" class="headerlink" title="反序列化为 MAP"></a>反序列化为 MAP</h3><p>少数复杂的场景，程序需要把字符串转换为对象，但是系统中没有依赖具体的目标类这时可以将字符串转换为 Map 对象。</p>
+<ul>
+<li>第二个参数执行 Map 为目标类即可，如上述实例锁写。</li>
+<li>Java特点是 面向接口编程，不需关心具体是哪一种 Map （HashMap、TreeMap 等），这么做的好处是 解耦。</li>
+<li>让系统更少的依赖其他系统代码，使其易于维护。</li>
+</ul>
+<h2 id="非全-序列化"><a href="#非全-序列化" class="headerlink" title="非全 序列化"></a>非全 序列化</h2><p>在类中做筛选，除去不需要被序列化的属性：</p>
+<pre><code class="java">public class Building implements Serializable &#123;
+  // 自定义serialVersionUID
+  private static final long serialVersionUID = 8735132092273200831L;
+
+    // 方法一： 关键字
+  private transient String name;
+    // 方法二： 注解
+  @JSONField(serialize=false)
+  private String address;
+
+&#125;</code></pre>
+<p>常用去除不需要被序列化的属性有两种方法：</p>
+<ol>
+<li>在声明字段的时候，添加一个 transient 修饰关键字，由 JDK 提供。</li>
+<li>在字段上添加一个 @JSONField(serialize=false) 注解，这个注解是 fastjson 库提供的。</li>
+</ol>
+<blockquote>
+<p>注：只对序列化有效；反序列化时只需要 JSON 字符串有内容，都会按照规则反序列化对象并且对齐进行赋值。</p>
+</blockquote>
+
+  </article>
+
+  <div class="nexmoe-post-meta nexmoe-rainbow">
+    
+        <a class="nexmoefont icon-appstore-fill -link" href="http://idzforjh.top/categories/Java%E5%9F%BA%E7%A1%80/">Java基础</a>
+    
+    
+        <a class="nexmoefont icon-tag-fill -none-link" href="http://idzforjh.top/tags/Think-of-Java/" rel="tag">Think of Java</a>
+    
+</div>
+
+  <div class="nexmoe-post-footer">
+    
+      
+  <div class="nexmoe-post-copyright">
+    <strong>本文作者：</strong>Fraser·&#39;iDzforjh&#39;·Bu<br>
+    <strong>本文链接：</strong><a href="http://idzforjh.top/2020/09/29/Serialization/" title="http:&#x2F;&#x2F;idzforjh.top&#x2F;2020&#x2F;09&#x2F;29&#x2F;Serialization&#x2F;" target="_blank" rel="noopener">http:&#x2F;&#x2F;idzforjh.top&#x2F;2020&#x2F;09&#x2F;29&#x2F;Serialization&#x2F;</a><br>
+    
+      <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
+    
+  </div>
+
+
+    
+    <section class="nexmoe-comment">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.5.0/dist/gitalk.min.css">
+<div id="gitalk"></div>
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1.5.0/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+    var gitalk = new Gitalk({
+        clientID: '80b2453b6d5f37ad6225',
+        clientSecret: '43e99fa852795c9a7b3eb924b2558c64b84bbdeb',
+        id: window.location.pathname,
+        repo: 'nexmoe.github.io',
+        owner: 'nexmoe',
+        admin: 'nexmoe'
+    })
+    gitalk.render('gitalk')
+</script>
+</section>
+  </div>
+</div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/combine/npm/lazysizes@5.1.0/lazysizes.min.js,gh/highlightjs/cdn-release@9.15.8/build/highlight.min.js,npm/mdui@0.4.3/dist/js/mdui.min.js,gh/nexmoe/nexmoe.github.io@latest/js/app.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<!--<script src="http://idzforjh.top/js/app.js?v=1601552637200"></script>-->
+
+
+    <script src="https://cdn.jsdelivr.net/gh/xtaodada/xtaodada.github.io@0.0.2/copy.js"></script>
+
+
+
+  
+
+
+
+
+
+</body>
+
+</html>
