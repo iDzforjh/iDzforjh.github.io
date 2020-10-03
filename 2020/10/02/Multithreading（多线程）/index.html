@@ -4,7 +4,7 @@
 
 <head>
   
-  <title>Inner class - The Division</title>
+  <title>Multithreading（多线程） - The Division</title>
   <meta charset="UTF-8">
   <meta name="description" content="JIT, 2018, Network engineering Undergraduate student">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
@@ -12,23 +12,21 @@
   
 
   <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/iDzforjh/Resource@2.0/images/TCTD2.PNG" type="image/png" />
-  <meta name="description" content="内部类（Inner class）是定义在另一个类中的类。有以下三点使用原因：  内部类方法可以访问该类定义所在的作用域中的数据，包括私有的数据。 内部类可以对同一个包中的其他类隐藏起来。 当想要定义一个回调函数且不想编写大量代码时，使用 匿名（anonymous）内部类比较便捷。">
+  <meta name="description" content="​    多线程（multithreading），是指从软件或者硬件上实现多个线程并发执行的技术。具有多线程能力的计算机因有硬件支持而能够在同一时间执行多于一个线程，进而提升整体处理性能。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Inner class">
-<meta property="og:url" content="http://idzforjh.top/2020/09/28/Inner%20class/index.html">
+<meta property="og:title" content="Multithreading（多线程）">
+<meta property="og:url" content="http://idzforjh.top/2020/10/02/Multithreading%EF%BC%88%E5%A4%9A%E7%BA%BF%E7%A8%8B%EF%BC%89/index.html">
 <meta property="og:site_name" content="The Division">
-<meta property="og:description" content="内部类（Inner class）是定义在另一个类中的类。有以下三点使用原因：  内部类方法可以访问该类定义所在的作用域中的数据，包括私有的数据。 内部类可以对同一个包中的其他类隐藏起来。 当想要定义一个回调函数且不想编写大量代码时，使用 匿名（anonymous）内部类比较便捷。">
+<meta property="og:description" content="​    多线程（multithreading），是指从软件或者硬件上实现多个线程并发执行的技术。具有多线程能力的计算机因有硬件支持而能够在同一时间执行多于一个线程，进而提升整体处理性能。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/iDzforjh/Resource@4.2/Java%E5%86%85%E9%83%A8%E7%B1%BB/%E5%86%85%E9%83%A8%E7%B1%BBUML.svg">
-<meta property="article:published_time" content="2020-09-28T10:33:38.000Z">
-<meta property="article:modified_time" content="2020-09-28T11:21:36.826Z">
+<meta property="article:published_time" content="2020-10-02T14:34:39.000Z">
+<meta property="article:modified_time" content="2020-10-03T08:13:56.237Z">
 <meta property="article:author" content="Fraser·&#39;iDzforjh&#39;·Bu">
 <meta property="article:tag" content="Think of Java">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/iDzforjh/Resource@4.2/Java%E5%86%85%E9%83%A8%E7%B1%BB/%E5%86%85%E9%83%A8%E7%B1%BBUML.svg">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/gh/nexmoe/nexmoe.github.io@latest/css/style.css,npm/highlight.js@9.15.8/styles/atom-one-dark.css,gh/nexmoe/nexmoe.github.io@latest/lib/mdui_043tiny/css/mdui.css,gh/nexmoe/nexmoe.github.io@latest/lib/iconfont/iconfont.css" crossorigin>
   
-  <!--<link rel="stylesheet" href="http://idzforjh.top/css/style.css?v=1601712862460">-->
+  <!--<link rel="stylesheet" href="http://idzforjh.top/css/style.css?v=1601712862455">-->
 
   
 <meta name="generator" content="Hexo 5.1.1"></head>
@@ -176,16 +174,16 @@
     <div class="nexmoe-primary">
         <div class="nexmoe-post">
   
-      <div class="nexmoe-post-cover" style="padding-bottom: 56.25%;"> 
-          <img data-src="https://cdn.jsdelivr.net/gh/iDzforjh/Resource@3.0/images/java.jpg" data-sizes="auto" alt="Inner class" class="lazyload">
-          <h1>Inner class</h1>
+      <div class="nexmoe-post-cover" style="padding-bottom: 56.289308176100626%;"> 
+          <img data-src="https://cdn.jsdelivr.net/gh/iDzforjh/Resource@3.1/images/home.jpg" data-sizes="auto" alt="Multithreading（多线程）" class="lazyload">
+          <h1>Multithreading（多线程）</h1>
       </div>
   
   
   <div class="nexmoe-post-meta nexmoe-rainbow" style="margin:10px 0!important;">
-    <a><i class="nexmoefont icon-calendar-fill"></i>2020年09月28日</a>
-    <a><i class="nexmoefont icon-areachart"></i>305 字</a>
-    <a><i class="nexmoefont icon-time-circle-fill"></i>大概 1 分钟</a>
+    <a><i class="nexmoefont icon-calendar-fill"></i>2020年10月02日</a>
+    <a><i class="nexmoefont icon-areachart"></i>908 字</a>
+    <a><i class="nexmoefont icon-time-circle-fill"></i>大概 4 分钟</a>
 </div>
 
   <div class="nexmoe-post-right">
@@ -193,51 +191,115 @@
   </div>
 
   <article>
-    <p>内部类（Inner class）是定义在另一个类中的类。有以下三点使用原因：</p>
-<ul>
-<li>内部类方法可以访问该类定义所在的作用域中的数据，包括私有的数据。</li>
-<li>内部类可以对同一个包中的其他类隐藏起来。</li>
-<li>当想要定义一个回调函数且不想编写大量代码时，使用 匿名（anonymous）内部类比较便捷。</li>
-</ul>
+    <p>​    多线程（multithreading），是指从软件或者硬件上实现多个线程并发执行的技术。具有多线程能力的计算机因有硬件支持而能够在同一时间执行多于一个线程，进而提升整体处理性能。</p>
 <a id="more"></a>
 
-<h1 id="Inner-class-内部类"><a href="#Inner-class-内部类" class="headerlink" title="Inner class 内部类"></a>Inner class 内部类</h1><p>内部类的语法比较复杂，先从简单语法开始讲起：</p>
-<pre><code class="java">public class Outer &#123;
-    public class InnerTool &#123; // 内部类
-        public int add(int a,int b)&#123;
-            return a+b;
-        &#125;
+<p><strong>操作系统原理：</strong></p>
+<ul>
+<li>进程：进程是程序的一次执行；进程是一个程序及其数据在处理机上顺序执行时所发生的活动；进程是系统进行资源分配和调度的一个独立单位。</li>
+<li>线程：不能独立的存在，必须是进程的一部分。一个进程一直运行，直到所有的非守护线程都结束运行后才结束。</li>
+</ul>
+<h2 id="Thread-类"><a href="#Thread-类" class="headerlink" title="Thread 类"></a>Thread 类</h2><p>继承 Thread 类定义多线程程序，缺点十分明显，由于Java是单继承的，只允许继承一个类所以变相的限制了程序的可拓展性。</p>
+<ul>
+<li>继承 java.lang.Thread 类</li>
+</ul>
+<pre><code class="java">public class ThreadTest &#123;
+
+  public static void main(String[] args) &#123;
+    ThreadTest test = new ThreadTest();
+    MyThread thread1 = test.new MyThread();
+    thread1.setName(&quot;MyThread-1&quot;);
+    MyThread thread2 = test.new MyThread();
+    thread2.setName(&quot;MyThread-2&quot;);
+    thread1.start();
+    thread2.start();
+  &#125;
+
+  class MyThread extends Thread &#123;
+
+    @Override
+    public void run() &#123;
+      try &#123;
+        System.out.println(&quot;线程 &quot; + Thread.currentThread().getName() + &quot; 进入睡眠状态&quot;);
+        Thread.sleep(200);
+      &#125; catch (InterruptedException e) &#123;
+        e.printStackTrace();
+      &#125;
+      System.out.println(&quot;线程 &quot; + Thread.currentThread().getName() + &quot; 睡眠结束&quot;);
     &#125;
+  &#125;
 &#125;</code></pre>
-<p>在上述例子中，class Outer 是 外部类， class InnerTool是内部类。如果想要调用内部类那么首先必须要实例化它且只能在 内部类中 new。</p>
-<pre><code class="java">public class OuterUtil &#123;
-    public class InnerTool &#123; // 内部类
-        public int add(int a,int b)&#123;
-            return a+b;
-        &#125;
-    &#125;
-    private InnerTool tool = new InnerTool();
-&#125;</code></pre>
-<h2 id="UML图"><a href="#UML图" class="headerlink" title="UML图"></a>UML图</h2><p><img data-sizes="auto" data-src="https://cdn.jsdelivr.net/gh/iDzforjh/Resource@4.2/Java%E5%86%85%E9%83%A8%E7%B1%BB/%E5%86%85%E9%83%A8%E7%B1%BBUML.svg" alt="https://cdn.jsdelivr.net/gh/iDzforjh/Resource@4.2/Java%E5%86%85%E9%83%A8%E7%B1%BB/%E5%86%85%E9%83%A8%E7%B1%BBUML.svg" class="lazyload"></p>
-<h2 id="内部类实现："><a href="#内部类实现：" class="headerlink" title="内部类实现："></a>内部类实现：</h2><p><strong>实例化：</strong></p>
-<pre><code class="java">public class OuterUtil &#123;
-    public class InnerTool &#123; // 内部类
-        public int add(int a,int b)&#123;
-            return a+b;
-        &#125;
-    &#125;
-    private InnerTool tool = new InnerTool();
-    public int add(int a,int b,int c)&#123;
-       return tool.add( tool.add(a,b) , c );
-    &#125;
-&#125;</code></pre>
+<p>实例代码运行后输出结果为：</p>
+<pre><code>线程 MyThread-1 进入睡眠状态
+线程 MyThread-2 进入睡眠状态
+线程 MyThread-1 睡眠结束
+线程 MyThread-2 睡眠结束</code></pre>
+<p>多次运行后有可能得到：</p>
+<pre><code>线程 MyThread-1 进入睡眠状态
+线程 MyThread-2 进入睡眠状态
+线程 MyThread-2 睡眠结束
+线程 MyThread-1 睡眠结束</code></pre>
+<p>线程的执行顺序不是固定的，每次运行的结果都不一定相同，输出的顺序也不完全一致，且与代码调用顺序不完全一致。</p>
+<p>原因：</p>
+<ul>
+<li><p>start() 方法：</p>
+<p>用来启动一个线程，当调用 start 方法后，系统才会开启一个新的线程来执行用户定义的子任务，在这个过程中会为线程分配资源。</p>
+</li>
+<li><p>run() 方法：</p>
+<p>此方法不需要用户调用，当通过 start 方法启动一个线程后，线程获得了 CPU 执行时间，便会进入 run 方法来执行具体的任务</p>
 <blockquote>
-<p>新增一个需求，实现数字加法。</p>
+<p>继承 Thread 类必须重写 run 方法，定义具体的任务。</p>
+</blockquote>
+</li>
+<li><p>sleep() 方法：</p>
+<p>线程睡眠，释放 CPU 资源，语法：</p>
+<p>sleep(long millis)  // 参数为毫秒</p>
+<p>sleep(long millis, int nanoseconds)  //毫秒，纳秒</p>
+</li>
+</ul>
+<p>线程的运行是不受用户精确控制的，start() 只是开启一个线程，真正的运行由 CPU 决定。</p>
+<h2 id="Runnable-接口"><a href="#Runnable-接口" class="headerlink" title="Runnable 接口"></a>Runnable 接口</h2><p>采用实现接口方式写程序（java.lang.Runnable）符合 <strong>高内聚低耦合</strong> 的Java设计原则</p>
+<p>实例：</p>
+<pre><code class="java">public class RunnableTest implements Runnable &#123;
+
+  public void run() &#123;
+    try &#123;
+      System.out.println(&quot;线程 &quot; + Thread.currentThread().getName() + &quot; 进入睡眠状态&quot;);
+      Thread.sleep(200);
+    &#125; catch (InterruptedException e) &#123;
+      // TODO: handle exception
+    &#125;
+    System.out.println(&quot;线程 &quot; + Thread.currentThread().getName() + &quot; 睡眠结束&quot;);
+  &#125;
+
+  public static void main(String[] args) &#123;
+    RunnableTest rt1 = new RunnableTest();
+    Thread t1 = new Thread(rt1);
+    t1.setName(&quot;MyThread-1&quot;);
+
+    RunnableTest rt2 = new RunnableTest();
+    Thread t2 = new Thread(rt2);
+    t2.setName(&quot;MyThread-2&quot;);
+
+    t1.start();
+    t2.start();
+  &#125;
+
+&#125;</code></pre>
+<h2 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h2><ul>
+<li>Thread.currentThread().getName() 的返回值可以取当前线程的名称，由 setName() 方法指定名称。</li>
+<li>Thread.sleep(200); 会让线程暂停执行200毫秒，然后继续执行。</li>
+</ul>
+<p>线程的执行还是需要依赖 Thread 类，通过 Runnable接口类使 Thead 类 仅成为启动一个线程的入口。</p>
+<blockquote>
+<p>RunnableTest 负责具体的线程业务逻辑，Thread 类 负责调度线程。</p>
 </blockquote>
 
   </article>
 
   <div class="nexmoe-post-meta nexmoe-rainbow">
+    
+        <a class="nexmoefont icon-appstore-fill -link" href="http://idzforjh.top/categories/Java-Web/">Java Web</a>
     
     
         <a class="nexmoefont icon-tag-fill -none-link" href="http://idzforjh.top/tags/Think-of-Java/" rel="tag">Think of Java</a>
@@ -249,7 +311,7 @@
       
   <div class="nexmoe-post-copyright">
     <strong>本文作者：</strong>Fraser·&#39;iDzforjh&#39;·Bu<br>
-    <strong>本文链接：</strong><a href="http://idzforjh.top/2020/09/28/Inner%20class/" title="http:&#x2F;&#x2F;idzforjh.top&#x2F;2020&#x2F;09&#x2F;28&#x2F;Inner%20class&#x2F;" target="_blank" rel="noopener">http:&#x2F;&#x2F;idzforjh.top&#x2F;2020&#x2F;09&#x2F;28&#x2F;Inner%20class&#x2F;</a><br>
+    <strong>本文链接：</strong><a href="http://idzforjh.top/2020/10/02/Multithreading%EF%BC%88%E5%A4%9A%E7%BA%BF%E7%A8%8B%EF%BC%89/" title="http:&#x2F;&#x2F;idzforjh.top&#x2F;2020&#x2F;10&#x2F;02&#x2F;Multithreading%EF%BC%88%E5%A4%9A%E7%BA%BF%E7%A8%8B%EF%BC%89&#x2F;" target="_blank" rel="noopener">http:&#x2F;&#x2F;idzforjh.top&#x2F;2020&#x2F;10&#x2F;02&#x2F;Multithreading%EF%BC%88%E5%A4%9A%E7%BA%BF%E7%A8%8B%EF%BC%89&#x2F;</a><br>
     
       <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
     
@@ -279,7 +341,7 @@
   </div>
   <script src="https://cdn.jsdelivr.net/combine/npm/lazysizes@5.1.0/lazysizes.min.js,gh/highlightjs/cdn-release@9.15.8/build/highlight.min.js,npm/mdui@0.4.3/dist/js/mdui.min.js,gh/nexmoe/nexmoe.github.io@latest/js/app.js"></script>
 <script>hljs.initHighlightingOnLoad();</script>
-<!--<script src="http://idzforjh.top/js/app.js?v=1601712862463"></script>-->
+<!--<script src="http://idzforjh.top/js/app.js?v=1601712862456"></script>-->
 
 
     <script src="https://cdn.jsdelivr.net/gh/xtaodada/xtaodada.github.io@0.0.2/copy.js"></script>
