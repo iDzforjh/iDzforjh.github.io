@@ -4,7 +4,7 @@
 
 <head>
   
-  <title>ArrayList - The Division</title>
+  <title>Multithreading Pt.2 （多线程） - The Division</title>
   <meta charset="UTF-8">
   <meta name="description" content="JIT, 2018, Network engineering Undergraduate student">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
@@ -12,21 +12,21 @@
   
 
   <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/iDzforjh/Resource@2.0/images/TCTD2.PNG" type="image/png" />
-  <meta name="description" content="数组容器 奇怪奇怪真奇怪，奇怪奇怪不奇怪。">
+  <meta name="description" content="线程安全；由于一般情况下线程的执行顺序充满随机性，输出的结果往往与预计的相差甚远，这种情况就是线程的安全问题。 非线程安全：多个线程对同一个对象中的同一个实例变量进行操作时会出现 值 被更改或 值 不同步的情况，进而影响程序的执行流程。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ArrayList">
-<meta property="og:url" content="http://idzforjh.top/2020/09/19/ArrayList/index.html">
+<meta property="og:title" content="Multithreading Pt.2 （多线程）">
+<meta property="og:url" content="http://idzforjh.top/2020/10/09/Multithreading%20Pt.2%EF%BC%88%E5%A4%9A%E7%BA%BF%E7%A8%8B)/index.html">
 <meta property="og:site_name" content="The Division">
-<meta property="og:description" content="数组容器 奇怪奇怪真奇怪，奇怪奇怪不奇怪。">
+<meta property="og:description" content="线程安全；由于一般情况下线程的执行顺序充满随机性，输出的结果往往与预计的相差甚远，这种情况就是线程的安全问题。 非线程安全：多个线程对同一个对象中的同一个实例变量进行操作时会出现 值 被更改或 值 不同步的情况，进而影响程序的执行流程。">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-09-19T11:09:06.000Z">
-<meta property="article:modified_time" content="2020-09-25T12:53:50.926Z">
+<meta property="article:published_time" content="2020-10-09T11:55:30.000Z">
+<meta property="article:modified_time" content="2020-10-09T14:14:48.778Z">
 <meta property="article:author" content="Fraser·&#39;iDzforjh&#39;·Bu">
 <meta property="article:tag" content="Think of Java">
 <meta name="twitter:card" content="summary">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/gh/nexmoe/nexmoe.github.io@latest/css/style.css,npm/highlight.js@9.15.8/styles/atom-one-dark.css,gh/nexmoe/nexmoe.github.io@latest/lib/mdui_043tiny/css/mdui.css,gh/nexmoe/nexmoe.github.io@latest/lib/iconfont/iconfont.css" crossorigin>
   
-  <!--<link rel="stylesheet" href="http://idzforjh.top/css/style.css?v=1602252962212">-->
+  <!--<link rel="stylesheet" href="http://idzforjh.top/css/style.css?v=1602252962198">-->
 
   
 <meta name="generator" content="Hexo 5.1.1"></head>
@@ -174,15 +174,15 @@
     <div class="nexmoe-primary">
         <div class="nexmoe-post">
   
-      <div class="nexmoe-post-cover" style="padding-bottom: 56.25%;"> 
-          <img data-src="https://cdn.jsdelivr.net/gh/iDzforjh/Resource@3.0/images/java.jpg" data-sizes="auto" alt="ArrayList" class="lazyload">
-          <h1>ArrayList</h1>
+      <div class="nexmoe-post-cover" style="padding-bottom: 56.289308176100626%;"> 
+          <img data-src="https://cdn.jsdelivr.net/gh/iDzforjh/Resource@3.1/images/home.jpg" data-sizes="auto" alt="Multithreading Pt.2 （多线程）" class="lazyload">
+          <h1>Multithreading Pt.2 （多线程）</h1>
       </div>
   
   
   <div class="nexmoe-post-meta nexmoe-rainbow" style="margin:10px 0!important;">
-    <a><i class="nexmoefont icon-calendar-fill"></i>2020年09月19日</a>
-    <a><i class="nexmoefont icon-areachart"></i>816 字</a>
+    <a><i class="nexmoefont icon-calendar-fill"></i>2020年10月09日</a>
+    <a><i class="nexmoefont icon-areachart"></i>785 字</a>
     <a><i class="nexmoefont icon-time-circle-fill"></i>大概 3 分钟</a>
 </div>
 
@@ -191,91 +191,83 @@
   </div>
 
   <article>
-    <p>数组容器</p>
-<p>奇怪奇怪真奇怪，奇怪奇怪不奇怪。</p>
+    <p>线程安全；由于一般情况下线程的执行顺序充满随机性，输出的结果往往与预计的相差甚远，这种情况就是线程的安全问题。</p>
+<p>非线程安全：多个线程对同一个对象中的同一个实例变量进行操作时会出现 值 被更改或 值 不同步的情况，进而影响程序的执行流程。</p>
 <a id="more"></a>
 
-<h1 id="ArrayList-语法"><a href="#ArrayList-语法" class="headerlink" title="ArrayList 语法"></a>ArrayList 语法</h1><p>ArratList 本质是一个动态数组对象，可以方便存储集合对象，一般来说我们会把同一个类型的数据存储在这个ArrayList里。我们如果要使用ArrayList就必须要先实例化，实例化的语法都是一样的，使用 <code>new</code> 关键字，并且需要指定对象类型。</p>
-<pre><code class="java">// 这里的 Java 对象类型可以是任意的对象类型
-// 比如 String、Integer、House 等
-// 这里的 &lt;&gt; 是 Java 泛型的规范,记住这个语法就行了
-ArrayList&lt;Java 对象类型&gt; list = new ArrayList&lt;&gt;();</code></pre>
+<h2 id="解决线程安全问题"><a href="#解决线程安全问题" class="headerlink" title="解决线程安全问题"></a>解决线程安全问题</h2><p>使用 <code>synchronized</code> 关键字修改线程内的方法，使其保证调用执行顺序，保证线程安全。</p>
+<pre><code class="java">public class Addition implements Runnable &#123;
+
+  private int count;
+
+  public Addition(int count) &#123;
+    this.count = count;
+  &#125;
+
+  @Override
+  public synchronized void run() &#123;
+    while (count &gt; 0) &#123;
+      System.out.println(Thread.currentThread().getId() + &quot; 计算：count=&quot; + count);
+      count--;
+    &#125;
+  &#125;
+&#125;</code></pre>
 <blockquote>
-<p>ArrayList 对象是存放在<code>java.util</code>包下的，所以如果需要使用它就需要先进行 <code>import</code> 引入<br><code>import java.util.ArrayList;</code></p>
+<p>对 <code>run()</code> 方法添加了 <code>synchronized</code> 关键字，当一个线程调用 <code>run</code> 前，会先判断有没有被上锁，如果上锁说明有其他线程正在调用 该方法，必须等其他线程对  <code>run</code> 方法调用结束后才可以执行方法。</p>
 </blockquote>
-<h2 id="add-方法"><a href="#add-方法" class="headerlink" title="add 方法"></a>add 方法</h2><p>完成ArrayList实例化之后，就可以使用ArrayList的<code>add</code>方法来进行数据的添加。</p>
-<pre><code class="java">import java.util.ArrayList;
-
-public class ArrayListTest1&#123;
-  public static void main(String[] args)&#123;
-    // 创建一个 ArrayList 存储字符串集合
-    ArrayList&lt;String&gt; strs = new ArrayList&lt;&gt;();
-    // 添加数据到 ArrayList 实例里
-    strs.add(&quot;张三&quot;);
-    strs.add(&quot;李四&quot;);
-  &#125;
-&#125;</code></pre>
-<h2 id="get-size-方法"><a href="#get-size-方法" class="headerlink" title="get/size 方法"></a>get/size 方法</h2><p>ArrayList 是动态数组也就具备如下特点：</p>
-<ul>
-<li>可以获取长度 <code>size()</code></li>
-<li>可以根据索引获取具体的值 <code>get(索引)</code>，ArrayList的索引是从0开始的。</li>
-</ul>
-<p><strong>索引  index:</strong></p>
-<pre><code class="java">// 返回指定字符在字符串中第一次出现处的索引，如果此字符串中没有这样的字符，则返回 -1。
-public int indexOf(int ch)
-
-//返回从 fromIndex 位置开始查找指定字符在字符串中第一次出现处的索引，如果此字符串中没有这样的字符，则返回 -1。
-public int indexOf(int ch, int fromIndex)
-
-//返回指定字符在字符串中第一次出现处的索引，如果此字符串中没有这样的字符，则返回 -1。
-int indexOf(String str)
-
-// 返回从 fromIndex 位置开始查找指定字符在字符串中第一次出现处的索引，如果此字符串中没有这样的字符，则返回 -1
-int indexOf(String str, int fromIndex)</code></pre>
-<pre><code class="java">import java.util.ArrayList;
-public class ArrayListTest1&#123;
-  public static void main(String[] args)&#123;
-    // 创建一个 ArrayList 存储字符串集合
-    ArrayList&lt;String&gt; strs = new ArrayList&lt;&gt;();
-    // 添加数据到 ArrayList 实例里
-    strs.add(&quot;张三&quot;);
-    strs.add(&quot;李四&quot;);
-    // 获取集合的长度
-    int size = strs.size();
-    // 使用 for 循环迭代每一条记录
-    for(int i=0;i&lt;size;i++)&#123;
-       // 根据索引获取值，值的类型是 String
-       String str = strs.get(i);
-       System.out.println(str);
+<p><code>synchronized</code> 关键字可以将任意对象、方法、代码块 上锁，我们将加锁的代码称之为 <code>互斥区</code> 或 <code>临界区</code> </p>
+<pre><code class="java">@Override
+public void run() &#123;
+  synchronized (this) &#123;
+    while (count &gt; 0) &#123;
+      System.out.println(Thread.currentThread().getId() + &quot; 计算：count=&quot; + count);
+      count--;
     &#125;
   &#125;
 &#125;</code></pre>
-<h2 id="for-语句迭代集合"><a href="#for-语句迭代集合" class="headerlink" title="for 语句迭代集合"></a>for 语句迭代集合</h2><pre><code class="java">import java.util.ArrayList;
+<p><strong>注：</strong>网络编程中每个客户端的连接请求在服务端都需要启动一个线程响应，如果出现线程安全问题就会出现各种各样莫名其妙的问题。</p>
+<h2 id="多线程的核心方法"><a href="#多线程的核心方法" class="headerlink" title="多线程的核心方法"></a>多线程的核心方法</h2><h3 id="sleep-long-millis"><a href="#sleep-long-millis" class="headerlink" title="sleep(long millis):"></a>sleep(long millis):</h3><p>类方法（使用 关键词<code>static</code> 修饰，也叫静态方法），在指定的毫秒数内让当前正在执行的线程休眠（暂停执行）</p>
+<pre><code class="java">try &#123;
+  Thread.sleep(500);
+&#125; catch (Exception e) &#123;
+  e.printStackTrace();
+&#125;</code></pre>
+<h3 id="jion"><a href="#jion" class="headerlink" title="jion():"></a>jion():</h3><p>实例方法，启动线程后可以直接调用（等待该线程（子线程）终止，子线程调用<code>join()</code>方法的语句后面的代码，只有等到子线程结束了才能执行。</p>
+<pre><code class="java">public class AdditionTest &#123;
 
-public class ArrayListTest1&#123;
-  public static void main(String[] args)&#123;
-    // 创建一个 ArrayList 存储字符串集合
-    ArrayList&lt;String&gt; strs = new ArrayList&lt;&gt;();
-    // 添加数据到 ArrayList 实例里
-    strs.add(&quot;张三&quot;);
-    strs.add(&quot;李四&quot;);
-    // 获取集合的长度
-    int size = strs.size();
-    // 使用 for 循环迭代每一条记录
-    for(String str : strs)&#123;
-       System.out.println(str);
+  public static void main(String[] args) &#123;
+    Addition add = new Addition(3);
+    Thread threadA = new Thread(add);
+    Thread threadB = new Thread(add);
+    Thread threadC = new Thread(add);
+
+    try &#123;
+      threadA.start();
+      threadA.join();
+      threadB.start();
+      threadB.join();
+      threadC.start();
+      threadC.join();
+    &#125; catch (Exception e) &#123;
+      e.printStackTrace();
     &#125;
+
+    System.out.println(&quot;that&#39;s the end.&quot;);
   &#125;
 &#125;</code></pre>
-<p>语法：</p>
-<pre><code class="java">for( 集合变量的类型 变量名称 : 集合变量 )</code></pre>
-<p>在上述例子中使用的集合是字符串集合，所以使用的是</p>
-<pre><code class="java">for(String str : strs)&#123; &#125;</code></pre>
-<p>与之前的 <code>for i</code> 语句的区别在于，遍历集合的时候能否得到 <code>i</code> 值。</p>
+<p>示例程序较为简单，调用 <code>System.out.println</code>  输出。实际上在输出信息的时候有可能依赖前面线程的 执行结果 或 输出信息，在这种情况下由于线程不一定会执行完毕但是代码已经接着向下继续执行了，所以无法得到需要的线程执行结果。</p>
+<p>因此调用 <code>join()</code> 方法，后面的代码不会立刻执行，必须等子线程结束，所以该方法可以确保子线程能执行完毕，从而保证  <code>System.out.println</code> 可以从 对象 实例中获取到正确的数据。</p>
+<p>适用场景：</p>
+<ol>
+<li>后续代码需要依赖父线程的执行结果，使用 <code>join</code> 方法来确保线程完整执行。</li>
+<li>复杂、执行时间较长的线程，使用 <code>join</code> 方法来等待线程执行完毕。</li>
+</ol>
 
   </article>
 
   <div class="nexmoe-post-meta nexmoe-rainbow">
+    
+        <a class="nexmoefont icon-appstore-fill -link" href="http://idzforjh.top/categories/Java-Web/">Java Web</a>
     
     
         <a class="nexmoefont icon-tag-fill -none-link" href="http://idzforjh.top/tags/Think-of-Java/" rel="tag">Think of Java</a>
@@ -287,7 +279,7 @@ public class ArrayListTest1&#123;
       
   <div class="nexmoe-post-copyright">
     <strong>本文作者：</strong>Fraser·&#39;iDzforjh&#39;·Bu<br>
-    <strong>本文链接：</strong><a href="http://idzforjh.top/2020/09/19/ArrayList/" title="http:&#x2F;&#x2F;idzforjh.top&#x2F;2020&#x2F;09&#x2F;19&#x2F;ArrayList&#x2F;" target="_blank" rel="noopener">http:&#x2F;&#x2F;idzforjh.top&#x2F;2020&#x2F;09&#x2F;19&#x2F;ArrayList&#x2F;</a><br>
+    <strong>本文链接：</strong><a href="http://idzforjh.top/2020/10/09/Multithreading%20Pt.2%EF%BC%88%E5%A4%9A%E7%BA%BF%E7%A8%8B)/" title="http:&#x2F;&#x2F;idzforjh.top&#x2F;2020&#x2F;10&#x2F;09&#x2F;Multithreading%20Pt.2%EF%BC%88%E5%A4%9A%E7%BA%BF%E7%A8%8B)&#x2F;" target="_blank" rel="noopener">http:&#x2F;&#x2F;idzforjh.top&#x2F;2020&#x2F;10&#x2F;09&#x2F;Multithreading%20Pt.2%EF%BC%88%E5%A4%9A%E7%BA%BF%E7%A8%8B)&#x2F;</a><br>
     
       <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
     
@@ -317,7 +309,7 @@ public class ArrayListTest1&#123;
   </div>
   <script src="https://cdn.jsdelivr.net/combine/npm/lazysizes@5.1.0/lazysizes.min.js,gh/highlightjs/cdn-release@9.15.8/build/highlight.min.js,npm/mdui@0.4.3/dist/js/mdui.min.js,gh/nexmoe/nexmoe.github.io@latest/js/app.js"></script>
 <script>hljs.initHighlightingOnLoad();</script>
-<!--<script src="http://idzforjh.top/js/app.js?v=1602252962213"></script>-->
+<!--<script src="http://idzforjh.top/js/app.js?v=1602252962199"></script>-->
 
 
     <script src="https://cdn.jsdelivr.net/gh/xtaodada/xtaodada.github.io@0.0.2/copy.js"></script>
