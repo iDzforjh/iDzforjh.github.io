@@ -4,7 +4,7 @@
 
 <head>
   
-  <title>Interface - The Division</title>
+  <title>ThreadPool（线程池） - The Division</title>
   <meta charset="UTF-8">
   <meta name="description" content="JIT, 2018, Network engineering Undergraduate student">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
@@ -12,28 +12,21 @@
   
 
   <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/iDzforjh/Resource@2.0/images/TCTD2.PNG" type="image/png" />
-  <meta name="description" content="Type-C, USB3.1   我只是个中介。">
+  <meta name="description" content="​    线程池（英语：thread pool）：一种线程使用模式。线程过多会带来调度开销，进而影响缓存局部性和整体性能。而线程池维护着多个线程，等待着监督管理者分配可并发执行的任务。这避免了在处理短时间任务时创建与销毁线程的代价。线程池不仅能够保证内核的充分利用，还能防止过分调度。可用线程数量应该取决于可用的并发处理器、处理器内核、内存、网络sockets等的数量。 例如，线程数一般取cpu数量">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Interface">
-<meta property="og:url" content="http://idzforjh.top/2020/09/25/Interface/index.html">
+<meta property="og:title" content="ThreadPool（线程池）">
+<meta property="og:url" content="http://idzforjh.top/2020/10/10/ThreadPool/index.html">
 <meta property="og:site_name" content="The Division">
-<meta property="og:description" content="Type-C, USB3.1   我只是个中介。">
+<meta property="og:description" content="​    线程池（英语：thread pool）：一种线程使用模式。线程过多会带来调度开销，进而影响缓存局部性和整体性能。而线程池维护着多个线程，等待着监督管理者分配可并发执行的任务。这避免了在处理短时间任务时创建与销毁线程的代价。线程池不仅能够保证内核的充分利用，还能防止过分调度。可用线程数量应该取决于可用的并发处理器、处理器内核、内存、网络sockets等的数量。 例如，线程数一般取cpu数量">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://style.youkeda.com/img/ham/course/j2/LoginService.svg">
-<meta property="og:image" content="https://style.youkeda.com/img/ham/course/j2/RoleService.svg">
-<meta property="og:image" content="https://style.youkeda.com/img/ham/course/j2/interface.png">
-<meta property="og:image" content="https://style.youkeda.com/img/ham/course/j2/implements.svg">
-<meta property="og:image" content="https://style.youkeda.com/img/ham/course/j2/RoleService1.svg">
-<meta property="og:image" content="https://style.youkeda.com/img/ham/course/j2/java-map1.png">
-<meta property="article:published_time" content="2020-09-25T14:43:23.000Z">
-<meta property="article:modified_time" content="2020-09-25T15:23:37.205Z">
+<meta property="article:published_time" content="2020-10-10T04:39:20.000Z">
+<meta property="article:modified_time" content="2020-10-12T14:50:17.547Z">
 <meta property="article:author" content="Fraser·&#39;iDzforjh&#39;·Bu">
 <meta property="article:tag" content="Think of Java">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://style.youkeda.com/img/ham/course/j2/LoginService.svg">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/gh/nexmoe/nexmoe.github.io@latest/css/style.css,npm/highlight.js@9.15.8/styles/atom-one-dark.css,gh/nexmoe/nexmoe.github.io@latest/lib/mdui_043tiny/css/mdui.css,gh/nexmoe/nexmoe.github.io@latest/lib/iconfont/iconfont.css" crossorigin>
   
-  <!--<link rel="stylesheet" href="http://idzforjh.top/css/style.css?v=1604819999233">-->
+  <!--<link rel="stylesheet" href="http://idzforjh.top/css/style.css?v=1604819999222">-->
 
   
 <meta name="generator" content="Hexo 5.1.1"></head>
@@ -196,13 +189,13 @@
         <div class="nexmoe-post">
   
       <div class="nexmoe-post-cover" style="padding-bottom: 56.25%;"> 
-          <img data-src="https://cdn.jsdelivr.net/gh/iDzforjh/Resource@3.0/images/java.jpg" data-sizes="auto" alt="Interface" class="lazyload">
-          <h1>Interface</h1>
+          <img data-src="https://cdn.jsdelivr.net/gh/iDzforjh/Resource@3.1/images/background.jpg" data-sizes="auto" alt="ThreadPool（线程池）" class="lazyload">
+          <h1>ThreadPool（线程池）</h1>
       </div>
   
   
   <div class="nexmoe-post-meta nexmoe-rainbow" style="margin:10px 0!important;">
-    <a><i class="nexmoefont icon-calendar-fill"></i>2020年09月25日</a>
+    <a><i class="nexmoefont icon-calendar-fill"></i>2020年10月10日</a>
     <a><i class="nexmoefont icon-areachart"></i>1k 字</a>
     <a><i class="nexmoefont icon-time-circle-fill"></i>大概 4 分钟</a>
 </div>
@@ -212,190 +205,61 @@
   </div>
 
   <article>
-    <p>Type-C, USB3.1   我只是个中介。</p>
+    <p>​    <strong>线程池</strong>（英语：thread pool）：一种线程使用模式。线程过多会带来调度开销，进而影响缓存局部性和整体性能。而线程池维护着多个线程，等待着监督管理者分配可并发执行的任务。这避免了在处理短时间任务时创建与销毁线程的代价。线程池不仅能够保证内核的充分利用，还能防止过分调度。可用线程数量应该取决于可用的并发处理器、处理器内核、内存、网络sockets等的数量。 例如，线程数一般取cpu数量+2比较合适，线程数过多会导致额外的线程切换开销。</p>
 <a id="more"></a>
 
-<h1 id="Interface"><a href="#Interface" class="headerlink" title="Interface"></a>Interface</h1><p>接口(Interface)技术，主要用来描述类具有什么功能，并不会给出每个功能具体的实现。一个类可以实现（implement）一个或多个接口，并在需要接口的地方，随时使用实现了相对应接口的对象。</p>
-<h2 id="接口的语法"><a href="#接口的语法" class="headerlink" title="接口的语法"></a>接口的语法</h2><p><img data-sizes="auto" data-src="https://style.youkeda.com/img/ham/course/j2/LoginService.svg" alt="img" class="lazyload"></p>
-<p>基本语法如上图，并不复杂。</p>
-<pre><code class="java">/**
- * 登录接口，支持各种方式的登录
- */
-public interface LoginService &#123;
-  String getLoginPageUrl()&#123;
-
-  &#125;
-&#125;</code></pre>
-<blockquote>
-<p>常见错误接口方法定义：</p>
-<p>接口抽象方法不能带有主体。</p>
-</blockquote>
-<h2 id="UML-接口定义："><a href="#UML-接口定义：" class="headerlink" title="UML 接口定义："></a>UML 接口定义：</h2><p><img data-sizes="auto" data-src="https://style.youkeda.com/img/ham/course/j2/RoleService.svg" alt="img" class="lazyload"></p>
-<p>如上图所示，这个图标就是接口(interface)：</p>
-<p><img data-sizes="auto" data-src="https://style.youkeda.com/img/ham/course/j2/interface.png" alt="img" class="lazyload"></p>
-<blockquote>
-<p>图标定义了一个 RoleService，依赖于 Role 类</p>
-</blockquote>
-<p>接口类命名遵循 XxxService , 以 Service 结尾的类名代表其是接口。</p>
-<h2 id="接口实现类"><a href="#接口实现类" class="headerlink" title="接口实现类"></a>接口实现类</h2><p><img data-sizes="auto" data-src="https://style.youkeda.com/img/ham/course/j2/implements.svg" alt="img" class="lazyload"></p>
-<p>语法规则：</p>
+<p>​    在 Java 中，如果每个请求到达就创建一个新的线程，其开销是十分巨大的。在实际使用的过程中，服务器要在创建和销毁线程上话费的时间和消耗的系统资源都相当的大，甚至可能要比在处理实际的用户请求时间的时间和资源要多的多。</p>
+<p>​    如果我们在一个JAM里创建过多的进程，会使系统由于过度消耗内存 或 “切换过度” 而导致系统资源不足。因此需要“池化资源”来减少创建和销毁线程的次数。一个简单的线程池至少应包含：线程池管理、工作线程、任务队列、任务接口等部分。</p>
 <ul>
-<li><strong>接口定义的方法在实现类里必须要全部实现，而且方法签名要一模一样（同样方法名称、方法参数、方法返回值）</strong></li>
-<li><strong>由于接口定义的方法都是 public 的，所以实现类的方法控制修饰符也必须是 public。</strong></li>
+<li>线程池管理器：创建、销毁并管理线程池，将工作线程放入线程池中。</li>
+<li>工作线程：一个可循环执行任务的线程，在没有任务时进行等待。</li>
+<li>任务队列：一种缓冲机制，将没有处理的任务放在任务队列中。</li>
+<li>任务接口：每个任务务必实现的借口，主要用来规定任务的入口、任务执行完毕后的收尾工作、任务执行状态等等，工作线程通过该接口调度任务执行。</li>
 </ul>
-<p>与继承不同的是：</p>
+<p><strong>注：</strong>线程池主要用来解决线程生命周期开销问题和资源不足问题。</p>
+<p><code>newCachedTreadPool</code> 创建可缓存线程池，如果线程池长度超过处理需要可回收空闲线程，若无线程可回收则新建线程。此线程池不会对线程大小做限制，其池大小完全依赖于操作系统能够创建的最大线程大小。</p>
+<p><code>newFixedThreadPool</code> 创建一个定长线程池，可控制线程最大并发数，超出的线程会在队列中等待。</p>
+<p><code>newSingleThreadExecutor</code> 创建一个单线程化的线程池，只会用唯一的工作线程来执行任务，保证所有的任务按照指定顺序（FIFO、LIFO、优先级）来执行。</p>
+<p><code>newScheduledThreadPool</code> 创建一个定长线程池，支持定时及周期性任务执行。</p>
+<h2 id="可缓存线程池"><a href="#可缓存线程池" class="headerlink" title="可缓存线程池"></a>可缓存线程池</h2><p> Java 提供了 Executors 工厂类，来创建线程池。(i.e. <code>Executors.newXXX</code> 创建)</p>
+<p><code>newCachedThreadPool</code> 是 <code>Executors</code> 工厂类的一个静态函数，用来创建一个可以无限扩大的线程池。</p>
+<pre><code class="java">import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+public class ThreadPoolCached &#123;
+
+  private static final ExecutorService cachedThreadPool =               Executors.newCachedThreadPool();
+
+  public stati c void main(String[] args) &#123;
+    for (int i = 0; i &lt; 10; i++) &#123;
+      final int index = i;
+
+      cachedThreadPool.execute(new Runnable() &#123;
+        @Override
+        public void run() &#123;
+          System.out.println(index);
+        &#125;
+      &#125;);
+    &#125;
+  &#125;
+&#125;</code></pre>
+<blockquote>
+<p><code>cachedThreadPool</code> 是线程池，因为线程是可以 <strong>重用</strong> 的，一般都定义为静态成员变量。</p>
 <ul>
-<li>继承表达的是父子关系，所子类只能继承一个父类；</li>
-<li>接口是一个约定，实现类可以拥有多个约定，所以实现类可以实现多个接口只需要用 “,” 分开即可。</li>
+<li>为了防止 <code>cachedThreadPool</code> 变量重新被赋值需要使用 <code>final</code> 修饰符。</li>
 </ul>
-<p><strong>实例：</strong></p>
-<pre><code class="java">package com.youkeda.service;
-
-public interface EchoService &#123;
-    // 输出任意的内容
-    void echo();
-&#125;</code></pre>
-<pre><code class="java">package com.youkeda.service.impl;
-import com.youkeda.service.RoleService;
-import com.youkeda.service.EchoService;
-
-public class RoleServiceImpl 
-             implements RoleService,EchoService&#123;
-
-    public void addRole(Role role)&#123;
-    &#125;
-
-    public ArrayList&lt;Role&gt; getRoles()&#123;
-        return null;
-    &#125;
-
-    public void echo()&#123;
-    &#125;
-&#125;</code></pre>
-<h2 id="接口实例化"><a href="#接口实例化" class="headerlink" title="接口实例化"></a>接口实例化</h2><p>接口是不能单独实例化的，因为接口只是定义没有具体的实现是不允许实例化的。</p>
-<p>以上述例子为例：这条语法是错误的</p>
-<pre><code class="java">EchoService echo = new EchoService();</code></pre>
-<p>正确的实例化是结合实现类的：</p>
-<pre><code class="java">package com.youkeda.test;
-import com.youkeda.service.RoleService;
-import com.youkeda.service.impl.RoleServiceImpl;
-/**
- * RoleServiceTest
- */
-public class RoleServiceTest &#123;
-
-  public static void main(String[] args) &#123;
-    RoleService roleService = new RoleServiceImpl();
-  &#125;
-&#125;</code></pre>
-<p>由于 RoleService 类同时实现了 EchoService，所以实例也可以被转化为 EchoService。</p>
-<pre><code class="java">package com.youkeda.test;
-
-import com.youkeda.service.RoleService;
-import com.youkeda.service.impl.RoleServiceImpl;
-
-/**
- * RoleServiceTest
- */
-public class RoleServiceTest &#123;
-
-  public static void main(String[] args) &#123;
-
-    RoleService roleService = new RoleServiceImpl();
-
-    // 类型转化：把 roleService 实例转化为 EchoService 接口类型
-    EchoService echoService = (EchoService)roleService;
-
-  &#125;
-&#125;</code></pre>
-<h2 id="UML-接口实现图"><a href="#UML-接口实现图" class="headerlink" title="UML 接口实现图"></a>UML 接口实现图</h2><p><img data-sizes="auto" data-src="https://style.youkeda.com/img/ham/course/j2/RoleService1.svg" alt="img" class="lazyload"></p>
-<blockquote>
-<p>RoleServiceImpl 实现了 RoleService 接口</p>
-<p>实现类的包名在 service 包下并且命名为 impl，同样 实现类的命名规则是 XxxServicImpl 。 </p>
+<p><code>Runnable</code> 实现接口放入线程池后会被自动调度，启动线程不需要再使用 <code>start()</code> 方法。</p>
+<ul>
+<li>上述示例中 <code>new Runnable() &#123;... ...&#125;</code> 是匿名类（i.e. 接口不可直接实例化，所以匿名类 实现了接口实例化但是没有 定义具体的类名，所以被称之为匿名类。）</li>
+</ul>
 </blockquote>
-<h2 id="Java-常用接口"><a href="#Java-常用接口" class="headerlink" title="Java 常用接口"></a>Java 常用接口</h2><h3 id="Map"><a href="#Map" class="headerlink" title="Map"></a><strong>Map</strong></h3><p><img data-sizes="auto" data-src="https://style.youkeda.com/img/ham/course/j2/java-map1.png" alt="img" class="lazyload"></p>
-<p>如上图，Map（映射）是遵循  [key : value] 这样的形式的集合。Key 和 Value 可以是任何 Java 对象。</p>
-<p>我们大部分情况下，都会使用 HashMap 这个 Map 实现类，所以如果想得到一个 Map 的实例的话可以使用 HashMap。</p>
-<pre><code class="java">import java.util.Map;
-import java.util.HashMap;
-
-// key value 得是 Java 类型
-Map&lt;key,value&gt; map = new HashMap&lt;&gt;();</code></pre>
-<p>举个例子：如果将 1-7 映射为 英文日期，利用 Map：</p>
-<table>
-<thead>
-<tr>
-<th>Key</th>
-<th>Value</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>1</td>
-<td>Monday</td>
-</tr>
-<tr>
-<td>2</td>
-<td>Tuesday</td>
-</tr>
-<tr>
-<td>3</td>
-<td>Wednesday</td>
-</tr>
-<tr>
-<td>4</td>
-<td>Thursday</td>
-</tr>
-<tr>
-<td>5</td>
-<td>Friday</td>
-</tr>
-<tr>
-<td>6</td>
-<td>Saturday</td>
-</tr>
-<tr>
-<td>7</td>
-<td>Sunday</td>
-</tr>
-</tbody></table>
-<p>首先使用 map.put(key,value) 这个方法来存储数据。</p>
-<p> Map 的键、值都是 String，可以使用 Map&lt;Integer,String&gt; 来表示。（<strong>泛型</strong>用法）</p>
-<pre><code class="java">// 实例化Map对象
-Map&lt;Integer,String&gt; map = new HashMap&lt;&gt;();
-
-map.put(1,&quot;Monday&quot;);
-map.put(2,&quot;Tuesday&quot;);
-map.put(3,&quot;Wednesday&quot;);
-map.put(4,&quot;Thursday&quot;);
-map.put(5,&quot;Friday&quot;);
-map.put(6,&quot;Saturday&quot;);
-map.put(7,&quot;Sunday&quot;);</code></pre>
-<p>使用 map.get(key) 获取值</p>
-<pre><code class="java">String weekText = map.get(3);
-System.out.println(weekText);</code></pre>
-<p>Map 是一种集合数据：</p>
-<p>可以使用 集合大小 size( ) 和 遍历 for</p>
-<pre><code class="java"> for (Map.Entry&lt;Integer,String&gt; entry : map.entrySet())&#123;
-
-   System.out.println(&quot;Key = &quot; + entry.getKey() +
-                  &quot;, Value = &quot; + entry.getValue());
- &#125;</code></pre>
-<blockquote>
-<p>需要先得到数据格式的集合 entrySet</p>
-</blockquote>
-<p><strong>Map 完整接口方法：</strong><a target="_blank" rel="noopener" href="https://ham.youkeda.com/articles/detail/5f3758fe5e205f30b2c2b2f0">https://ham.youkeda.com/articles/detail/5f3758fe5e205f30b2c2b2f0</a></p>
-<h3 id="List"><a href="#List" class="headerlink" title="List"></a><strong>List</strong></h3><p>List 是 ArrayList 的接口，支持同一类型数据的集合存储。如：</p>
-<pre><code class="java">List&lt;String&gt; strings = new ArrayList&lt;&gt;();</code></pre>
-<p>简化版 for （适用于不关系数组坐标值的场景）：</p>
-<pre><code class="java">List&lt;String&gt; strings = new ArrayList&lt;&gt;();
-
-for(String str : strings)&#123;
-    System.out.println(str);
-&#125;</code></pre>
+<p><code>CachedThreadPool</code> 可缓存线程池会优先重用空闲线程池，但由于其原理可以”无限“扩大，线程数可以随意增加，因此较多使用在处理执行时间比较小的任务。</p>
 
   </article>
 
   <div class="nexmoe-post-meta nexmoe-rainbow">
+    
+        <a class="nexmoefont icon-appstore-fill -link" href="http://idzforjh.top/categories/Java%E5%9F%BA%E7%A1%80/">Java基础</a>
     
     
         <a class="nexmoefont icon-tag-fill -none-link" href="http://idzforjh.top/tags/Think-of-Java/" rel="tag">Think of Java</a>
@@ -407,7 +271,7 @@ for(String str : strings)&#123;
       
   <div class="nexmoe-post-copyright">
     <strong>本文作者：</strong>Fraser·&#39;iDzforjh&#39;·Bu<br>
-    <strong>本文链接：</strong><a href="http://idzforjh.top/2020/09/25/Interface/" title="http:&#x2F;&#x2F;idzforjh.top&#x2F;2020&#x2F;09&#x2F;25&#x2F;Interface&#x2F;" target="_blank" rel="noopener">http:&#x2F;&#x2F;idzforjh.top&#x2F;2020&#x2F;09&#x2F;25&#x2F;Interface&#x2F;</a><br>
+    <strong>本文链接：</strong><a href="http://idzforjh.top/2020/10/10/ThreadPool/" title="http:&#x2F;&#x2F;idzforjh.top&#x2F;2020&#x2F;10&#x2F;10&#x2F;ThreadPool&#x2F;" target="_blank" rel="noopener">http:&#x2F;&#x2F;idzforjh.top&#x2F;2020&#x2F;10&#x2F;10&#x2F;ThreadPool&#x2F;</a><br>
     
       <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
     
@@ -437,7 +301,7 @@ for(String str : strings)&#123;
   </div>
   <script src="https://cdn.jsdelivr.net/combine/npm/lazysizes@5.1.0/lazysizes.min.js,gh/highlightjs/cdn-release@9.15.8/build/highlight.min.js,npm/mdui@0.4.3/dist/js/mdui.min.js,gh/nexmoe/nexmoe.github.io@latest/js/app.js"></script>
 <script>hljs.initHighlightingOnLoad();</script>
-<!--<script src="http://idzforjh.top/js/app.js?v=1604819999233"></script>-->
+<!--<script src="http://idzforjh.top/js/app.js?v=1604819999223"></script>-->
 
 
     <script src="https://cdn.jsdelivr.net/gh/xtaodada/xtaodada.github.io@0.0.2/copy.js"></script>

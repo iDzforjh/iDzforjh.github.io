@@ -4,7 +4,7 @@
 
 <head>
   
-  <title>标签：HTML - The Division</title>
+  <title>Screeps - The Division</title>
   <meta charset="UTF-8">
   <meta name="description" content="JIT, 2018, Network engineering Undergraduate student">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
@@ -12,18 +12,23 @@
   
 
   <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/iDzforjh/Resource@2.0/images/TCTD2.PNG" type="image/png" />
-  <meta name="description" content="JIT, 2018, Network engineering Undergraduate student">
-<meta property="og:type" content="website">
-<meta property="og:title" content="The Division">
-<meta property="og:url" content="http://idzforjh.top/tags/HTML/index.html">
+  <meta name="description" content="Screeps-面向程序员的策略游戏">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Screeps">
+<meta property="og:url" content="http://idzforjh.top/2020/10/25/Screeps/index.html">
 <meta property="og:site_name" content="The Division">
-<meta property="og:description" content="JIT, 2018, Network engineering Undergraduate student">
+<meta property="og:description" content="Screeps-面向程序员的策略游戏">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://idzforjh.top/Library/Application%20Support/typora-user-images/image-20201025164231935.png">
+<meta property="article:published_time" content="2020-10-25T07:21:29.000Z">
+<meta property="article:modified_time" content="2020-11-08T02:24:26.673Z">
 <meta property="article:author" content="Fraser·&#39;iDzforjh&#39;·Bu">
+<meta property="article:tag" content="Screeps">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://idzforjh.top/Library/Application%20Support/typora-user-images/image-20201025164231935.png">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/gh/nexmoe/nexmoe.github.io@latest/css/style.css,npm/highlight.js@9.15.8/styles/atom-one-dark.css,gh/nexmoe/nexmoe.github.io@latest/lib/mdui_043tiny/css/mdui.css,gh/nexmoe/nexmoe.github.io@latest/lib/iconfont/iconfont.css" crossorigin>
   
-  <!--<link rel="stylesheet" href="http://idzforjh.top/css/style.css?v=1604819999248">-->
+  <!--<link rel="stylesheet" href="http://idzforjh.top/css/style.css?v=1604819999220">-->
 
   
 <meta name="generator" content="Hexo 5.1.1"></head>
@@ -183,73 +188,149 @@
   </div>
   <div id="nexmoe-content">
     <div class="nexmoe-primary">
-        
-<section class="nexmoe-archives">
+        <div class="nexmoe-post">
+  
+      <div class="nexmoe-post-cover" style="padding-bottom: 56.25%;"> 
+          <img data-src="https://cdn.jsdelivr.net/gh/iDzforjh/Resource@20/images/Queen%60s%20gambit3.png" data-sizes="auto" alt="Screeps" class="lazyload">
+          <h1>Screeps</h1>
+      </div>
+  
+  
+  <div class="nexmoe-post-meta nexmoe-rainbow" style="margin:10px 0!important;">
+    <a><i class="nexmoefont icon-calendar-fill"></i>2020年10月25日</a>
+    <a><i class="nexmoefont icon-areachart"></i>440 字</a>
+    <a><i class="nexmoefont icon-time-circle-fill"></i>大概 2 分钟</a>
+</div>
 
-    <article>
-        
+  <div class="nexmoe-post-right">
+    
+  </div>
 
-        
-            <h2>2020</h2>
-            <ul>
-            
-                <li><span>09-27</span><a href="http://idzforjh.top/2020/09/27/HTML/" >HTML 学习日志</a></li>
-            
-            </ul>
-        
-    </article>
+  <article>
+    <p>Screeps-面向程序员的策略游戏</p>
+<a id="more"></a>
+
+<h2 id="创建工人，其具有-work-carry-move等三种属性"><a href="#创建工人，其具有-work-carry-move等三种属性" class="headerlink" title="创建工人，其具有 work carry move等三种属性"></a>创建工人，其具有 work carry move等三种属性</h2><pre><code class="javascript">Game.spawns[&#39;Spawn1&#39;].spawnCreep( [WORK, CARRY, MOVE], &#39;Harvester1&#39; );</code></pre>
+<h2 id="让工人执行最基本的挖矿脚本"><a href="#让工人执行最基本的挖矿脚本" class="headerlink" title="让工人执行最基本的挖矿脚本"></a>让工人执行最基本的挖矿脚本</h2><pre><code class="javascript">module.exports.loop = function () &#123;
+    var creep = Game.creeps[&#39;Harvester1&#39;];
+    var sources = creep.room.find(FIND_SOURCES);
+    if(creep.harvest(sources[0]) == ERR_NOT_IN_RANGE) &#123;
+        creep.moveTo(sources[0]);
+    &#125;
+&#125;</code></pre>
+<blockquote>
+<p><code>Game.creeps[ worker_name ]</code>  获取需要被控制的 creep </p>
+<p><code>creep.room.find</code> find 通过 room来调用</p>
+<p><code>creep.harvest(sources[0]) == ERR_NOT_IN_RANGE</code> (<code>sources</code>是一个数组并不是对象)</p>
+<p><code>ERR_NOT_IN_RANGE</code> 目标距离 creep 太远 （注：soucre 似乎是第一个资源点的距离（相对creep））</p>
+</blockquote>
+<h2 id="采矿执行完毕，返回基地"><a href="#采矿执行完毕，返回基地" class="headerlink" title="采矿执行完毕，返回基地"></a>采矿执行完毕，返回基地</h2><pre><code class="javascript">module.exports.loop = function () &#123;
+    var creep = Game.creeps[&#39;Harvester1&#39;];
+
+    if(creep.store.getFreeCapacity() &gt; 0) &#123;
+        var sources = creep.room.find(FIND_SOURCES);
+        if(creep.harvest(sources[0]) == ERR_NOT_IN_RANGE) &#123;
+            creep.moveTo(sources[0]);
+        &#125;
+    &#125;
+    else &#123;
+        if( creep.transfer(Game.spawns[&#39;Spawn1&#39;], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE ) &#123;
+            creep.moveTo(Game.spawns[&#39;Spawn1&#39;]);
+        &#125;
+    &#125;
+&#125;</code></pre>
+<blockquote>
+<p><code>if(creep.store.getFreeCapacity() &gt; 0)</code> :</p>
+<ul>
+<li><code>.store</code> 代表其存储中的资源对象</li>
+<li><code>.getFreeCapacity() </code> 方法 返回剩余可用容量</li>
+</ul>
+<p><code>creep.transfer(Game.spawns[&#39;Spawn1&#39;], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE</code></p>
+<ul>
+<li><code>.transfer(target, resourcetype, [amount]（可选）)</code> 将资源从该creep转移至其他对象，目标必须在紧邻creep的正方形区域中</li>
+</ul>
+</blockquote>
+<h2 id="遍历所有的-creeps-执行挖矿代码"><a href="#遍历所有的-creeps-执行挖矿代码" class="headerlink" title="遍历所有的 creeps 执行挖矿代码"></a>遍历所有的 creeps 执行挖矿代码</h2><pre><code class="javascript">module.exports.loop = function () &#123;
+    for(var name in Game.creeps) &#123;
+        var creep = Game.creeps[name];
+
+        if(creep.store.getFreeCapacity() &gt; 0) &#123;
+            var sources = creep.room.find(FIND_SOURCES);
+            if(creep.harvest(sources[0]) == ERR_NOT_IN_RANGE) &#123;
+                creep.moveTo(sources[0]);
+            &#125;
+        &#125;
+        else &#123;
+            if(creep.transfer(Game.spawns[&#39;Spawn1&#39;], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) &#123;
+                creep.moveTo(Game.spawns[&#39;Spawn1&#39;]);
+            &#125;
+        &#125;
+    &#125;
+&#125;</code></pre>
+<h2 id="模块"><a href="#模块" class="headerlink" title="模块"></a>模块</h2><p><img data-sizes="auto" data-src="../../../../../Library/Application%20Support/typora-user-images/image-20201025164231935.png" alt="image-20201025164231935" class="lazyload"></p>
+<p>左下角新建模块（函数）</p>
+<p>固定模版格式 <code>run：function()&#123;&#125;</code> </p>
+<pre><code class="javascript">var roleHarvester = require(&#39;role.harvester&#39;);
+
+module.exports.loop = function () &#123;
+
+    for(var name in Game.creeps) &#123;
+        var creep = Game.creeps[name];
+        roleHarvester.run(creep);
+    &#125;
+&#125;</code></pre>
+<blockquote>
+<p><code>var roleHarvester = require(&#39;role.harvester&#39;);</code> 模块引用</p>
+<p><code>roleHarvester.run(creep);</code> 调用 模块 里的函数方法</p>
+</blockquote>
+
+  </article>
+
+  <div class="nexmoe-post-meta nexmoe-rainbow">
+    
+        <a class="nexmoefont icon-appstore-fill -link" href="http://idzforjh.top/categories/Queen-s-Gambit/">Queen`s Gambit</a>
+    
+    
+        <a class="nexmoefont icon-tag-fill -none-link" href="http://idzforjh.top/tags/Screeps/" rel="tag">Screeps</a>
+    
+</div>
+
+  <div class="nexmoe-post-footer">
+    
+      
+  <div class="nexmoe-post-copyright">
+    <strong>本文作者：</strong>Fraser·&#39;iDzforjh&#39;·Bu<br>
+    <strong>本文链接：</strong><a href="http://idzforjh.top/2020/10/25/Screeps/" title="http:&#x2F;&#x2F;idzforjh.top&#x2F;2020&#x2F;10&#x2F;25&#x2F;Screeps&#x2F;" target="_blank" rel="noopener">http:&#x2F;&#x2F;idzforjh.top&#x2F;2020&#x2F;10&#x2F;25&#x2F;Screeps&#x2F;</a><br>
+    
+      <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
+    
+  </div>
+
+
+    
+    <section class="nexmoe-comment">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.5.0/dist/gitalk.min.css">
+<div id="gitalk"></div>
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1.5.0/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+    var gitalk = new Gitalk({
+        clientID: '80b2453b6d5f37ad6225',
+        clientSecret: '43e99fa852795c9a7b3eb924b2558c64b84bbdeb',
+        id: window.location.pathname,
+        repo: 'nexmoe.github.io',
+        owner: 'nexmoe',
+        admin: 'nexmoe'
+    })
+    gitalk.render('gitalk')
+</script>
 </section>
-
-<style>
-.nexmoe-archives article > *:first-child {
-    margin-top: 0;
-}
-.nexmoe-archives article > *:last-child {
-    margin-bottom: 0;
-}
-.nexmoe-archives ul {
-    list-style: none;
-    padding-left: 0!important;
-}
-.nexmoe-archives li {
-    position: relative;
-    padding: 10px 0;
-}
-.nexmoe-archives li::before {
-    content: "";
-    width: 14px;
-    height: 14px;
-    background: #ff4e6a;
-    display: inline-block;
-    vertical-align: middle;
-    margin-top: -2px;
-    margin-right: 11px;
-    border-radius: 100%;
-    border: 3px solid #fff;
-    z-index: 100;
-    position: relative;
-}
-.nexmoe-archives li::after {
-    content: "";
-    height: 100%;
-    width: 2px;
-    background: rgba(255, 78, 106, 0.2);
-    position: absolute;
-    left: 6px;
-    top: 20px;
-}
-.nexmoe-archives li:last-child:after {
-    display: none;
-}
-.nexmoe-archives span {
-    margin-right: 15px;
-}
-</style>
+  </div>
+</div>
     </div>
   </div>
   <script src="https://cdn.jsdelivr.net/combine/npm/lazysizes@5.1.0/lazysizes.min.js,gh/highlightjs/cdn-release@9.15.8/build/highlight.min.js,npm/mdui@0.4.3/dist/js/mdui.min.js,gh/nexmoe/nexmoe.github.io@latest/js/app.js"></script>
 <script>hljs.initHighlightingOnLoad();</script>
-<!--<script src="http://idzforjh.top/js/app.js?v=1604819999249"></script>-->
+<!--<script src="http://idzforjh.top/js/app.js?v=1604819999220"></script>-->
 
 
     <script src="https://cdn.jsdelivr.net/gh/xtaodada/xtaodada.github.io@0.0.2/copy.js"></script>
