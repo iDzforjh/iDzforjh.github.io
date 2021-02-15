@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+
+<head>
+  
+  <title>The Division</title>
+  <meta charset="UTF-8">
+  <meta name="description" content="JIT, 2018, Network engineering Undergraduate student">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+  
+  
+
+  <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/iDzforjh/Resource@2.0/images/TCTD2.PNG" type="image/png" />
+  <meta name="description" content="OpenCV 树莓派部署1. 刻录操作系统1.1  烧写工具下载地址https:&#x2F;&#x2F;www.balena.io&#x2F;etcher&#x2F; 1.2 系统文件部署系统镜像官网 https:&#x2F;&#x2F;openeuler.org&#x2F;zh&#x2F;download&#x2F;  注：需要带图形的操作系统，否则无法部署 OpenCV  vandyke - securecrt 下载地址 https:&#x2F;&#x2F;www.vandyke.com&#x2F;downlo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="The Division">
+<meta property="og:url" content="http://idzforjh.top/2020/12/19/OpenCV%20%E6%A0%91%E8%8E%93%E6%B4%BE%E9%83%A8%E7%BD%B2/index.html">
+<meta property="og:site_name" content="The Division">
+<meta property="og:description" content="OpenCV 树莓派部署1. 刻录操作系统1.1  烧写工具下载地址https:&#x2F;&#x2F;www.balena.io&#x2F;etcher&#x2F; 1.2 系统文件部署系统镜像官网 https:&#x2F;&#x2F;openeuler.org&#x2F;zh&#x2F;download&#x2F;  注：需要带图形的操作系统，否则无法部署 OpenCV  vandyke - securecrt 下载地址 https:&#x2F;&#x2F;www.vandyke.com&#x2F;downlo">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://idzforjh.top/2020/12/19/Library/Application%20Support/typora-user-images/image-20201219153833838.png">
+<meta property="og:image" content="http://idzforjh.top/2020/12/19/Library/Application%20Support/typora-user-images/image-20201219153809819.png">
+<meta property="og:image" content="http://idzforjh.top/2020/12/19/Library/Application%20Support/typora-user-images/image-20201219154157503.png">
+<meta property="og:image" content="http://idzforjh.top/2020/12/19/Library/Application%20Support/typora-user-images/image-20201219153045418.png">
+<meta property="og:image" content="http://idzforjh.top/2020/12/19/Library/Application%20Support/typora-user-images/image-20201219154436464.png">
+<meta property="og:image" content="http://idzforjh.top/2020/12/19/Library/Application%20Support/typora-user-images/image-20201219154449139.png">
+<meta property="og:image" content="http://idzforjh.top/2020/12/19/Library/Application%20Support/typora-user-images/image-20201219154619116.png">
+<meta property="og:image" content="http://idzforjh.top/2020/12/19/Library/Application%20Support/typora-user-images/image-20201219154731316.png">
+<meta property="og:image" content="http://idzforjh.top/2020/12/19/Library/Application%20Support/typora-user-images/image-20201219155245906.png">
+<meta property="og:image" content="http://idzforjh.top/2020/12/19/Library/Application%20Support/typora-user-images/image-20201219155450392.png">
+<meta property="og:image" content="http://idzforjh.top/2020/12/19/Library/Application%20Support/typora-user-images/image-20201219155642029.png">
+<meta property="og:image" content="http://idzforjh.top/2020/12/19/Library/Application%20Support/typora-user-images/image-20201219155812801.png">
+<meta property="og:image" content="http://idzforjh.top/2020/12/19/Library/Application%20Support/typora-user-images/image-20201219160456230.png">
+<meta property="og:image" content="http://idzforjh.top/2020/12/19/Library/Application%20Support/typora-user-images/image-20201219160513928.png">
+<meta property="og:image" content="http://idzforjh.top/2020/12/19/Library/Application%20Support/typora-user-images/image-20201219161155189.png">
+<meta property="og:image" content="http://idzforjh.top/2020/12/19/Library/Application%20Support/typora-user-images/image-20201219164027140.png">
+<meta property="og:image" content="http://idzforjh.top/2020/12/19/Library/Application%20Support/typora-user-images/image-20201219164332150.png">
+<meta property="og:image" content="http://idzforjh.top/2020/12/19/Library/Application%20Support/typora-user-images/image-20201219165711306.png">
+<meta property="og:image" content="http://idzforjh.top/2020/12/19/Library/Containers/com.tencent.qq/Data/Library/Application%20Support/QQ/Users/1486702069/QQ/Temp.db/A5398FEA-4511-447C-8E19-B0888ED341D2.png">
+<meta property="og:image" content="http://idzforjh.top/2020/12/19/Library/Application%20Support/typora-user-images/image-20201219171227852.png">
+<meta property="og:image" content="http://idzforjh.top/2020/12/19/Library/Application%20Support/typora-user-images/image-20201219183833915.png">
+<meta property="og:image" content="http://idzforjh.top/2020/12/19/Library/Application%20Support/typora-user-images/image-20201219185606786.png">
+<meta property="og:image" content="http://idzforjh.top/2020/12/19/Library/Application%20Support/typora-user-images/image-20201219191552826.png">
+<meta property="og:image" content="http://idzforjh.top/2020/12/19/Library/Application%20Support/typora-user-images/image-20201219191251538.png">
+<meta property="og:image" content="http://idzforjh.top/2020/12/19/Library/Application%20Support/typora-user-images/image-20201219191646309.png">
+<meta property="og:image" content="http://idzforjh.top/2020/12/19/Library/Application%20Support/typora-user-images/image-20201219204458982.png">
+<meta property="og:image" content="http://idzforjh.top/2020/12/19/Library/Containers/com.tencent.qq/Data/Library/Caches/Images/F0A5D6266A87BECB83B28F4C8C2E2DC1.jpg">
+<meta property="article:published_time" content="2020-12-19T05:53:03.087Z">
+<meta property="article:modified_time" content="2020-12-20T02:45:38.020Z">
+<meta property="article:author" content="Fraser·&#39;iDzforjh&#39;·Bu">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://idzforjh.top/2020/12/19/Library/Application%20Support/typora-user-images/image-20201219153833838.png">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/gh/nexmoe/nexmoe.github.io@latest/css/style.css,npm/highlight.js@9.15.8/styles/atom-one-dark.css,gh/nexmoe/nexmoe.github.io@latest/lib/mdui_043tiny/css/mdui.css,gh/nexmoe/nexmoe.github.io@latest/lib/iconfont/iconfont.css" crossorigin>
+  
+  <!--<link rel="stylesheet" href="http://idzforjh.top/css/style.css?v=1613376270076">-->
+
+  
+<meta name="generator" content="Hexo 5.1.1"></head>
+
+<body class="mdui-drawer-body-left">
+  
+  <div id="nexmoe-background">
+    <div class="nexmoe-bg" style="background-image: url(https://cdn.jsdelivr.net/gh/iDzforjh/Resource@2.0/images/background.jpg)"></div>
+    <div class="mdui-appbar mdui-shadow-0">
+      <div class="mdui-toolbar">
+        <a mdui-drawer="{target: '#drawer', swipe: true}" title="menu" class="mdui-btn mdui-btn-icon mdui-ripple"><i class="mdui-icon nexmoefont icon-menu"></i></a>
+        <div class="mdui-toolbar-spacer"></div>
+        <!--<a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>-->
+        <a href="http://idzforjh.top/" title="Fraser·&#39;iDzforjh&#39;·Bu" class="mdui-btn mdui-btn-icon"><img src="https://cdn.jsdelivr.net/gh/iDzforjh/Resource@2.0/images/avatar.jpg" alt="Fraser·&#39;iDzforjh&#39;·Bu"></a>
+       </div>
+    </div>
+  </div>
+  <div id="nexmoe-header">
+      <div class="nexmoe-drawer mdui-drawer" id="drawer">
+    <div class="nexmoe-avatar mdui-ripple">
+        <a href="http://idzforjh.top/" title="Fraser·&#39;iDzforjh&#39;·Bu">
+            <img src="https://cdn.jsdelivr.net/gh/iDzforjh/Resource@2.0/images/avatar.jpg" alt="Fraser·&#39;iDzforjh&#39;·Bu" alt="Fraser·&#39;iDzforjh&#39;·Bu">
+        </a>
+    </div>
+    <div class="nexmoe-count">
+        <div><span>文章</span>23</div>
+        <div><span>标签</span>9</div>
+        <div><span>分类</span>5</div>
+    </div>
+    <div class="nexmoe-list mdui-list" mdui-collapse="{accordion: true}">
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="http://idzforjh.top/" title="回到首页">
+            <i class="mdui-list-item-icon nexmoefont icon-home"></i>
+            <div class="mdui-list-item-content">
+                回到首页
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="http://idzforjh.top/archives" title="文章归档">
+            <i class="mdui-list-item-icon nexmoefont icon-container"></i>
+            <div class="mdui-list-item-content">
+                文章归档
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="http://idzforjh.top/about.html" title="关于博客">
+            <i class="mdui-list-item-icon nexmoefont icon-info-circle"></i>
+            <div class="mdui-list-item-content">
+                关于博客
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="http://idzforjh.top/PY.html" title="我的朋友">
+            <i class="mdui-list-item-icon nexmoefont icon-unorderedlist"></i>
+            <div class="mdui-list-item-content">
+                我的朋友
+            </div>
+        </a>
+        
+    </div>
+    <aside id="nexmoe-sidebar">
+  
+  <div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-search">
+        <form id="search_form" action_e="https://cn.bing.com/search?q=site:nexmoe.com" onsubmit="return search();">
+            <label><input id="search_value" name="q" type="search" placeholder="搜索"></label>
+        </form>
+    </div>
+</div>
+  
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">社交按钮</h3>
+    <div class="nexmoe-widget nexmoe-social">
+        <a class="mdui-ripple" href="https://space.bilibili.com/21645780" target="_blank" mdui-tooltip="{content: '哔哩哔哩'}" style="color: rgb(231, 106, 141);background-color: rgba(231, 106, 141, .15);">
+            <i class="nexmoefont icon-bilibili"></i>
+        </a><a class="mdui-ripple" href="https://github.com/iDzforjh" target="_blank" mdui-tooltip="{content: 'GitHub'}" style="color: rgb(25, 23, 23);background-color: rgba(25, 23, 23, .15);">
+            <i class="nexmoefont icon-github"></i>
+        </a>
+    </div>
+</div>
+  
+  
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">文章分类</h3>
+    <div class="nexmoe-widget">
+
+      <ul class="category-list">
+
+        
+
+
+        
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="http://iDzforjh.top/categories/Java-Web/">Java Web</a>
+          <span class="category-list-count">3</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="http://iDzforjh.top/categories/Java基础/">Java基础</a>
+          <span class="category-list-count">2</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="http://iDzforjh.top/categories/Machine-Learning/">Machine Learning</a>
+          <span class="category-list-count">2</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="http://iDzforjh.top/categories/Queen-s-Gambit/">Queen`s Gambit</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="http://iDzforjh.top/categories/Web-of-CTF/">Web of CTF</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+      </ul>
+
+    </div>
+  </div>
+
+
+  
+  
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">标签云</h3>
+    <div id="randomtagcloud" class="nexmoe-widget tagcloud nexmoe-rainbow">
+      <a href="http://idzforjh.top/tags/Algorithm/" style="font-size: 10px;">Algorithm</a> <a href="http://idzforjh.top/tags/CSS-3/" style="font-size: 10px;">CSS 3</a> <a href="http://idzforjh.top/tags/HTML/" style="font-size: 10px;">HTML</a> <a href="http://idzforjh.top/tags/HTML-5/" style="font-size: 10px;">HTML 5</a> <a href="http://idzforjh.top/tags/Kali/" style="font-size: 10px;">Kali</a> <a href="http://idzforjh.top/tags/OpenCV/" style="font-size: 15px;">OpenCV</a> <a href="http://idzforjh.top/tags/Screeps/" style="font-size: 10px;">Screeps</a> <a href="http://idzforjh.top/tags/Think-of-Java/" style="font-size: 20px;">Think of Java</a> <a href="http://idzforjh.top/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 10px;">前端</a>
+    </div>
+    
+  </div>
+
+  
+  
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">文章归档</h3>
+    <div class="nexmoe-widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="http://idzforjh.top/archives/2021/02/">二月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="http://idzforjh.top/archives/2021/01/">一月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="http://idzforjh.top/archives/2020/12/">十二月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="http://idzforjh.top/archives/2020/11/">十一月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="http://idzforjh.top/archives/2020/10/">十月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="http://idzforjh.top/archives/2020/09/">九月 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+</aside>
+    <div class="nexmoe-copyright">
+        &copy; 2021 Fraser·&#39;iDzforjh&#39;·Bu
+        Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+        & <a href="https://nexmoe.com/hexo-theme-nexmoe.html" target="_blank">Nexmoe</a>
+    </div>
+</div><!-- .nexmoe-drawer -->
+  </div>
+  <div id="nexmoe-content">
+    <div class="nexmoe-primary">
+        <div class="nexmoe-post">
+  
+      <div class="nexmoe-post-cover" style="padding-bottom: 56.25%;"> 
+          <img data-src="https://cdn.jsdelivr.net/gh/iDzforjh/Resource@2.0/images/background.jpg" data-sizes="auto" alt="" class="lazyload">
+          <h1></h1>
+      </div>
+  
+  
+  <div class="nexmoe-post-meta nexmoe-rainbow" style="margin:10px 0!important;">
+    <a><i class="nexmoefont icon-calendar-fill"></i>2020年12月19日</a>
+    <a><i class="nexmoefont icon-areachart"></i>2.3k 字</a>
+    <a><i class="nexmoefont icon-time-circle-fill"></i>大概 10 分钟</a>
+</div>
+
+  <div class="nexmoe-post-right">
+    
+  </div>
+
+  <article>
+    <h1 id="OpenCV-树莓派部署"><a href="#OpenCV-树莓派部署" class="headerlink" title="OpenCV 树莓派部署"></a>OpenCV 树莓派部署</h1><h2 id="1-刻录操作系统"><a href="#1-刻录操作系统" class="headerlink" title="1. 刻录操作系统"></a>1. 刻录操作系统</h2><h3 id="1-1-烧写工具下载地址"><a href="#1-1-烧写工具下载地址" class="headerlink" title="1.1  烧写工具下载地址"></a>1.1  烧写工具下载地址</h3><p><a target="_blank" rel="noopener" href="https://www.balena.io/etcher/">https://www.balena.io/etcher/</a></p>
+<h3 id="1-2-系统文件部署"><a href="#1-2-系统文件部署" class="headerlink" title="1.2 系统文件部署"></a>1.2 系统文件部署</h3><p>系统镜像官网</p>
+<pre><code>https://openeuler.org/zh/download/</code></pre>
+<blockquote>
+<p>注：需要带图形的操作系统，否则无法部署 OpenCV</p>
+</blockquote>
+<p>vandyke - securecrt 下载地址</p>
+<pre><code>https://www.vandyke.com/download/securecrt/6.7/index.html</code></pre>
+<h2 id="2-系统设置"><a href="#2-系统设置" class="headerlink" title="2. 系统设置"></a>2. 系统设置</h2><h4 id="连接wifi："><a href="#连接wifi：" class="headerlink" title="连接wifi："></a>连接wifi：</h4><p>在 root 权限下执行 </p>
+<pre><code class="linux">nmcli dev wifi connect SSID password PWD</code></pre>
+<p>其中，<code>SSID</code> 为上一步扫描到的可供连接的 WIFI 的 SSID，<code>PWD</code> 为对应 WIFI 的密码，如：</p>
+<pre><code>nmcli dev wifi connect openEuler-wifi password 12345678</code></pre>
+<h4 id="SecureCRT-连接"><a href="#SecureCRT-连接" class="headerlink" title="SecureCRT 连接"></a>SecureCRT 连接</h4><p>系统：macOS ,  SecureCRT: 8.5.3</p>
+<p>打开软件后点击 <code>connect</code> 按键，做出如下配置：</p>
+<p><code>Hostname</code> 为 树莓派的IPv4地址 <strong>注：树莓派与电脑需在同一网段。</strong></p>
+<p><img data-sizes="auto" data-src="../Library/Application%20Support/typora-user-images/image-20201219153833838.png" alt="image-20201219153833838" class="lazyload"></p>
+<p>做完配置后点击左下脚的<code>connect</code> 远程连接树莓派</p>
+<p><img data-sizes="auto" data-src="../Library/Application%20Support/typora-user-images/image-20201219153809819.png" alt="image-20201219153809819" class="lazyload"></p>
+<p>最后如果连接正常，状态栏左侧会显示一个绿色的对号：</p>
+<p><img data-sizes="auto" data-src="../Library/Application%20Support/typora-user-images/image-20201219154157503.png" alt="image-20201219154157503" class="lazyload"></p>
+<h3 id="2-1-修改系统磁盘"><a href="#2-1-修改系统磁盘" class="headerlink" title="2.1 修改系统磁盘"></a>2.1 修改系统磁盘</h3><p>默认根目录分区较小，在使用前需要对其进行扩容。</p>
+<p>使用 <code>fdisk -l</code> 命令查看磁盘分区信息，结果如下：</p>
+<p><img data-sizes="auto" data-src="../Library/Application%20Support/typora-user-images/image-20201219153045418.png" alt="image-20201219153045418" class="lazyload"></p>
+<p>SD 卡对应盘符为 /dev/mmcblk0，包括 3 个分区，分别为</p>
+<p> /dev/mmcblk0p1：引导分区</p>
+<p>/dev/mmcblk0p2：交换分区</p>
+<p>/dev/mmcblk0p3：根目录分区</p>
+<p>这里我们需要将根目录分区 /dev/mmcblk0p3 进行扩容，执行如下命令，进入交互界面：</p>
+<pre><code>fdisk /dev/mmcblk0</code></pre>
+<p> 结果如下：</p>
+<p><img data-sizes="auto" data-src="../Library/Application%20Support/typora-user-images/image-20201219154436464.png" alt="image-20201219154436464" class="lazyload"></p>
+<p>系统会弹出一个对话框 <code>Command (m for help):</code> 输入 p，查看分区信息。</p>
+<p><img data-sizes="auto" data-src="../Library/Application%20Support/typora-user-images/image-20201219154449139.png" alt="image-20201219154449139" class="lazyload"></p>
+<blockquote>
+<p>记录分区 /dev/mmcblk0p3 的起始扇区号，即 /dev/mmcblk0p3 分区信息中 Start 列的值，示例中为 1593344。</p>
+</blockquote>
+<p>随后输入 <code>d </code> 选择删除功能，然后输入3 表示删除第三个区域，成功后系统会提示已经完成，如下图所示：</p>
+<p><img data-sizes="auto" data-src="../Library/Application%20Support/typora-user-images/image-20201219154619116.png" alt="image-20201219154619116" class="lazyload"></p>
+<p>在完成删除后，输入<code>n</code> 创建新的分区，此时系统会询问所要创建的分区类型，这里我们选择 输入 <code>p</code> 创建 primary 类型分区。然后输入3，创建序列号为3的分区，也就是之前所见过的<code>/dev/mmcblk0p3 分区</code>，之后系统会询问新的分区起始扇区号，也就是上文所提及的默认分区时第三扇区的起始位置，下图中为 <code>1593344</code> 号扇区。最后按下<code>enter</code>键，这里系统是默认使用最后一个扇区作为新分区的终止扇区号。</p>
+<p><img data-sizes="auto" data-src="../Library/Application%20Support/typora-user-images/image-20201219154731316.png" alt="image-20201219154731316" class="lazyload"></p>
+<p>在创建完新的分区后，系统会询问你是否需要修改扇区标记，这里输入 <code>n</code> 拒绝，随后输入<code>w</code> 保存分区设置退出交互界面。</p>
+<p><img data-sizes="auto" data-src="../Library/Application%20Support/typora-user-images/image-20201219155245906.png" alt="image-20201219155245906" class="lazyload"></p>
+<p>在完成分区操作后记得使用 <code>fdisk -l</code> 命令查看新的磁盘分区信息，以确保磁盘分区正确。</p>
+<p><img data-sizes="auto" data-src="../Library/Application%20Support/typora-user-images/image-20201219155450392.png" alt="image-20201219155450392" class="lazyload"></p>
+<p>然后执行 <code>resize2fs /dev/mmcblk0p3</code> 命令，增大未加载的文件系统大小。</p>
+<p><img data-sizes="auto" data-src="../Library/Application%20Support/typora-user-images/image-20201219155642029.png" alt="image-20201219155642029" class="lazyload"></p>
+<p>继续执行<code>df -lh</code> 命令查看磁盘空间信息，确保根目录分区已扩展。</p>
+<p><img data-sizes="auto" data-src="../Library/Application%20Support/typora-user-images/image-20201219155812801.png" alt="image-20201219155812801" class="lazyload"></p>
+<blockquote>
+<p>注： 如果根目录分区未扩展，可执行 reboot 命令重启树莓派之后再在 root 权限下执行 resize2fs /dev/mmcblk0p3。</p>
+</blockquote>
+<h3 id="2-2-DNF-换源"><a href="#2-2-DNF-换源" class="headerlink" title="2.2 DNF 换源"></a>2.2 DNF 换源</h3><p>默认的源太慢了～～～</p>
+<h4 id="2-2-1-官方源"><a href="#2-2-1-官方源" class="headerlink" title="2.2.1 官方源"></a>2.2.1 官方源</h4><p>在终端输入如下命令，打开配置文件：</p>
+<pre><code>vi /etc/yum.repos.d/openEuler_aarch64.repo</code></pre>
+<p><img data-sizes="auto" data-src="../Library/Application%20Support/typora-user-images/image-20201219160456230.png" alt="image-20201219160456230" class="lazyload"></p>
+<p>将以下内容添加在文件的末尾：</p>
+<pre><code>[osrepo]
+name=osrepo
+baseurl=https://repo.openeuler.org/openEuler-20.09/OS/aarch64/
+enabled=1
+gpgcheck=1
+gpgkey=https://repo.openeuler.org/openEuler-20.09/OS/aarch64/RPM-GPG-KEY-openEuler</code></pre>
+<p> <img data-sizes="auto" data-src="../Library/Application%20Support/typora-user-images/image-20201219160513928.png" alt="image-20201219160513928" class="lazyload"></p>
+<blockquote>
+<p>vim 文件的一般打开后是阅读模式，可尝试在英文输入法环境下输入几个单词，如果发现无法输入则先按下键盘上的 <code>i</code> 键进入编辑模式，然后输入内容。</p>
+<p>保存文件的方法与macOS、ubuntu一样为 先按下 <code>esc</code> 键，然后输入 <code>:wq </code> 后按下 <code>enter</code> 回车健，保存。</p>
+</blockquote>
+<h4 id="2-2-2-华为源"><a href="#2-2-2-华为源" class="headerlink" title="2.2.2 华为源"></a>2.2.2 华为源</h4><p>在终端输入如下命令：</p>
+<pre><code>dnf install wget</code></pre>
+<p>之后系统会有多次询问，默认输入<code>y</code> 便可以了。</p>
+<p><img data-sizes="auto" data-src="../Library/Application%20Support/typora-user-images/image-20201219161155189.png" alt="image-20201219161155189" class="lazyload"></p>
+<p>随后 <strong>备份</strong> 原文件夹中的文件。</p>
+<h5 id="2-2-2-1-Filezilla-ftp-client-软件下载"><a href="#2-2-2-1-Filezilla-ftp-client-软件下载" class="headerlink" title="2.2.2.1 Filezilla ftp client 软件下载"></a>2.2.2.1 Filezilla ftp client 软件下载</h5><p>突然多了一个小节，是因为在学长陈豪的version中原本的有一步文件替换的步骤被 优化 了，因此为了接下来的步骤，在此需要额外进行一个软件的安装。</p>
+<p>首先当然是去官网寻找适合你系统的安装包：</p>
+<pre><code>https://www.filezilla.cn/download/client</code></pre>
+<p>在这一步骤中，所需要用到的文件：</p>
+<p><img data-sizes="auto" data-src="../Library/Application%20Support/typora-user-images/image-20201219164027140.png" alt="image-20201219164027140" class="lazyload"></p>
+<p>随后打开  FileZilla，最上方 <code>主机</code> 为树莓派的ip地址，<code>用户名</code>为 树莓派的管理员名称， <code>密码</code>则是系统默认的 openeuler ，<code>端口号</code>为 <code>22</code>。完成配置后点击快速连接，随后会有一个信任报警，如果有点确定。随后连接成功如下图所示，图中左侧为系统磁盘，右侧为树莓派磁盘。</p>
+<p><img data-sizes="auto" data-src="../Library/Application%20Support/typora-user-images/image-20201219164332150.png" alt="image-20201219164332150" class="lazyload"></p>
+<p>在本地磁盘上选中依赖源的 repo文件，然后右击上传到树莓派到 根目录（home）目录下。</p>
+<p><img data-sizes="auto" data-src="../Library/Application%20Support/typora-user-images/image-20201219165711306.png" alt="image-20201219165711306" class="lazyload"></p>
+<p>遇到的一些问题，解决问题过程时候的截图。具体会在下面说明。</p>
+<p><img data-sizes="auto" data-src="../Library/Containers/com.tencent.qq/Data/Library/Application%20Support/QQ/Users/1486702069/QQ/Temp.db/A5398FEA-4511-447C-8E19-B0888ED341D2.png" alt="A5398FEA-4511-447C-8E19-B0888ED341D2" class="lazyload"></p>
+<p>随后在树莓派到终端中执行文件迁移命令：</p>
+<pre><code>rm openEuler.repo /etc/yum.repos.d/</code></pre>
+<p>—————————————————————————————————</p>
+<p>Houston, we have a problem.</p>
+<p>在换华为源的时候，陈豪学长误将原源 源文件传给我了。在进行完文件迁移后查看文件内部的时候发现这个问题，一开始是以为传输失败（因为时延问题）后来删除了原文件后再次重传发现一开始的文件就不是华为源。因此这个方法先放在这里留作参考。</p>
+<p>—————————————————————————————————</p>
+<p>我们继续换源。</p>
+<p>这次先 备份 原文件夹里的文件，其位置在 <code>/etc/yum.repos.d/</code> </p>
+<blockquote>
+<p>其实任何关于软件或系统文件的修改都最好留有至少一个备份这样在发生未知错误或意外时可以及时恢复而不至于重装系统。</p>
+</blockquote>
+<p>然后 删除 文件夹里的文件 使用命令 <code>rm [文件名]</code> </p>
+<p>之后输入命令：</p>
+<pre><code>wget -O /etc/yum.repos.d/openEulerOS.repo https://mirrors.huaweicloud.com/repository/conf/openeuler_aarch64.repo</code></pre>
+<p>然后执行 <code>dnf clean all</code> 清除原有 yum 缓存</p>
+<p>最后执行 <code>dnf makecache</code> 生成新的缓存</p>
+<p><strong>常用 DNF 指令</strong></p>
+<pre><code>dnf repolist   // 显示相应软件源的配置
+dnf search     // 使用rpm包名称、缩写或者描述搜索需要的RPM包
+dnf remove     // 卸载软件包以及相关的依赖软件包
+dnf install    // 安装一个软件包及其所有未安装的依赖
+</code></pre>
+<h3 id="2-3-编译-OpenCV-依赖库"><a href="#2-3-编译-OpenCV-依赖库" class="headerlink" title="2.3 编译 OpenCV 依赖库"></a>2.3 编译 OpenCV 依赖库</h3><h4 id="2-3-1-依赖库安装"><a href="#2-3-1-依赖库安装" class="headerlink" title="2.3.1 依赖库安装"></a>2.3.1 依赖库安装</h4><p>在SecureCRT软件中 右击选项卡，点击 <code>clone in new window</code> 可以 手工进行多线程操作。</p>
+<p><img data-sizes="auto" data-src="../Library/Application%20Support/typora-user-images/image-20201219171227852.png" alt="image-20201219171227852" class="lazyload"></p>
+<p>这个环节所需要的依赖库有如下：</p>
+<p><code>libraw1394*</code>  <code>make*</code>  <code>cmake*</code> <code>gcc*</code>  <code>gtk2*</code>  <code>gtk3*</code>  <code>gtk+*</code> <code>libjpeg*</code>  <code>openjpeg*</code>   <code>gstreamer*</code> <code>libmpeg*</code>  <code>libgnomeui*</code>   <code>gphoto2*</code>   <code>libgphoto2*</code>   <code>libv4l-devel*</code>  <code>numpy*</code>  <code>build*</code>  <code>zlib*</code>  <code>openssl*</code>  <code>gl*</code> <code>g++*</code></p>
+<pre><code>dnf install libraw1394* &amp;&amp; dnf install make* &amp;&amp; dnf install cmake* &amp;&amp; dnf install gcc* &amp;&amp; dnf install gtk2* &amp;&amp; dnf install gtk3* &amp;&amp; dnf install gtk+*
+
+dnf install libjpeg* &amp;&amp; dnf install openjpeg* &amp;&amp; dnf install gstreamer* &amp;&amp; dnf install libmpeg* &amp;&amp; dnf install libgnomeui* &amp;&amp; dnf install gphoto2* &amp;&amp; dnf install libgphoto2*</code></pre>
+<p>额外：</p>
+<pre><code>dnf install  lmdb*  &amp;&amp; dnf install hdf5* &amp;&amp; dnf install doxygen* &amp;&amp; dnf install tbb* &amp;&amp; dnf install pylint*</code></pre>
+<p>使用 <code> dnf install gcc*</code> 即可安装 <code>gcc</code> 相关依赖，后续默认 y 同意。</p>
+<p><img data-sizes="auto" data-src="../Library/Application%20Support/typora-user-images/image-20201219183833915.png" alt="image-20201219183833915" class="lazyload"></p>
+<h4 id="2-3-4-编译源码安装"><a href="#2-3-4-编译源码安装" class="headerlink" title="2.3.4 编译源码安装"></a>2.3.4 编译源码安装</h4><p>上传所需资源包，在文件夹 <code>openEuler_libPt.1</code> 中</p>
+<p><img data-sizes="auto" data-src="../Library/Application%20Support/typora-user-images/image-20201219185606786.png" alt="image-20201219185606786" class="lazyload"></p>
+<blockquote>
+<p>*.tar                           使用 <code>tar -xvf</code>解压<br>*.gz                            使用 <code>gzip-d</code>或者  <code>gunzip</code>解压<br>*.tar.gz 和 *.tgz           使用<code>tar -xzf</code>解压<br>*.bz2                          使用<code>bzip2 -d</code>或 <code>bunzip2</code>解压<br>.tar.bz2                       使用<code>tar -xjf</code>解压<br>*.Z                              使用<code>uncompress</code>解压<br>*.tar.Z                         使用<code>tar -xZf</code>解压<br>*.rar                             使用<code>unrar e</code>解压<br>*.zip                             使用<code>unzip</code>解压</p>
+</blockquote>
+<pre><code>tar -zxf VTK-8.2.0.tar.gz 
+tar -zxf ffmpeg-3.4.tar.gz 
+tar -zxf &#39;tiff-4.0.10 .tar.gz&#39; 
+tar -zxf yasm-1.3.0.tar.gz     
+tar -zxf ccache-3.2.4.tar.gz 
+tar -zxf jasper-2.0.14.tar.gz 
+tar -zxf protobuf-all-3.14.0.tar.gz  
+tar -xjf x264-master.tar.bz2    
+unzip mirrors_Distrotech-libdc1394-distrotech-libdc1394.zip </code></pre>
+<p><img data-sizes="auto" data-src="../Library/Application%20Support/typora-user-images/image-20201219191552826.png" alt="image-20201219191552826" class="lazyload"></p>
+<h5 id="2-3-4-1-yasm-1-3-0"><a href="#2-3-4-1-yasm-1-3-0" class="headerlink" title="2.3.4.1  yasm-1.3.0"></a>2.3.4.1  yasm-1.3.0</h5><pre><code>./configure
+make -j4 &amp;&amp; make install</code></pre>
+<p><img data-sizes="auto" data-src="../Library/Application%20Support/typora-user-images/image-20201219191251538.png" alt="image-20201219191251538" class="lazyload"></p>
+<h5 id="2-3-4-2-x264-master"><a href="#2-3-4-2-x264-master" class="headerlink" title="2.3.4.2 x264-master"></a>2.3.4.2 x264-master</h5><pre><code>./configure --enable-shared --enable-pic
+make -j4 &amp;&amp; make install</code></pre>
+<p>过程：不要慌，问题“很大”，慌也没用。不如坐下来泡杯咖啡等等。</p>
+<p><img data-sizes="auto" data-src="../Library/Application%20Support/typora-user-images/image-20201219191646309.png" alt="image-20201219191646309" class="lazyload"></p>
+<p>—————————————————————————————————</p>
+<p>Houston, we have a problem.</p>
+<p>系统突然断电，重启后 make 编译报错 </p>
+<p><img data-sizes="auto" data-src="../Library/Application%20Support/typora-user-images/image-20201219204458982.png" alt="image-20201219204458982" class="lazyload"></p>
+<p>查询 config.log 日志后：</p>
+<p><img data-sizes="auto" data-src="../Library/Containers/com.tencent.qq/Data/Library/Caches/Images/F0A5D6266A87BECB83B28F4C8C2E2DC1.jpg" alt="F0A5D6266A87BECB83B28F4C8C2E2DC1" class="lazyload"></p>
+<p>解决方案：dnf -remove gcc*  然后 dnf install gcc* 解决问题</p>
+<p>—————————————————————————————————</p>
+<h5 id="2-3-4-3-libdc1394"><a href="#2-3-4-3-libdc1394" class="headerlink" title="2.3.4.3 libdc1394"></a>2.3.4.3 libdc1394</h5><pre><code>./configure
+make -j4 &amp;&amp; make install</code></pre>
+<h5 id="2-3-4-4-jasper-2-0-14"><a href="#2-3-4-4-jasper-2-0-14" class="headerlink" title="2.3.4.4 jasper-2.0.14"></a>2.3.4.4 jasper-2.0.14</h5><pre><code>cd build
+
+cmake -DCMAKE_INSTALL_PREFIX=/usr  -DCMAKE_BUILD_TYPE=Release   -DCMAKE_SKIP_INSTALL_RPATH=YES  -DJAS_ENABLE_DOC=NO -DCMAKE_INSTALL_DOCDIR=/usr/share/doc/jasper-2.0.14 ..
+
+make -j4 &amp;&amp; make install</code></pre>
+<h5 id="2-3-4-5-tiff-4-0-10"><a href="#2-3-4-5-tiff-4-0-10" class="headerlink" title="2.3.4.5 tiff-4.0.10"></a>2.3.4.5 tiff-4.0.10</h5><pre><code>/configure CFLAGS=-fPIC --enable-shared
+make -j4 &amp;&amp; make install</code></pre>
+<h5 id="2-3-4-6-ccache-3-2-4"><a href="#2-3-4-6-ccache-3-2-4" class="headerlink" title="2.3.4.6 ccache-3.2.4"></a>2.3.4.6 ccache-3.2.4</h5><pre><code>./configure
+make -j4 &amp;&amp; make install</code></pre>
+<h5 id="2-3-4-7-VTK-8-2-0"><a href="#2-3-4-7-VTK-8-2-0" class="headerlink" title="2.3.4.7 VTK-8.2.0"></a>2.3.4.7 VTK-8.2.0</h5><pre><code>mkdir build
+cd build 
+cmake ..
+make -j4 &amp;&amp; make install</code></pre>
+<h5 id="2-3-4-8-ffmpeg-3-4-时间最长"><a href="#2-3-4-8-ffmpeg-3-4-时间最长" class="headerlink" title="2.3.4.8 ffmpeg-3.4 时间最长"></a>2.3.4.8 ffmpeg-3.4 时间最长</h5><pre><code>./configure --enable-shared --enable-avresample
+make -j4
+make install</code></pre>
+<p>额外：</p>
+<p><strong>glog</strong></p>
+<pre><code>git clone https://github.com/google/glog.gittar zxvf glog-0.3.3.tar.gz
+
+mkdir build &amp;&amp; cd build
+
+make -j4&amp;&amp; make install</code></pre>
+<p><strong>gflags</strong></p>
+<pre><code>mkdir build &amp;&amp; cd build
+make -j4&amp;&amp; make install</code></pre>
+<p><strong>eigen</strong> </p>
+<pre><code>git clone https://gitlab.com/libeigen/eigen.git
+mkdir build
+cd build
+make install</code></pre>
+<h3 id="2-4-OpenCV-安装"><a href="#2-4-OpenCV-安装" class="headerlink" title="2.4 OpenCV 安装"></a>2.4 OpenCV 安装</h3>
+  </article>
+
+  <div class="nexmoe-post-meta nexmoe-rainbow">
+    
+    
+</div>
+
+  <div class="nexmoe-post-footer">
+    
+      
+  <div class="nexmoe-post-copyright">
+    <strong>本文作者：</strong>Fraser·&#39;iDzforjh&#39;·Bu<br>
+    <strong>本文链接：</strong><a href="http://idzforjh.top/2020/12/19/OpenCV%20%E6%A0%91%E8%8E%93%E6%B4%BE%E9%83%A8%E7%BD%B2/" title="http:&#x2F;&#x2F;idzforjh.top&#x2F;2020&#x2F;12&#x2F;19&#x2F;OpenCV%20%E6%A0%91%E8%8E%93%E6%B4%BE%E9%83%A8%E7%BD%B2&#x2F;" target="_blank" rel="noopener">http:&#x2F;&#x2F;idzforjh.top&#x2F;2020&#x2F;12&#x2F;19&#x2F;OpenCV%20%E6%A0%91%E8%8E%93%E6%B4%BE%E9%83%A8%E7%BD%B2&#x2F;</a><br>
+    
+      <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
+    
+  </div>
+
+
+    
+    <section class="nexmoe-comment">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.5.0/dist/gitalk.min.css">
+<div id="gitalk"></div>
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1.5.0/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+    var gitalk = new Gitalk({
+        clientID: '80b2453b6d5f37ad6225',
+        clientSecret: '43e99fa852795c9a7b3eb924b2558c64b84bbdeb',
+        id: window.location.pathname,
+        repo: 'nexmoe.github.io',
+        owner: 'nexmoe',
+        admin: 'nexmoe'
+    })
+    gitalk.render('gitalk')
+</script>
+</section>
+  </div>
+</div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/combine/npm/lazysizes@5.1.0/lazysizes.min.js,gh/highlightjs/cdn-release@9.15.8/build/highlight.min.js,npm/mdui@0.4.3/dist/js/mdui.min.js,gh/nexmoe/nexmoe.github.io@latest/js/app.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<!--<script src="http://idzforjh.top/js/app.js?v=1613376270077"></script>-->
+
+
+    <script src="https://cdn.jsdelivr.net/gh/xtaodada/xtaodada.github.io@0.0.2/copy.js"></script>
+
+
+
+  
+
+
+
+
+
+</body>
+
+</html>
