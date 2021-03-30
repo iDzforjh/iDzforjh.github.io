@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+
+<head>
+  
+  <title>Linux Notebook - The Division</title>
+  <meta charset="UTF-8">
+  <meta name="description" content="JIT, 2018, Network engineering Undergraduate student">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+  
+  
+
+  <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/iDzforjh/Resource@2.0/images/TCTD2.PNG" type="image/png" />
+  <meta name="description" content="Hands on Linux operation system for Centos 8">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux Notebook">
+<meta property="og:url" content="http://idzforjh.top/2021/03/30/Linux/index.html">
+<meta property="og:site_name" content="The Division">
+<meta property="og:description" content="Hands on Linux operation system for Centos 8">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://idzforjh.top/2021/03/30/Library/Application%20Support/typora-user-images/image-20210330141721537.png">
+<meta property="og:image" content="http://idzforjh.top/2021/03/30/Library/Application%20Support/typora-user-images/image-20210330145132497.png">
+<meta property="article:published_time" content="2021-03-30T05:24:09.000Z">
+<meta property="article:modified_time" content="2021-03-30T07:27:20.188Z">
+<meta property="article:author" content="Fraser·&#39;iDzforjh&#39;·Bu">
+<meta property="article:tag" content="Linux">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://idzforjh.top/2021/03/30/Library/Application%20Support/typora-user-images/image-20210330141721537.png">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/gh/nexmoe/nexmoe.github.io@latest/css/style.css,npm/highlight.js@9.15.8/styles/atom-one-dark.css,gh/nexmoe/nexmoe.github.io@latest/lib/mdui_043tiny/css/mdui.css,gh/nexmoe/nexmoe.github.io@latest/lib/iconfont/iconfont.css" crossorigin>
+  
+  <!--<link rel="stylesheet" href="http://idzforjh.top/css/style.css?v=1617089448500">-->
+
+  
+<meta name="generator" content="Hexo 5.1.1"></head>
+
+<body class="mdui-drawer-body-left">
+  
+  <div id="nexmoe-background">
+    <div class="nexmoe-bg" style="background-image: url(https://cdn.jsdelivr.net/gh/iDzforjh/Resource@2.0/images/background.jpg)"></div>
+    <div class="mdui-appbar mdui-shadow-0">
+      <div class="mdui-toolbar">
+        <a mdui-drawer="{target: '#drawer', swipe: true}" title="menu" class="mdui-btn mdui-btn-icon mdui-ripple"><i class="mdui-icon nexmoefont icon-menu"></i></a>
+        <div class="mdui-toolbar-spacer"></div>
+        <!--<a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>-->
+        <a href="http://idzforjh.top/" title="Fraser·&#39;iDzforjh&#39;·Bu" class="mdui-btn mdui-btn-icon"><img src="https://cdn.jsdelivr.net/gh/iDzforjh/Resource@2.0/images/avatar.jpg" alt="Fraser·&#39;iDzforjh&#39;·Bu"></a>
+       </div>
+    </div>
+  </div>
+  <div id="nexmoe-header">
+      <div class="nexmoe-drawer mdui-drawer" id="drawer">
+    <div class="nexmoe-avatar mdui-ripple">
+        <a href="http://idzforjh.top/" title="Fraser·&#39;iDzforjh&#39;·Bu">
+            <img src="https://cdn.jsdelivr.net/gh/iDzforjh/Resource@2.0/images/avatar.jpg" alt="Fraser·&#39;iDzforjh&#39;·Bu" alt="Fraser·&#39;iDzforjh&#39;·Bu">
+        </a>
+    </div>
+    <div class="nexmoe-count">
+        <div><span>文章</span>22</div>
+        <div><span>标签</span>10</div>
+        <div><span>分类</span>6</div>
+    </div>
+    <div class="nexmoe-list mdui-list" mdui-collapse="{accordion: true}">
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="http://idzforjh.top/" title="回到首页">
+            <i class="mdui-list-item-icon nexmoefont icon-home"></i>
+            <div class="mdui-list-item-content">
+                回到首页
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="http://idzforjh.top/archives" title="文章归档">
+            <i class="mdui-list-item-icon nexmoefont icon-container"></i>
+            <div class="mdui-list-item-content">
+                文章归档
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="http://idzforjh.top/about.html" title="关于博客">
+            <i class="mdui-list-item-icon nexmoefont icon-info-circle"></i>
+            <div class="mdui-list-item-content">
+                关于博客
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="http://idzforjh.top/PY.html" title="我的朋友">
+            <i class="mdui-list-item-icon nexmoefont icon-unorderedlist"></i>
+            <div class="mdui-list-item-content">
+                我的朋友
+            </div>
+        </a>
+        
+    </div>
+    <aside id="nexmoe-sidebar">
+  
+  <div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-search">
+        <form id="search_form" action_e="https://cn.bing.com/search?q=site:nexmoe.com" onsubmit="return search();">
+            <label><input id="search_value" name="q" type="search" placeholder="搜索"></label>
+        </form>
+    </div>
+</div>
+  
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">社交按钮</h3>
+    <div class="nexmoe-widget nexmoe-social">
+        <a class="mdui-ripple" href="https://space.bilibili.com/21645780" target="_blank" mdui-tooltip="{content: '哔哩哔哩'}" style="color: rgb(231, 106, 141);background-color: rgba(231, 106, 141, .15);">
+            <i class="nexmoefont icon-bilibili"></i>
+        </a><a class="mdui-ripple" href="https://github.com/iDzforjh" target="_blank" mdui-tooltip="{content: 'GitHub'}" style="color: rgb(25, 23, 23);background-color: rgba(25, 23, 23, .15);">
+            <i class="nexmoefont icon-github"></i>
+        </a>
+    </div>
+</div>
+  
+  
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">文章分类</h3>
+    <div class="nexmoe-widget">
+
+      <ul class="category-list">
+
+        
+
+
+        
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="http://iDzforjh.top/categories/Java-Web/">Java Web</a>
+          <span class="category-list-count">3</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="http://iDzforjh.top/categories/Java基础/">Java基础</a>
+          <span class="category-list-count">2</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="http://iDzforjh.top/categories/Linux/">Linux</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="http://iDzforjh.top/categories/Machine-Learning/">Machine Learning</a>
+          <span class="category-list-count">2</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="http://iDzforjh.top/categories/Queen-s-Gambit/">Queen`s Gambit</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="http://iDzforjh.top/categories/Web-of-CTF/">Web of CTF</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+      </ul>
+
+    </div>
+  </div>
+
+
+  
+  
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">标签云</h3>
+    <div id="randomtagcloud" class="nexmoe-widget tagcloud nexmoe-rainbow">
+      <a href="http://idzforjh.top/tags/Algorithm/" style="font-size: 10px;">Algorithm</a> <a href="http://idzforjh.top/tags/CSS-3/" style="font-size: 10px;">CSS 3</a> <a href="http://idzforjh.top/tags/HTML/" style="font-size: 10px;">HTML</a> <a href="http://idzforjh.top/tags/HTML-5/" style="font-size: 10px;">HTML 5</a> <a href="http://idzforjh.top/tags/Kali/" style="font-size: 10px;">Kali</a> <a href="http://idzforjh.top/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="http://idzforjh.top/tags/OpenCV/" style="font-size: 15px;">OpenCV</a> <a href="http://idzforjh.top/tags/Screeps/" style="font-size: 10px;">Screeps</a> <a href="http://idzforjh.top/tags/Think-of-Java/" style="font-size: 20px;">Think of Java</a> <a href="http://idzforjh.top/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 10px;">前端</a>
+    </div>
+    
+  </div>
+
+  
+  
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">文章归档</h3>
+    <div class="nexmoe-widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="http://idzforjh.top/archives/2021/03/">三月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="http://idzforjh.top/archives/2021/01/">一月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="http://idzforjh.top/archives/2020/12/">十二月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="http://idzforjh.top/archives/2020/11/">十一月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="http://idzforjh.top/archives/2020/10/">十月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="http://idzforjh.top/archives/2020/09/">九月 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+</aside>
+    <div class="nexmoe-copyright">
+        &copy; 2021 Fraser·&#39;iDzforjh&#39;·Bu
+        Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+        & <a href="https://nexmoe.com/hexo-theme-nexmoe.html" target="_blank">Nexmoe</a>
+    </div>
+</div><!-- .nexmoe-drawer -->
+  </div>
+  <div id="nexmoe-content">
+    <div class="nexmoe-primary">
+        <div class="nexmoe-post">
+  
+      <div class="nexmoe-post-cover" style="padding-bottom: 56.25%;"> 
+          <img data-src="https://cdn.jsdelivr.net/gh/iDzforjh/Resource@1.1/images/sea.jpg" data-sizes="auto" alt="Linux Notebook" class="lazyload">
+          <h1>Linux Notebook</h1>
+      </div>
+  
+  
+  <div class="nexmoe-post-meta nexmoe-rainbow" style="margin:10px 0!important;">
+    <a><i class="nexmoefont icon-calendar-fill"></i>2021年03月30日</a>
+    <a><i class="nexmoefont icon-areachart"></i>1.3k 字</a>
+    <a><i class="nexmoefont icon-time-circle-fill"></i>大概 5 分钟</a>
+</div>
+
+  <div class="nexmoe-post-right">
+    
+  </div>
+
+  <article>
+    <p>Hands on Linux operation system for Centos 8</p>
+<a id="more"></a>
+
+<h1 id="Linux-notebook-for-CentOS-8"><a href="#Linux-notebook-for-CentOS-8" class="headerlink" title="Linux notebook for CentOS 8"></a>Linux notebook for CentOS 8</h1><p>Linux 内核版本：version: r.x.y</p>
+<p>（2.6之前的版本号含义）</p>
+<p>​    r：目前发布的kenel主版本</p>
+<p>​    x：偶数为稳定版本；奇数为开发版本</p>
+<p>​    y：错误修复次数</p>
+<p>（2.6～3.0版本）：</p>
+<p>​    y：随新版本发布而增加</p>
+<p>​    z：bug修复、安全更新、添加新特性和驱动次数增加</p>
+<p>（3.0～ ）：</p>
+<p>​    不再使用奇偶数代表开发与稳定版本，0为默认稳定版</p>
+<h2 id="Shell命令"><a href="#Shell命令" class="headerlink" title="Shell命令"></a>Shell命令</h2><h3 id="基础命令"><a href="#基础命令" class="headerlink" title="基础命令"></a>基础命令</h3><pre><code class="shell">命令名称 [-选项] [参数]</code></pre>
+<blockquote>
+<p>区分大小写</p>
+</blockquote>
+<p> 系统关机命令</p>
+<pre><code class="shell">halt             //系统正常关机
+reboot         //重新启动
+poweroff     //系统关机后关闭电源</code></pre>
+<p>登陆提示信息含义：</p>
+<pre><code>[root@localhost~]#</code></pre>
+<blockquote>
+<ol>
+<li>root：当前用户的账号</li>
+<li>localhost：主机名</li>
+<li>～：用户当前所在目录</li>
+<li>#：root用户的命令提示符</li>
+<li>$：普通用户的命令提示符</li>
+</ol>
+</blockquote>
+<p> <code>ls</code> (list) 命令</p>
+<pre><code class="shell">ls -a
+ls -l
+ls -i
+ls -d</code></pre>
+<blockquote>
+<p>-a：列出所有项</p>
+<p>-l：以长格式输出文件的详细信息</p>
+<p>-i：显示文件的索引节点号</p>
+<p>-d：只列出目录本身的信息</p>
+</blockquote>
+<p><code>man</code>命令</p>
+<pre><code class="sh">man who</code></pre>
+<blockquote>
+<p>查看 who命令的使用手册</p>
+</blockquote>
+<p><code>data</code>命令</p>
+<p>显示系统当前的日期和时间</p>
+<p><code>who</code>命令</p>
+<pre><code class="sh">who -r
+who -q</code></pre>
+<blockquote>
+<p>-r：显示系统当前的运行级</p>
+<p>-q：显示登录系统的用户名称和在线总人数</p>
+</blockquote>
+<p><code>cal</code>命令</p>
+<p>日历命令</p>
+<pre><code class="sh">cal
+cal 2019
+cal 8 2019</code></pre>
+<p><code>uname</code>命令</p>
+<p>显示当前操作系统的相关信息</p>
+<pre><code class="shell">uname -r
+uname -n
+uname -v
+uname -i</code></pre>
+<blockquote>
+<p>-r：显示操作系统的发行版本号</p>
+<p>-m：显示所用机器类型</p>
+<p>-v：显示操作系统的版本</p>
+<p>-i：显示所需硬件平台</p>
+</blockquote>
+<p><code>wc</code>命令</p>
+<p><code>wc [lw] [-c] 文件名</code></p>
+<p>输出格式：行数、字数、字节数、文件名</p>
+<pre><code class="shell">wc -l f1
+wc deom demo1 demo2</code></pre>
+<blockquote>
+<ol>
+<li>统计文件f1的行数</li>
+<li>统计三个文件的信息</li>
+</ol>
+</blockquote>
+<h3 id="扩充"><a href="#扩充" class="headerlink" title="扩充"></a>扩充</h3><h4 id="通配符"><a href="#通配符" class="headerlink" title="通配符"></a>通配符</h4><ol>
+<li><code>*</code>：表示任意长度的任何字符</li>
+<li><code>?</code>：表示任意的一个字符</li>
+<li><code>[] - !</code>：<code>[]</code>、<code>-</code>：表示指定一个符号的取值范围，使用<code>!</code>表示相反含义</li>
+</ol>
+<h4 id="特殊符号"><a href="#特殊符号" class="headerlink" title="特殊符号"></a>特殊符号</h4><ol>
+<li><code>;</code>：隔开多条命令，使他们可以连续执行</li>
+<li><code>&amp;</code>：指令当前命令在后台运行</li>
+<li><code>\</code>：转译符号</li>
+</ol>
+<h4 id="输入、输出重定向"><a href="#输入、输出重定向" class="headerlink" title="输入、输出重定向"></a>输入、输出重定向</h4><p><img data-sizes="auto" data-src="../Library/Application%20Support/typora-user-images/image-20210330141721537.png" alt="image-20210330141721537" class="lazyload"></p>
+<ol>
+<li><p>输出重定向和附加输出重定向</p>
+<ol>
+<li>输出重定向：命令 &gt; 重定向文件（覆盖原文件）</li>
+<li>附加输出重定向： 命令 &gt;&gt; 重定向文件（在指定文件末尾追加命令效果）</li>
+</ol>
+<pre><code class="sh">date &gt; record
+who &gt;&gt; record</code></pre>
+</li>
+</ol>
+<p><code>cat</code>命令</p>
+<pre><code class="shell">cat [选项] 文件名</code></pre>
+<p>建立小型文件</p>
+<pre><code class="sh">cat &gt; 文件名
+echo cat1 is not a cat1！
+# ctrl + d 关闭</code></pre>
+<p>文件合并</p>
+<pre><code class="sh">cat file1 file2 &gt; file3</code></pre>
+<h4 id="管道"><a href="#管道" class="headerlink" title="管道 |"></a>管道 <code>|</code></h4><p>多命令集合，完成复杂功能</p>
+<p><code>more</code>命令</p>
+<p>分屏显示文件内容</p>
+<pre><code class="sh">ls -al /erc|more</code></pre>
+<h3 id="vim-文本编辑器"><a href="#vim-文本编辑器" class="headerlink" title="vim 文本编辑器"></a>vim 文本编辑器</h3><p>编译器自动：</p>
+<pre><code class="sh">vim [选项][文件名]</code></pre>
+<p>命令模式：</p>
+<pre><code>i：从当前光标位开始输入字符
+I：在当前行首，开始输入字符
+a：从当前光标的下一个位置开始输入字符
+A：移动到当前行尾，开始输入字符
+o：光标所在行下，插入一行
+O：光标所在行上，插入一行</code></pre>
+<h3 id="gcc编译器"><a href="#gcc编译器" class="headerlink" title="gcc编译器"></a>gcc编译器</h3><pre><code>gcc [选项] [文件名]</code></pre>
+<blockquote>
+<p>源代码文件要求带扩展名（*.c）</p>
+<p>可执行代码默认保存在 a.out文件中</p>
+</blockquote>
+<p>常用选项：</p>
+<pre><code class="sh">-ansi：只支持ANSI标准的c语法
+-c：生成目标文件（*.o）
+-o [file name]：指定可以执行文件名
+-O[level]：进行优化</code></pre>
+<h3 id="文件操作"><a href="#文件操作" class="headerlink" title="文件操作"></a>文件操作</h3><p><code>touch</code>创建文件</p>
+<pre><code class="sh">touch [文件/目录路径]</code></pre>
+<p><code>rm</code>删除</p>
+<pre><code class="sh">rm -f
+rm -r</code></pre>
+<blockquote>
+<p>-r 递归删除目录下所有文件</p>
+<p>-rf 不提示直接删除所有文件</p>
+</blockquote>
+<p>文件属性</p>
+<p><img data-sizes="auto" data-src="../Library/Application%20Support/typora-user-images/image-20210330145132497.png" alt="image-20210330145132497" class="lazyload"></p>
+<p>由 权限、链接数、文件属主、文件属组、文件大小、创建时间\最近修改时间 组成</p>
+<p><code>find</code>查找指定文件</p>
+<pre><code class="sh">find [路径][表达式]</code></pre>
+<h3 id="目录操作"><a href="#目录操作" class="headerlink" title="目录操作"></a>目录操作</h3><pre><code class="sh">mkdir [catalog name]             #创建
+cd [catalog name]                    #进入
+rmdir [catalog name]            #删除
+pwd                                                #显示
+ls                                                #列出内容
+mv [路径] [路径]                     #移动        
+cp [路径] [路径]                     #复制</code></pre>
+<p><code>cp</code>命令</p>
+<pre><code class="sh">-b     #若有同名文件，先备份
+-r     #递归复制，保留源目录结构
+-a     #复制目录</code></pre>
+<p><code>mv</code>命令</p>
+<pre><code class="sh">-b     #若有同名文件，先备份    
+-f     #强制覆盖</code></pre>
+<h2 id="权限"><a href="#权限" class="headerlink" title="权限"></a>权限</h2><h3 id="Linux-用户分类："><a href="#Linux-用户分类：" class="headerlink" title="Linux 用户分类："></a>Linux 用户分类：</h3><ol>
+<li>文件所有者(owner)</li>
+<li>同组用户(group)</li>
+<li>其他用户(other)</li>
+</ol>
+<h3 id="访问权限："><a href="#访问权限：" class="headerlink" title="访问权限："></a>访问权限：</h3><p><code>ls -l</code>    查看文件权限</p>
+<ul>
+<li>读取权限</li>
+<li>写入权限<ul>
+<li>文件：修改文件内容的权限</li>
+<li>目录：删除、添加和重命名目录内文件的权限</li>
+</ul>
+</li>
+<li>执行权限</li>
+</ul>
+<h4 id="访问权限表示法："><a href="#访问权限表示法：" class="headerlink" title="访问权限表示法："></a>访问权限表示法：</h4><ol>
+<li><p>字幕表示法</p>
+<ol>
+<li>r：读</li>
+<li>w：写</li>
+<li>x：可执行或查找</li>
+<li>-：无权限</li>
+</ol>
+</li>
+<li><p>数字表示法</p>
+<p>相应权限位，有权限为1；无权限为0（八进制）</p>
+<ul>
+<li>文件属主：读写权限 7（111）</li>
+<li>同组用户：执行权限 5（101）</li>
+<li>其他用户：无权限 4（100）</li>
+</ul>
+</li>
+</ol>
+<h4 id="权限管理"><a href="#权限管理" class="headerlink" title="权限管理"></a>权限管理</h4><pre><code class="sh">ls -l        #查看权限
+chmod        #修改访问权限
+chown        #修改文件所有者、所属组群
+chgrp        #修改文件所属组群</code></pre>
+<p><code>chmod</code> 命令</p>
+<pre><code class="sh">chmod [字母模式] [文件名]
+chmod [数字模式] [文件名]
+
+chmod g+x, o-r [file name]
+chmod 670 [file name]</code></pre>
+<p><code>chown</code> 命令</p>
+<pre><code class="sh">chown [user] [file name]                #修改文件所有者
+chown [user:user] [file name]        #修改文件所有者和组群</code></pre>
+<p><code>chgrp</code> 命令</p>
+<pre><code class="sh">chgrp [group name] [file name]     #修改所属组</code></pre>
+
+  </article>
+
+  <div class="nexmoe-post-meta nexmoe-rainbow">
+    
+        <a class="nexmoefont icon-appstore-fill -link" href="http://idzforjh.top/categories/Linux/">Linux</a>
+    
+    
+        <a class="nexmoefont icon-tag-fill -none-link" href="http://idzforjh.top/tags/Linux/" rel="tag">Linux</a>
+    
+</div>
+
+  <div class="nexmoe-post-footer">
+    
+      
+  <div class="nexmoe-post-copyright">
+    <strong>本文作者：</strong>Fraser·&#39;iDzforjh&#39;·Bu<br>
+    <strong>本文链接：</strong><a href="http://idzforjh.top/2021/03/30/Linux/" title="http:&#x2F;&#x2F;idzforjh.top&#x2F;2021&#x2F;03&#x2F;30&#x2F;Linux&#x2F;" target="_blank" rel="noopener">http:&#x2F;&#x2F;idzforjh.top&#x2F;2021&#x2F;03&#x2F;30&#x2F;Linux&#x2F;</a><br>
+    
+      <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
+    
+  </div>
+
+
+    
+    <section class="nexmoe-comment">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.5.0/dist/gitalk.min.css">
+<div id="gitalk"></div>
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1.5.0/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+    var gitalk = new Gitalk({
+        clientID: '80b2453b6d5f37ad6225',
+        clientSecret: '43e99fa852795c9a7b3eb924b2558c64b84bbdeb',
+        id: window.location.pathname,
+        repo: 'nexmoe.github.io',
+        owner: 'nexmoe',
+        admin: 'nexmoe'
+    })
+    gitalk.render('gitalk')
+</script>
+</section>
+  </div>
+</div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/combine/npm/lazysizes@5.1.0/lazysizes.min.js,gh/highlightjs/cdn-release@9.15.8/build/highlight.min.js,npm/mdui@0.4.3/dist/js/mdui.min.js,gh/nexmoe/nexmoe.github.io@latest/js/app.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<!--<script src="http://idzforjh.top/js/app.js?v=1617089448501"></script>-->
+
+
+    <script src="https://cdn.jsdelivr.net/gh/xtaodada/xtaodada.github.io@0.0.2/copy.js"></script>
+
+
+
+  
+
+
+
+
+
+</body>
+
+</html>
