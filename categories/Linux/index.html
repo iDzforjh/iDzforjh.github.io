@@ -4,7 +4,7 @@
 
 <head>
   
-  <title>Inner class - The Division</title>
+  <title>分类：Linux - The Division</title>
   <meta charset="UTF-8">
   <meta name="description" content="JIT, 2018, Network engineering Undergraduate student">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
@@ -12,23 +12,18 @@
   
 
   <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/iDzforjh/Resource@2.0/images/TCTD2.PNG" type="image/png" />
-  <meta name="description" content="内部类（Inner class）是定义在另一个类中的类。有以下三点使用原因：  内部类方法可以访问该类定义所在的作用域中的数据，包括私有的数据。 内部类可以对同一个包中的其他类隐藏起来。 当想要定义一个回调函数且不想编写大量代码时，使用 匿名（anonymous）内部类比较便捷。">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Inner class">
-<meta property="og:url" content="http://idzforjh.top/2020/09/28/Inner%20class/index.html">
+  <meta name="description" content="JIT, 2018, Network engineering Undergraduate student">
+<meta property="og:type" content="website">
+<meta property="og:title" content="The Division">
+<meta property="og:url" content="http://idzforjh.top/categories/Linux/index.html">
 <meta property="og:site_name" content="The Division">
-<meta property="og:description" content="内部类（Inner class）是定义在另一个类中的类。有以下三点使用原因：  内部类方法可以访问该类定义所在的作用域中的数据，包括私有的数据。 内部类可以对同一个包中的其他类隐藏起来。 当想要定义一个回调函数且不想编写大量代码时，使用 匿名（anonymous）内部类比较便捷。">
+<meta property="og:description" content="JIT, 2018, Network engineering Undergraduate student">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/iDzforjh/Resource@4.2/Java%E5%86%85%E9%83%A8%E7%B1%BB/%E5%86%85%E9%83%A8%E7%B1%BBUML.svg">
-<meta property="article:published_time" content="2020-09-28T10:33:38.000Z">
-<meta property="article:modified_time" content="2020-09-28T11:21:36.826Z">
 <meta property="article:author" content="Fraser·&#39;iDzforjh&#39;·Bu">
-<meta property="article:tag" content="Think of Java">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/iDzforjh/Resource@4.2/Java%E5%86%85%E9%83%A8%E7%B1%BB/%E5%86%85%E9%83%A8%E7%B1%BBUML.svg">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/gh/nexmoe/nexmoe.github.io@latest/css/style.css,npm/highlight.js@9.15.8/styles/atom-one-dark.css,gh/nexmoe/nexmoe.github.io@latest/lib/mdui_043tiny/css/mdui.css,gh/nexmoe/nexmoe.github.io@latest/lib/iconfont/iconfont.css" crossorigin>
   
-  <!--<link rel="stylesheet" href="http://idzforjh.top/css/style.css?v=1617089448519">-->
+  <!--<link rel="stylesheet" href="http://idzforjh.top/css/style.css?v=1617089448542">-->
 
   
 <meta name="generator" content="Hexo 5.1.1"></head>
@@ -202,112 +197,73 @@
   </div>
   <div id="nexmoe-content">
     <div class="nexmoe-primary">
-        <div class="nexmoe-post">
-  
-      <div class="nexmoe-post-cover" style="padding-bottom: 56.25%;"> 
-          <img data-src="https://cdn.jsdelivr.net/gh/iDzforjh/Resource@3.0/images/java.jpg" data-sizes="auto" alt="Inner class" class="lazyload">
-          <h1>Inner class</h1>
-      </div>
-  
-  
-  <div class="nexmoe-post-meta nexmoe-rainbow" style="margin:10px 0!important;">
-    <a><i class="nexmoefont icon-calendar-fill"></i>2020年09月28日</a>
-    <a><i class="nexmoefont icon-areachart"></i>305 字</a>
-    <a><i class="nexmoefont icon-time-circle-fill"></i>大概 1 分钟</a>
-</div>
+        
+<section class="nexmoe-archives">
 
-  <div class="nexmoe-post-right">
-    
-  </div>
+    <article>
+        
 
-  <article>
-    <p>内部类（Inner class）是定义在另一个类中的类。有以下三点使用原因：</p>
-<ul>
-<li>内部类方法可以访问该类定义所在的作用域中的数据，包括私有的数据。</li>
-<li>内部类可以对同一个包中的其他类隐藏起来。</li>
-<li>当想要定义一个回调函数且不想编写大量代码时，使用 匿名（anonymous）内部类比较便捷。</li>
-</ul>
-<a id="more"></a>
-
-<h1 id="Inner-class-内部类"><a href="#Inner-class-内部类" class="headerlink" title="Inner class 内部类"></a>Inner class 内部类</h1><p>内部类的语法比较复杂，先从简单语法开始讲起：</p>
-<pre><code class="java">public class Outer &#123;
-    public class InnerTool &#123; // 内部类
-        public int add(int a,int b)&#123;
-            return a+b;
-        &#125;
-    &#125;
-&#125;</code></pre>
-<p>在上述例子中，class Outer 是 外部类， class InnerTool是内部类。如果想要调用内部类那么首先必须要实例化它且只能在 内部类中 new。</p>
-<pre><code class="java">public class OuterUtil &#123;
-    public class InnerTool &#123; // 内部类
-        public int add(int a,int b)&#123;
-            return a+b;
-        &#125;
-    &#125;
-    private InnerTool tool = new InnerTool();
-&#125;</code></pre>
-<h2 id="UML图"><a href="#UML图" class="headerlink" title="UML图"></a>UML图</h2><p><img data-sizes="auto" data-src="https://cdn.jsdelivr.net/gh/iDzforjh/Resource@4.2/Java%E5%86%85%E9%83%A8%E7%B1%BB/%E5%86%85%E9%83%A8%E7%B1%BBUML.svg" alt="https://cdn.jsdelivr.net/gh/iDzforjh/Resource@4.2/Java%E5%86%85%E9%83%A8%E7%B1%BB/%E5%86%85%E9%83%A8%E7%B1%BBUML.svg" class="lazyload"></p>
-<h2 id="内部类实现："><a href="#内部类实现：" class="headerlink" title="内部类实现："></a>内部类实现：</h2><p><strong>实例化：</strong></p>
-<pre><code class="java">public class OuterUtil &#123;
-    public class InnerTool &#123; // 内部类
-        public int add(int a,int b)&#123;
-            return a+b;
-        &#125;
-    &#125;
-    private InnerTool tool = new InnerTool();
-    public int add(int a,int b,int c)&#123;
-       return tool.add( tool.add(a,b) , c );
-    &#125;
-&#125;</code></pre>
-<blockquote>
-<p>新增一个需求，实现数字加法。</p>
-</blockquote>
-
-  </article>
-
-  <div class="nexmoe-post-meta nexmoe-rainbow">
-    
-    
-        <a class="nexmoefont icon-tag-fill -none-link" href="http://idzforjh.top/tags/Think-of-Java/" rel="tag">Think of Java</a>
-    
-</div>
-
-  <div class="nexmoe-post-footer">
-    
-      
-  <div class="nexmoe-post-copyright">
-    <strong>本文作者：</strong>Fraser·&#39;iDzforjh&#39;·Bu<br>
-    <strong>本文链接：</strong><a href="http://idzforjh.top/2020/09/28/Inner%20class/" title="http:&#x2F;&#x2F;idzforjh.top&#x2F;2020&#x2F;09&#x2F;28&#x2F;Inner%20class&#x2F;" target="_blank" rel="noopener">http:&#x2F;&#x2F;idzforjh.top&#x2F;2020&#x2F;09&#x2F;28&#x2F;Inner%20class&#x2F;</a><br>
-    
-      <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
-    
-  </div>
-
-
-    
-    <section class="nexmoe-comment">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.5.0/dist/gitalk.min.css">
-<div id="gitalk"></div>
-<script src="https://cdn.jsdelivr.net/npm/gitalk@1.5.0/dist/gitalk.min.js"></script>
-<script type="text/javascript">
-    var gitalk = new Gitalk({
-        clientID: '80b2453b6d5f37ad6225',
-        clientSecret: '43e99fa852795c9a7b3eb924b2558c64b84bbdeb',
-        id: window.location.pathname,
-        repo: 'nexmoe.github.io',
-        owner: 'nexmoe',
-        admin: 'nexmoe'
-    })
-    gitalk.render('gitalk')
-</script>
+        
+            <h2>2021</h2>
+            <ul>
+            
+                <li><span>03-30</span><a href="http://idzforjh.top/2021/03/30/Linux/" >Linux Notebook</a></li>
+            
+            </ul>
+        
+    </article>
 </section>
-  </div>
-</div>
+
+<style>
+.nexmoe-archives article > *:first-child {
+    margin-top: 0;
+}
+.nexmoe-archives article > *:last-child {
+    margin-bottom: 0;
+}
+.nexmoe-archives ul {
+    list-style: none;
+    padding-left: 0!important;
+}
+.nexmoe-archives li {
+    position: relative;
+    padding: 10px 0;
+}
+.nexmoe-archives li::before {
+    content: "";
+    width: 14px;
+    height: 14px;
+    background: #ff4e6a;
+    display: inline-block;
+    vertical-align: middle;
+    margin-top: -2px;
+    margin-right: 11px;
+    border-radius: 100%;
+    border: 3px solid #fff;
+    z-index: 100;
+    position: relative;
+}
+.nexmoe-archives li::after {
+    content: "";
+    height: 100%;
+    width: 2px;
+    background: rgba(255, 78, 106, 0.2);
+    position: absolute;
+    left: 6px;
+    top: 20px;
+}
+.nexmoe-archives li:last-child:after {
+    display: none;
+}
+.nexmoe-archives span {
+    margin-right: 15px;
+}
+</style>
     </div>
   </div>
   <script src="https://cdn.jsdelivr.net/combine/npm/lazysizes@5.1.0/lazysizes.min.js,gh/highlightjs/cdn-release@9.15.8/build/highlight.min.js,npm/mdui@0.4.3/dist/js/mdui.min.js,gh/nexmoe/nexmoe.github.io@latest/js/app.js"></script>
 <script>hljs.initHighlightingOnLoad();</script>
-<!--<script src="http://idzforjh.top/js/app.js?v=1617089448520"></script>-->
+<!--<script src="http://idzforjh.top/js/app.js?v=1617089448543"></script>-->
 
 
     <script src="https://cdn.jsdelivr.net/gh/xtaodada/xtaodada.github.io@0.0.2/copy.js"></script>
