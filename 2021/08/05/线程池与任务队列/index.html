@@ -1,12 +1,16 @@
 <!DOCTYPE html>
-<html>
+
+<html lang="zh-CN">
+
 <head>
-  <meta charset="utf-8">
-  
-  
-  <title>线程池与任务队列 | Fraser Porter Bridges</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="线程池与任务队列栈和队列也是线性表，它们是操作受限的线性表。">
+    
+    <title>线程池与任务队列 - Fraser Porter Bridges</title>
+    <meta charset="UTF-8">
+    <meta name="keywords" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+    
+    <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/iDzforjh/Resource@2.0/images/TCTD2.PNG" type="image/png" />
+    <meta name="description" content="线程池与任务队列栈和队列也是线性表，它们是操作受限的线性表。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="线程池与任务队列">
 <meta property="og:url" content="https://idzforjh.github.io/2021/08/05/%E7%BA%BF%E7%A8%8B%E6%B1%A0%E4%B8%8E%E4%BB%BB%E5%8A%A1%E9%98%9F%E5%88%97/index.html">
@@ -18,95 +22,424 @@
 <meta property="article:author" content="Fraser·Porter·Bridges·&#39;iDzforjh&#39;·Bu">
 <meta property="article:tag" content="Algorithms">
 <meta name="twitter:card" content="summary">
-  
-    <link rel="alternate" href="https://idzforjh.github.io/atom.xml" title="Fraser Porter Bridges" type="application/atom+xml">
-  
-  
-    <link rel="shortcut icon" href="https://idzforjh.github.io/favicon.png">
-  
-  
     
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+<link rel="stylesheet" href="https://idzforjh.github.io/lib/fancybox/fancybox.css">
+<link rel="stylesheet" href="https://idzforjh.github.io/lib/mdui_043tiny/mdui.css">
 
-  
-  
-<link rel="stylesheet" href="https://idzforjh.github.io/css/style.css">
 
-  
+    <link rel="stylesheet" href="https://idzforjh.github.io/lib/iconfont/iconfont.css?v=1687161444538">
     
-<link rel="stylesheet" href="https://idzforjh.github.io/fancybox/jquery.fancybox.min.css">
+    <link rel="stylesheet" href="https://idzforjh.github.io/css/style.css?v=1687161444538">
 
-  
-  
+    
+        
+            <link rel="stylesheet" href="https://idzforjh.github.io/custom.css?v=1687161444538">
+        
+    
+
+    
+<script src="https://idzforjh.github.io/lib/mdui_043tiny/mdui.js" async></script>
+<script src="https://idzforjh.github.io/lib/fancybox/fancybox.umd.js" async></script>
+
+
+    <script async src="https://idzforjh.github.io/js/app.js?v=1687161444538"></script>
+    
+     
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-4D4ZJ9G024"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag("js", new Date());
+
+  gtag("config", "G-4D4ZJ9G024");
+</script>
+
 <meta name="generator" content="Hexo 6.3.0"></head>
 
-<body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="https://idzforjh.github.io/" id="logo">Fraser Porter Bridges</a>
-      </h1>
-      
-        <h2 id="subtitle-wrap">
-          <a href="https://idzforjh.github.io/" id="subtitle">坐而言，不如起而行</a>
-        </h2>
-      
+<body class="mdui-drawer-body-left">
+    <div id="nexmoe-background">
+        <div class="nexmoe-bg" 
+            style="background-image: url(https://cdn.jsdelivr.net/gh/iDzforjh/Blog_pic@V1.1/image/background.jpg)"
+        ></div>
+        <div class="mdui-appbar mdui-shadow-0">
+            <div class="mdui-toolbar">
+                <a mdui-drawer="{target: '#drawer', swipe: true}" title="menu" class="mdui-btn mdui-btn-icon mdui-ripple"><i class="mdui-icon nexmoefont icon-menu"></i></a>
+                <div class="mdui-toolbar-spacer"></div>
+                <!--<a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>-->
+                <a href="https://idzforjh.github.io/" title="Fraser·Porter·Bridges·&#39;iDzforjh&#39;·Bu" class="mdui-btn mdui-btn-icon"><img src="https://cdn.jsdelivr.net/gh/iDzforjh/Resource@2.0/images/avatar.jpg" alt="Fraser·Porter·Bridges·&#39;iDzforjh&#39;·Bu"></a>
+            </div>
+        </div>
     </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+    <div id="nexmoe-header">
+        <div class="nexmoe-drawer mdui-drawer" id="drawer">
+    <div class="nexmoe-avatar mdui-ripple">
+        <a href="https://idzforjh.github.io/" title="Fraser·Porter·Bridges·&#39;iDzforjh&#39;·Bu">
+            <img src="https://cdn.jsdelivr.net/gh/iDzforjh/Resource@2.0/images/avatar.jpg" alt="Fraser·Porter·Bridges·&#39;iDzforjh&#39;·Bu" alt="Fraser·Porter·Bridges·&#39;iDzforjh&#39;·Bu">
+        </a>
+    </div>
+    <div class="nexmoe-count">
+        <div><span>文章</span>27</div>
+        <div><span>标签</span>12</div>
+        <div><span>分类</span>8</div>
+    </div>
+    <div class="nexmoe-list mdui-list" mdui-collapse="{accordion: true}">
         
-          <a class="main-nav-link" href="https://idzforjh.github.io/">Home</a>
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="https://idzforjh.github.io/" title="回到首页">
+            <i class="mdui-list-item-icon nexmoefont icon-home"></i>
+            <div class="mdui-list-item-content">
+                回到首页
+            </div>
+        </a>
         
-          <a class="main-nav-link" href="https://idzforjh.github.io/archives">Archives</a>
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="https://idzforjh.github.io/archive.html" title="文章归档">
+            <i class="mdui-list-item-icon nexmoefont icon-container"></i>
+            <div class="mdui-list-item-content">
+                文章归档
+            </div>
+        </a>
         
-      </nav>
-      <nav id="sub-nav">
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="https://idzforjh.github.io/PY.html" title="我的朋友">
+            <i class="mdui-list-item-icon nexmoefont icon-unorderedlist"></i>
+            <div class="mdui-list-item-content">
+                我的朋友
+            </div>
+        </a>
         
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="https://idzforjh.github.io/donate.html" title="给我赞助">
+            <i class="mdui-list-item-icon nexmoefont icon-coffee"></i>
+            <div class="mdui-list-item-content">
+                给我赞助
+            </div>
+        </a>
         
-          <a class="nav-icon" href="https://idzforjh.github.io/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a>
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="https://idzforjh.github.io/about.html" title="关于博主">
+            <i class="mdui-list-item-icon nexmoefont icon-info-circle"></i>
+            <div class="mdui-list-item-content">
+                关于博主
+            </div>
+        </a>
         
-        <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://idzforjh.github.io"></form>
-      </div>
+    </div>
+    <aside id="nexmoe-sidebar">
+        
+            
+            <div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-search">
+         
+            <form id="search_form" action_e="https://cn.bing.com/search?q=site:nexmoe.com" onsubmit="return search();">
+                <label><input id="search_value" name="q" type="search" placeholder="搜索"></label>
+            </form>
+         
+    </div>
+</div>
+
+
+
+
+        
+            
+            <div class="nexmoe-widget-wrap">
+	<div class="nexmoe-widget nexmoe-social">
+		<a
+			class="mdui-ripple"
+			href="https://jq.qq.com/?_wv=1027&k=5CfKHun"
+			target="_blank"
+			mdui-tooltip="{content: 'QQ群'}"
+			style="
+				color: rgb(249, 174, 8);
+				background-color: rgba(249, 174, 8, .1);
+			"
+		>
+			<i
+				class="nexmoefont icon-QQ"
+			></i> </a
+		><a
+			class="mdui-ripple"
+			href="https://space.bilibili.com/20238211"
+			target="_blank"
+			mdui-tooltip="{content: '哔哩哔哩'}"
+			style="
+				color: rgb(231, 106, 141);
+				background-color: rgba(231, 106, 141, .1);
+			"
+		>
+			<i
+				class="nexmoefont icon-bilibili"
+			></i> </a
+		><a
+			class="mdui-ripple"
+			href="https://github.com/nexmoe/"
+			target="_blank"
+			mdui-tooltip="{content: 'GitHub'}"
+			style="
+				color: rgb(25, 23, 23);
+				background-color: rgba(25, 23, 23, .1);
+			"
+		>
+			<i
+				class="nexmoefont icon-github"
+			></i> </a
+		><a
+			class="mdui-ripple"
+			href="https://www.zhihu.com/people/nexmoe"
+			target="_blank"
+			mdui-tooltip="{content: '知乎'}"
+			style="
+				color: rgb(30, 136, 229);
+				background-color: rgba(30, 136, 229, .1);
+			"
+		>
+			<i
+				class="nexmoefont icon-zhihu"
+			></i> </a
+		><a
+			class="mdui-ripple"
+			href="https://twitter.com/nexmoe"
+			target="_blank"
+			mdui-tooltip="{content: 'Twitter'}"
+			style="
+				color: rgb(59, 151, 239);
+				background-color: rgba(59, 151, 239, .1);
+			"
+		>
+			<i
+				class="nexmoefont icon-twitter"
+			></i> </a
+		><a
+			class="mdui-ripple"
+			href="https://nexmoe.com/atom.xml"
+			target="_blank"
+			mdui-tooltip="{content: 'RSS'}"
+			style="
+				color: rgb(247, 132, 34);
+				background-color: rgba(247, 132, 34, .1);
+			"
+		>
+			<i
+				class="nexmoefont icon-rss"
+			></i> </a
+		>
+	</div>
+</div>
+
+        
+            
+            
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">文章分类</h3>
+    <div class="nexmoe-widget">
+
+      <ul class="category-list">
+
+        
+
+
+        
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="https://idzforjh.github.io/categories/Algorithms/">Algorithms</a>
+          <span class="category-list-count">3</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="https://idzforjh.github.io/categories/Java-Web/">Java Web</a>
+          <span class="category-list-count">3</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="https://idzforjh.github.io/categories/Java基础/">Java基础</a>
+          <span class="category-list-count">2</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="https://idzforjh.github.io/categories/Linux/">Linux</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="https://idzforjh.github.io/categories/Machine-Learning/">Machine Learning</a>
+          <span class="category-list-count">2</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="https://idzforjh.github.io/categories/Network-engerning/">Network engerning</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="https://idzforjh.github.io/categories/Queen-s-Gambit/">Queen`s Gambit</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="https://idzforjh.github.io/categories/Web-of-CTF/">Web of CTF</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+      </ul>
+
     </div>
   </div>
-</header>
 
-      <div class="outer">
-        <section id="main"><article id="post-线程池与任务队列" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="https://idzforjh.github.io/2021/08/05/%E7%BA%BF%E7%A8%8B%E6%B1%A0%E4%B8%8E%E4%BB%BB%E5%8A%A1%E9%98%9F%E5%88%97/" class="article-date">
-  <time class="dt-published" datetime="2021-08-05T07:42:07.000Z" itemprop="datePublished">2021-08-05</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="https://idzforjh.github.io/categories/Algorithms/">Algorithms</a>
-  </div>
 
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
         
-  
-    <h1 class="p-name article-title" itemprop="headline name">
-      线程池与任务队列
-    </h1>
-  
-
-      </header>
+            
+            
+  <div class="nexmoe-widget-wrap">
+    <div id="randomtagcloud" class="nexmoe-widget tagcloud nexmoe-rainbow">
+      <a href="https://idzforjh.github.io/tags/Ad-hoc/" style="font-size: 10px;">Ad-hoc</a> <a href="https://idzforjh.github.io/tags/Algorithm/" style="font-size: 10px;">Algorithm</a> <a href="https://idzforjh.github.io/tags/Algorithms/" style="font-size: 16.67px;">Algorithms</a> <a href="https://idzforjh.github.io/tags/CSS-3/" style="font-size: 10px;">CSS 3</a> <a href="https://idzforjh.github.io/tags/HTML/" style="font-size: 10px;">HTML</a> <a href="https://idzforjh.github.io/tags/HTML-5/" style="font-size: 10px;">HTML 5</a> <a href="https://idzforjh.github.io/tags/Kali/" style="font-size: 10px;">Kali</a> <a href="https://idzforjh.github.io/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="https://idzforjh.github.io/tags/OpenCV/" style="font-size: 13.33px;">OpenCV</a> <a href="https://idzforjh.github.io/tags/Screeps/" style="font-size: 10px;">Screeps</a> <a href="https://idzforjh.github.io/tags/Think-of-Java/" style="font-size: 20px;">Think of Java</a> <a href="https://idzforjh.github.io/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 10px;">前端</a>
+    </div>
     
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="线程池与任务队列"><a href="#线程池与任务队列" class="headerlink" title="线程池与任务队列"></a>线程池与任务队列</h1><p><code>栈</code>和<code>队列</code>也是线性表，它们是操作受限的线性表。</p>
+      <script>
+        var maxTagcloud = parseInt(17);
+        var tags_length = parseInt(12);
+        var tags_arr = [];
+        for(var i = 0; i < tags_length; i++){
+          tags_arr.push(i);
+        }
+        tags_arr.sort(function (l, r) {
+          return Math.random() > 0.5 ? -1 : 1;
+        });
+        tags_arr = tags_arr.slice(0, maxTagcloud < tags_length ? tags_length - maxTagcloud : 0);
+        for(var tag_i = 0; tag_i < tags_arr.length; tag_i++){
+          document.getElementById("randomtagcloud").children[tags_arr[tag_i]].style.display = 'none';
+        }
+      </script>
+    
+  </div>
+
+        
+            
+            
+            
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">文章归档</h3>
+    <div class="nexmoe-widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="https://idzforjh.github.io/archives/2021/">2021</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="https://idzforjh.github.io/archives/2020/">2020</a><span class="archive-list-count">20</span></li></ul>
+    </div>
+  </div>
+
+
+
+        
+            
+            
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">最新文章</h3>
+    <div class="nexmoe-widget">
+      <ul>
+        
+          <li>
+            <a href="https://idzforjh.github.io/2021/08/11/%E9%80%92%E5%BD%92%E4%B8%8E%E6%A0%88/">递归与栈</a>
+          </li>
+        
+          <li>
+            <a href="https://idzforjh.github.io/2021/08/10/%E4%BA%8C%E5%8F%89%E6%A0%91/">二叉树</a>
+          </li>
+        
+          <li>
+            <a href="https://idzforjh.github.io/2021/08/05/%E7%BA%BF%E7%A8%8B%E6%B1%A0%E4%B8%8E%E4%BB%BB%E5%8A%A1%E9%98%9F%E5%88%97/">线程池与任务队列</a>
+          </li>
+        
+          <li>
+            <a href="https://idzforjh.github.io/2021/08/04/%E9%93%BE%E8%A1%A8/">链表</a>
+          </li>
+        
+          <li>
+            <a href="https://idzforjh.github.io/2021/04/12/Data/">Data</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+        
+            
+            <div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-link">
+		<ul>
+        
+            <li>
+                <a href="" target="_blank" >
+                    <img src="" alt=""></img>
+                    <p></p>
+                </a>
+            </li>
+        
+		</ul>
+    </div>
+</div>
+<style>
+.nexmoe-widget-wrap .nexmoe-link ul li a {
+    text-align : center;
+}
+.nexmoe-widget-wrap .nexmoe-link ul li a img {
+    max-width : 100%;
+}
+.nexmoe-widget-wrap .nexmoe-link ul li a p {
+    margin: 10px 0;
+}
+</style>
+
+        
+    </aside>
+    <div class="nexmoe-copyright">
+        &copy; 2023 Fraser·Porter·Bridges·&#39;iDzforjh&#39;·Bu
+        Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+        & <a href="https://github.com/theme-nexmoe/hexo-theme-nexmoe" target="_blank">Nexmoe</a>
+        <br><a target="_blank" href="</a>
+<br><a target="_blank" href="">
+<img src="" width="150px"></a>
+
+    </div>
+</div><!-- .nexmoe-drawer -->
+    </div>
+    <div id="nexmoe-content">
+        <div class="nexmoe-primary">
+    <div class="nexmoe-post">
+  <article>
+    
+        <div class="nexmoe-post-cover absolute" style="padding-top: 56.25%;"> 
+            <img src="https://cdn.jsdelivr.net/gh/iDzforjh/Resource@20/images/Queen%60s%20gambit3.png" alt="线程池与任务队列" loading="lazy">
+            <h1>线程池与任务队列</h1>
+        </div>
+    
+    
+    <div class="nexmoe-post-meta">
+    <div class="nexmoe-rainbow">
+        <a class="nexmoefont icon-calendar-fill">2021年08月05日</a>
+        
+            <a class="nexmoefont icon-appstore-fill -link" href="https://idzforjh.github.io/categories/Algorithms/">Algorithms</a>
+        
+        
+    </div>
+    
+    
+    
+    
+    
+</div>
+
+    <h1 id="线程池与任务队列"><a href="#线程池与任务队列" class="headerlink" title="线程池与任务队列"></a>线程池与任务队列</h1><p><code>栈</code>和<code>队列</code>也是线性表，它们是操作受限的线性表。</p>
 <span id="more"></span>
 
 <h2 id="栈和队列"><a href="#栈和队列" class="headerlink" title="栈和队列"></a>栈和队列</h2><p><code>栈</code> 的定义和特点</p>
@@ -234,157 +567,86 @@
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * </span></span><br><span class="line"><span class="comment"> * 2021-8-9</span></span><br><span class="line"><span class="comment"> * LeetCode621 任务调度器</span></span><br><span class="line"><span class="comment"> * </span></span><br><span class="line"><span class="comment"> * (A的数量 - 1)（出现次数最多的任务）* (冷却数量 + 1) + 出现次数最多的任务有几种</span></span><br><span class="line"><span class="comment"> **/</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">leastInterval</span><span class="params">(vector&lt;<span class="type">char</span>&gt; &amp;tasks, <span class="type">int</span> n)</span></span>&#123;</span><br><span class="line">        <span class="type">int</span> cnt[<span class="number">26</span>] = &#123;<span class="number">0</span>&#125;;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; tasks.<span class="built_in">size</span>(); i++)&#123;</span><br><span class="line">            cnt[tasks[i] - <span class="string">&#x27;A&#x27;</span>] += <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">sort</span>(cnt, cnt + <span class="number">26</span>);</span><br><span class="line">        <span class="type">int</span> m = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">25</span>; i &gt;= <span class="number">0</span> &amp;&amp; cnt[i] == cnt[<span class="number">25</span>]; i--, m++);</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">max</span>((<span class="type">int</span>)tasks.<span class="built_in">size</span>(), (cnt[<span class="number">25</span>] - <span class="number">1</span>) * (n + <span class="number">1</span>) + m);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
 
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://idzforjh.github.io/2021/08/05/%E7%BA%BF%E7%A8%8B%E6%B1%A0%E4%B8%8E%E4%BB%BB%E5%8A%A1%E9%98%9F%E5%88%97/" data-id="clj2k3so3001ud6473sr8h0hb" data-title="线程池与任务队列" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="https://idzforjh.github.io/tags/Algorithms/" rel="tag">Algorithms</a></li></ul>
+    <p><img src="https://i.dawnlab.me/53a8c7cf3ad77a0f0a456ce2c6afe88a.png" loading="lazy"></p>
 
-    </footer>
-  </div>
+  </article>
+
   
+      
+    <div class="nexmoe-post-copyright">
+        <strong>本文作者：</strong>Fraser·Porter·Bridges·&#39;iDzforjh&#39;·Bu<br>
+        <strong>本文链接：</strong><a href="https://idzforjh.github.io/2021/08/05/%E7%BA%BF%E7%A8%8B%E6%B1%A0%E4%B8%8E%E4%BB%BB%E5%8A%A1%E9%98%9F%E5%88%97/" title="https:&#x2F;&#x2F;idzforjh.github.io&#x2F;2021&#x2F;08&#x2F;05&#x2F;%E7%BA%BF%E7%A8%8B%E6%B1%A0%E4%B8%8E%E4%BB%BB%E5%8A%A1%E9%98%9F%E5%88%97&#x2F;" target="_blank" rel="noopener">https:&#x2F;&#x2F;idzforjh.github.io&#x2F;2021&#x2F;08&#x2F;05&#x2F;%E7%BA%BF%E7%A8%8B%E6%B1%A0%E4%B8%8E%E4%BB%BB%E5%8A%A1%E9%98%9F%E5%88%97&#x2F;</a><br>
+        
+            <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
+
+        
+    </div>
+
+
+  
+  
+  <div class="nexmoe-post-meta nexmoe-rainbow">
+   
     
-<nav id="article-nav">
+        <a class="nexmoefont icon-tag-fill -none-link" href="https://idzforjh.github.io/tags/Algorithms/" rel="tag">Algorithms</a>
+    
+</div>
   
-    <a href="https://idzforjh.github.io/2021/08/10/%E4%BA%8C%E5%8F%89%E6%A0%91/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">前一篇</strong>
-      <div class="article-nav-title">
-        
-          二叉树
-        
+  
+    <script async src="https://idzforjh.github.io/js/copy-codeblock.js?v=1687161444435"></script>
+  
+
+  
+      <div class="nexmoe-post-footer">
+          请在你的配置文件中设置 slotComment
+
       </div>
-    </a>
   
-  
-    <a href="https://idzforjh.github.io/2021/08/04/%E9%93%BE%E8%A1%A8/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">后一篇</strong>
-      <div class="article-nav-title">链表</div>
-    </a>
-  
-</nav>
+</div>
+</div>
+        <div class="nexmoe-post-right">
+              <div class="nexmoe-fixed">
+                  <div class="nexmoe-tool"> 
+                    
+                      
+                        
+                          
+                          
+                              <button class="mdui-fab catalog" style="overflow:unset;">
+                                  <i class="nexmoefont icon-i-catalog"></i>
+                                  <div class="nexmoe-toc">
+                                      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BA%BF%E7%A8%8B%E6%B1%A0%E4%B8%8E%E4%BB%BB%E5%8A%A1%E9%98%9F%E5%88%97"><span class="toc-number">1.</span> <span class="toc-text">线程池与任务队列</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%88%E5%92%8C%E9%98%9F%E5%88%97"><span class="toc-number">1.1.</span> <span class="toc-text">栈和队列</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#LeetCode%E7%BB%8F%E5%85%B8%E9%97%AE%E9%A2%98"><span class="toc-number">1.2.</span> <span class="toc-text">LeetCode经典问题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#86-%E5%88%86%E9%9A%94%E9%93%BE%E8%A1%A8"><span class="toc-number">1.2.1.</span> <span class="toc-text">86. 分隔链表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#138-%E5%A4%8D%E5%88%B6%E5%B8%A6%E9%9A%8F%E6%9C%BA%E6%8C%87%E9%92%88%E7%9A%84%E9%93%BE%E8%A1%A8"><span class="toc-number">1.2.2.</span> <span class="toc-text">138. 复制带随机指针的链表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#622-%E8%AE%BE%E8%AE%A1%E5%BE%AA%E7%8E%AF%E9%98%9F%E5%88%97"><span class="toc-number">1.2.3.</span> <span class="toc-text">622. 设计循环队列</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#641-%E8%AE%BE%E8%AE%A1%E5%BE%AA%E7%8E%AF%E5%8F%8C%E7%AB%AF%E9%98%9F%E5%88%97"><span class="toc-number">1.2.4.</span> <span class="toc-text">641. 设计循环双端队列</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1670-%E8%AE%BE%E8%AE%A1%E5%89%8D%E4%B8%AD%E5%90%8E%E9%98%9F%E5%88%97"><span class="toc-number">1.2.5.</span> <span class="toc-text">1670. 设计前中后队列</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#933-%E6%9C%80%E8%BF%91%E7%9A%84%E8%AF%B7%E6%B1%82%E6%AC%A1%E6%95%B0"><span class="toc-number">1.2.6.</span> <span class="toc-text">933. 最近的请求次数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9D%A2%E8%AF%95%E9%A2%98-17-09-%E7%AC%AC-k-%E4%B8%AA%E6%95%B0"><span class="toc-number">1.2.7.</span> <span class="toc-text">面试题 17.09. 第 k 个数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#859-%E4%BA%B2%E5%AF%86%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="toc-number">1.2.8.</span> <span class="toc-text">859. 亲密字符串</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#860-%E6%9F%A0%E6%AA%AC%E6%B0%B4%E6%89%BE%E9%9B%B6"><span class="toc-number">1.2.9.</span> <span class="toc-text">860. 柠檬水找零</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#969-%E7%85%8E%E9%A5%BC%E6%8E%92%E5%BA%8F"><span class="toc-number">1.2.10.</span> <span class="toc-text">969. 煎饼排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#621-%E4%BB%BB%E5%8A%A1%E8%B0%83%E5%BA%A6%E5%99%A8"><span class="toc-number">1.2.11.</span> <span class="toc-text">621. 任务调度器</span></a></li></ol></li></ol></li></ol>
+                                  </div>
+                              </button>
+                          
+                          
+                      
+                    
+                      <a href="#nexmoe-content" class="toc-link" aria-label="Back To Top" title="top"><button class="mdui-fab mdui-ripple"><i class="nexmoefont icon-caret-top"></i></button></a>
+                  </div>
+              </div>
+            </div>
+    </div>
+    <div id="nexmoe-search-space">
+	<div class="search-container">
+		<div class="search-header">
+			<div class="search-input-container">
+				<input
+					class="search-input"
+					type="text"
+					placeholder="搜索"
+					oninput="sinput();"
+				/>
+			</div>
+			<a class="search-close" onclick="sclose();">×</a>
+		</div>
+		<div class="search-body"></div>
+	</div>
+</div>
 
-  
-</article>
-
-
-</section>
-        
-          <aside id="sidebar">
-  
     
-  <div class="widget-wrap">
-    <h3 class="widget-title">分类</h3>
-    <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="https://idzforjh.github.io/categories/Algorithms/">Algorithms</a></li><li class="category-list-item"><a class="category-list-link" href="https://idzforjh.github.io/categories/Java-Web/">Java Web</a></li><li class="category-list-item"><a class="category-list-link" href="https://idzforjh.github.io/categories/Java%E5%9F%BA%E7%A1%80/">Java基础</a></li><li class="category-list-item"><a class="category-list-link" href="https://idzforjh.github.io/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="https://idzforjh.github.io/categories/Machine-Learning/">Machine Learning</a></li><li class="category-list-item"><a class="category-list-link" href="https://idzforjh.github.io/categories/Network-engerning/">Network engerning</a></li><li class="category-list-item"><a class="category-list-link" href="https://idzforjh.github.io/categories/Queen-s-Gambit/">Queen`s Gambit</a></li><li class="category-list-item"><a class="category-list-link" href="https://idzforjh.github.io/categories/Web-of-CTF/">Web of CTF</a></li></ul>
-    </div>
-  </div>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2058306854838448" crossorigin="anonymous"></script>
 
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">标签</h3>
-    <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="https://idzforjh.github.io/tags/Ad-hoc/" rel="tag">Ad-hoc</a></li><li class="tag-list-item"><a class="tag-list-link" href="https://idzforjh.github.io/tags/Algorithm/" rel="tag">Algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="https://idzforjh.github.io/tags/Algorithms/" rel="tag">Algorithms</a></li><li class="tag-list-item"><a class="tag-list-link" href="https://idzforjh.github.io/tags/CSS-3/" rel="tag">CSS 3</a></li><li class="tag-list-item"><a class="tag-list-link" href="https://idzforjh.github.io/tags/HTML/" rel="tag">HTML</a></li><li class="tag-list-item"><a class="tag-list-link" href="https://idzforjh.github.io/tags/HTML-5/" rel="tag">HTML 5</a></li><li class="tag-list-item"><a class="tag-list-link" href="https://idzforjh.github.io/tags/Kali/" rel="tag">Kali</a></li><li class="tag-list-item"><a class="tag-list-link" href="https://idzforjh.github.io/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="https://idzforjh.github.io/tags/OpenCV/" rel="tag">OpenCV</a></li><li class="tag-list-item"><a class="tag-list-link" href="https://idzforjh.github.io/tags/Screeps/" rel="tag">Screeps</a></li><li class="tag-list-item"><a class="tag-list-link" href="https://idzforjh.github.io/tags/Think-of-Java/" rel="tag">Think of Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="https://idzforjh.github.io/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">标签云</h3>
-    <div class="widget tagcloud">
-      <a href="https://idzforjh.github.io/tags/Ad-hoc/" style="font-size: 10px;">Ad-hoc</a> <a href="https://idzforjh.github.io/tags/Algorithm/" style="font-size: 10px;">Algorithm</a> <a href="https://idzforjh.github.io/tags/Algorithms/" style="font-size: 16.67px;">Algorithms</a> <a href="https://idzforjh.github.io/tags/CSS-3/" style="font-size: 10px;">CSS 3</a> <a href="https://idzforjh.github.io/tags/HTML/" style="font-size: 10px;">HTML</a> <a href="https://idzforjh.github.io/tags/HTML-5/" style="font-size: 10px;">HTML 5</a> <a href="https://idzforjh.github.io/tags/Kali/" style="font-size: 10px;">Kali</a> <a href="https://idzforjh.github.io/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="https://idzforjh.github.io/tags/OpenCV/" style="font-size: 13.33px;">OpenCV</a> <a href="https://idzforjh.github.io/tags/Screeps/" style="font-size: 10px;">Screeps</a> <a href="https://idzforjh.github.io/tags/Think-of-Java/" style="font-size: 20px;">Think of Java</a> <a href="https://idzforjh.github.io/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 10px;">前端</a>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">归档</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="https://idzforjh.github.io/archives/2021/08/">八月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="https://idzforjh.github.io/archives/2021/04/">四月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="https://idzforjh.github.io/archives/2021/03/">三月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="https://idzforjh.github.io/archives/2021/01/">一月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="https://idzforjh.github.io/archives/2020/12/">十二月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="https://idzforjh.github.io/archives/2020/11/">十一月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="https://idzforjh.github.io/archives/2020/10/">十月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="https://idzforjh.github.io/archives/2020/09/">九月 2020</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">最新文章</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="https://idzforjh.github.io/2021/08/11/%E9%80%92%E5%BD%92%E4%B8%8E%E6%A0%88/">递归与栈</a>
-          </li>
-        
-          <li>
-            <a href="https://idzforjh.github.io/2021/08/10/%E4%BA%8C%E5%8F%89%E6%A0%91/">二叉树</a>
-          </li>
-        
-          <li>
-            <a href="https://idzforjh.github.io/2021/08/05/%E7%BA%BF%E7%A8%8B%E6%B1%A0%E4%B8%8E%E4%BB%BB%E5%8A%A1%E9%98%9F%E5%88%97/">线程池与任务队列</a>
-          </li>
-        
-          <li>
-            <a href="https://idzforjh.github.io/2021/08/04/%E9%93%BE%E8%A1%A8/">链表</a>
-          </li>
-        
-          <li>
-            <a href="https://idzforjh.github.io/2021/04/12/Data/">Data</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-
-  
-</aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      
-      &copy; 2023 Fraser·Porter·Bridges·&#39;iDzforjh&#39;·Bu<br>
-      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
-    </div>
-  </div>
-</footer>
-
-    </div>
-    <nav id="mobile-nav">
-  
-    <a href="https://idzforjh.github.io/" class="mobile-nav-link">Home</a>
-  
-    <a href="https://idzforjh.github.io/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
-    
-
-
-<script src="https://idzforjh.github.io/js/jquery-3.6.4.min.js"></script>
-
-
-
-  
-<script src="https://idzforjh.github.io/fancybox/jquery.fancybox.min.js"></script>
-
-
-
-
-<script src="https://idzforjh.github.io/js/script.js"></script>
-
-
-
-
-
-  </div>
 </body>
+
 </html>
