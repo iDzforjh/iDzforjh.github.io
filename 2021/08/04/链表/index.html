@@ -27,13 +27,13 @@
 <link rel="stylesheet" href="https://idzforjh.github.io/lib/mdui_043tiny/mdui.css">
 
 
-    <link rel="stylesheet" href="https://idzforjh.github.io/lib/iconfont/iconfont.css?v=1687163815424">
+    <link rel="stylesheet" href="https://idzforjh.github.io/lib/iconfont/iconfont.css?v=1687179731617">
     
-    <link rel="stylesheet" href="https://idzforjh.github.io/css/style.css?v=1687163815424">
+    <link rel="stylesheet" href="https://idzforjh.github.io/css/style.css?v=1687179731617">
 
     
         
-            <link rel="stylesheet" href="https://idzforjh.github.io/custom.css?v=1687163815424">
+            <link rel="stylesheet" href="https://idzforjh.github.io/custom.css?v=1687179731617">
         
     
 
@@ -42,7 +42,7 @@
 <script src="https://idzforjh.github.io/lib/fancybox/fancybox.umd.js" async></script>
 
 
-    <script async src="https://idzforjh.github.io/js/app.js?v=1687163815425"></script>
+    <script async src="https://idzforjh.github.io/js/app.js?v=1687179731617"></script>
     
      
 
@@ -484,8 +484,7 @@
 <p>返回同样按升序排列的结果链表。</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * </span></span><br><span class="line"><span class="comment"> * 2021-7-28</span></span><br><span class="line"><span class="comment"> * LeetCode82 删除排序链表中的重复元素 II</span></span><br><span class="line"><span class="comment"> * </span></span><br><span class="line"><span class="comment"> **/</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Definition for singly-linked list.</span></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">ListNode</span> &#123;</span><br><span class="line">    <span class="type">int</span> val;</span><br><span class="line">    ListNode *next;</span><br><span class="line">    <span class="built_in">ListNode</span>() : <span class="built_in">val</span>(<span class="number">0</span>), <span class="built_in">next</span>(<span class="literal">nullptr</span>) &#123;&#125;</span><br><span class="line">    <span class="built_in">ListNode</span>(<span class="type">int</span> x) : <span class="built_in">val</span>(x), <span class="built_in">next</span>(<span class="literal">nullptr</span>) &#123;&#125;</span><br><span class="line">    <span class="built_in">ListNode</span>(<span class="type">int</span> x, ListNode *next) : <span class="built_in">val</span>(x), <span class="built_in">next</span>(next) &#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode* <span class="title">deleteDuplicates</span><span class="params">(ListNode* head)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(head == <span class="literal">nullptr</span>) <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line">        <span class="function">ListNode <span class="title">ret</span><span class="params">(<span class="number">0</span>, head)</span>, *p </span>= &amp;ret, *q;</span><br><span class="line">        <span class="keyword">while</span> (p -&gt;next)&#123;</span><br><span class="line">            <span class="keyword">if</span> (p -&gt;next-&gt;next &amp;&amp; p -&gt;next-&gt;val == p -&gt;next-&gt;next-&gt;val)&#123;</span><br><span class="line">                q = p-&gt;next-&gt;next;</span><br><span class="line">            <span class="keyword">while</span> (q &amp;&amp; q-&gt;val == p-&gt;next-&gt;val)&#123;</span><br><span class="line">                q = q-&gt;next;</span><br><span class="line">            &#125;</span><br><span class="line">            p-&gt;next = q;  </span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                p = p-&gt;next;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ret.next;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
-    <p><img src="https://i.dawnlab.me/53a8c7cf3ad77a0f0a456ce2c6afe88a.png" loading="lazy"></p>
-
+    
   </article>
 
   
@@ -510,7 +509,7 @@
 </div>
   
   
-    <script async src="https://idzforjh.github.io/js/copy-codeblock.js?v=1687163815303"></script>
+    <script async src="https://idzforjh.github.io/js/copy-codeblock.js?v=1687179731514"></script>
   
 
   
