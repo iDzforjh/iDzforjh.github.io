@@ -4,18 +4,19 @@
   <meta charset="utf-8">
   
   
-  <title>categories | Fraser Porter Bridges</title>
+  <title>OpenCV(I) | Fraser Porter Bridges</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="JIT, 2018, Network engineering Undergraduate student">
-<meta property="og:type" content="website">
-<meta property="og:title" content="categories">
-<meta property="og:url" content="https://idzforjh.github.io/categories/index.html">
+  <meta name="description" content="P Y T H O N A N D R E Q U I R E D PA C K A G E S123456pip install numpypip install scipypip install matplotlibpip install mahotaspip install scikit-learnpip install -U scikit-image  L O A D I N G , D">
+<meta property="og:type" content="article">
+<meta property="og:title" content="OpenCV(I)">
+<meta property="og:url" content="https://idzforjh.github.io/2020/11/29/OpenCV(I)/index.html">
 <meta property="og:site_name" content="Fraser Porter Bridges">
-<meta property="og:description" content="JIT, 2018, Network engineering Undergraduate student">
+<meta property="og:description" content="P Y T H O N A N D R E Q U I R E D PA C K A G E S123456pip install numpypip install scipypip install matplotlibpip install mahotaspip install scikit-learnpip install -U scikit-image  L O A D I N G , D">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-10-01T11:10:45.000Z">
-<meta property="article:modified_time" content="2023-06-19T02:47:14.969Z">
+<meta property="article:published_time" content="2020-11-29T12:02:31.000Z">
+<meta property="article:modified_time" content="2020-11-29T13:23:33.000Z">
 <meta property="article:author" content="Fraser·Porter·Bridges·&#39;iDzforjh&#39;·Bu">
+<meta property="article:tag" content="OpenCV">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternate" href="https://idzforjh.github.io/atom.xml" title="Fraser Porter Bridges" type="application/atom+xml">
@@ -79,12 +80,16 @@
 </header>
 
       <div class="outer">
-        <section id="main"><article id="page-" class="h-entry article article-type-page" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+        <section id="main"><article id="post-OpenCV(I)" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="https://idzforjh.github.io/categories/index.html" class="article-date">
-  <time class="dt-published" datetime="2020-10-01T11:10:45.000Z" itemprop="datePublished">2020-10-01</time>
+    <a href="https://idzforjh.github.io/2020/11/29/OpenCV(I)/" class="article-date">
+  <time class="dt-published" datetime="2020-11-29T12:02:31.000Z" itemprop="datePublished">2020-11-29</time>
 </a>
     
+  <div class="article-category">
+    <a class="article-category-link" href="https://idzforjh.github.io/categories/Machine-Learning/">Machine Learning</a>
+  </div>
+
   </div>
   <div class="article-inner">
     
@@ -93,7 +98,7 @@
         
   
     <h1 class="p-name article-title" itemprop="headline name">
-      categories
+      OpenCV(I)
     </h1>
   
 
@@ -101,18 +106,60 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        
+        <h2 id="P-Y-T-H-O-N-A-N-D-R-E-Q-U-I-R-E-D-PA-C-K-A-G-E-S"><a href="#P-Y-T-H-O-N-A-N-D-R-E-Q-U-I-R-E-D-PA-C-K-A-G-E-S" class="headerlink" title="P Y T H O N A N D R E Q U I R E D PA C K A G E S"></a>P Y T H O N A N D R E Q U I R E D PA C K A G E S</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">pip install numpy</span><br><span class="line">pip install scipy</span><br><span class="line">pip install matplotlib</span><br><span class="line">pip install mahotas</span><br><span class="line">pip install scikit-learn</span><br><span class="line">pip install -U scikit-image</span><br></pre></td></tr></table></figure>
+
+<h2 id="L-O-A-D-I-N-G-D-I-S-P-L-AY-I-N-G-A-N-D-S-AV-I-N-G"><a href="#L-O-A-D-I-N-G-D-I-S-P-L-AY-I-N-G-A-N-D-S-AV-I-N-G" class="headerlink" title="L O A D I N G , D I S P L AY I N G , A N D S AV I N G"></a>L O A D I N G , D I S P L AY I N G , A N D S AV I N G</h2><p>从0开始学习OpenCV(当然得有一定的Python基础)，直接来看代码吧，新建一个load_display_save.py</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> __future__ <span class="keyword">import</span> print_function</span><br><span class="line"><span class="keyword">import</span> argparse</span><br><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"></span><br><span class="line">ap = argparse.ArgumentParser()</span><br><span class="line">ap.add_argument(<span class="string">&quot;-i&quot;</span>, <span class="string">&quot;--image&quot;</span>, required=<span class="literal">True</span>,</span><br><span class="line">                <span class="built_in">help</span>=<span class="string">&quot;Path to the image&quot;</span>)</span><br><span class="line">args = <span class="built_in">vars</span>(ap.parse_args())</span><br></pre></td></tr></table></figure>
+
+<p>首先是导入所必须要的第三方库。</p>
+<p> <code>from __future__ import print_function</code> 实际上在这里使用的是print()函数，而不是print语句实际上是为了兼容python3 和 python2的使用。</p>
+<p><code>argparse</code> 是为了帮助处理解析命令行参数，而cv2 很明显是为了之后的图像处理做引用。</p>
+<p>随后5-8行代码是用来处理解析命令，<code>--image</code> 用来获取硬盘上的图像路径，随后将量化的图像数据存储在字典中（python本身并没有数组功能（python3.7），使用numpy可以解决）。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">image = cv2.imread(args[<span class="string">&quot;image&quot;</span>])</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;width:&#123;&#125;pixels&quot;</span>.<span class="built_in">format</span>(image.shape[<span class="number">1</span>]))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;height:&#123;&#125;pixels&quot;</span>.<span class="built_in">format</span>(image.shape[<span class="number">0</span>]))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;channels:&#123;&#125;&quot;</span>.<span class="built_in">format</span>(image.shape[<span class="number">2</span>]))</span><br><span class="line"></span><br><span class="line">cv2.imshow(<span class="string">&quot;Image&quot;</span>, image)</span><br><span class="line">cv2.waitKey(<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+
+<p>现在，所选择的图片已经加载到计算机内存中了，调用<code>cv2.imread()</code>函数，它可以返回一个代表图像的 Numpy 数组。</p>
+<p>随后三行代码，通过<code>print()</code>函数来输出（可视化）图像的信息，因为已经是数组形式的数据了所以这里可以通过调用<code>.shape</code>属性来输出。</p>
+<p>最后两行，第一个用来在桌面显示我们调用的图像，<code>imshow()</code>方法中的<code>&quot;Image&quot;</code>代表输出框的名称，<code>image</code> 代表我们从硬盘中提取到内存中的图像映射名称，<code>waitKey()</code>方法用来控制输出的选项框不会立刻消失（如果没有这行代码，可能结果只会出现在一瞬间后就立马消失），”0”代表按下键盘上的任意按键来结束（关闭）这个输出框。</p>
+<p>最后一件事就是将“处理（事实这个程序15行啥也没干…不过作为学习使用方法了）”写入到硬盘中：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cv2.imwrite(<span class="string">&quot;newimage.jpg&quot;</span>, image)</span><br></pre></td></tr></table></figure>
+
+<p>如果想调试这个项目的话需要在terminal中“手动”调试：（pycharm下方自带terminal选项卡可以很方便的使用，vs code也同理，如果需要在cmd之类的终端运行代码的话 需要cd 到代码所在目录。）</p>
+<p>比如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python load_display_save.py --image ./images/trex.png</span><br></pre></td></tr></table></figure>
+
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://idzforjh.github.io/categories/index.html" data-id="clj2k3sng0002d6474c5v5l2v" data-title="categories" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="https://idzforjh.github.io/2020/11/29/OpenCV(I)/" data-id="clj2k3snw0012d647f0ih9cwp" data-title="OpenCV(I)" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="https://idzforjh.github.io/tags/OpenCV/" rel="tag">OpenCV</a></li></ul>
+
     </footer>
   </div>
   
     
+<nav id="article-nav">
+  
+    <a href="https://idzforjh.github.io/2020/11/29/OpenCV(II)/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          OpenCV(II)
+        
+      </div>
+    </a>
+  
+  
+    <a href="https://idzforjh.github.io/2020/11/08/BurpSuite/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">BurpSuite</div>
+    </a>
+  
+</nav>
+
   
 </article>
 

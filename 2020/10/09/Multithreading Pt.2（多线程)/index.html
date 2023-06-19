@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Multithreading Pt.2 （多线程） | Fraser Porter Bridges</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="线程安全；由于一般情况下线程的执行顺序充满随机性，输出的结果往往与预计的相差甚远，这种情况就是线程的安全问题。 非线程安全：多个线程对同一个对象中的同一个实例变量进行操作时会出现 值 被更改或 值 不同步的情况，进而影响程序的执行流程。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Multithreading Pt.2 （多线程）">
+<meta property="og:url" content="https://idzforjh.github.io/2020/10/09/Multithreading%20Pt.2%EF%BC%88%E5%A4%9A%E7%BA%BF%E7%A8%8B)/index.html">
+<meta property="og:site_name" content="Fraser Porter Bridges">
+<meta property="og:description" content="线程安全；由于一般情况下线程的执行顺序充满随机性，输出的结果往往与预计的相差甚远，这种情况就是线程的安全问题。 非线程安全：多个线程对同一个对象中的同一个实例变量进行操作时会出现 值 被更改或 值 不同步的情况，进而影响程序的执行流程。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-10-09T11:55:30.000Z">
+<meta property="article:modified_time" content="2020-10-25T09:05:29.000Z">
+<meta property="article:author" content="Fraser·Porter·Bridges·&#39;iDzforjh&#39;·Bu">
+<meta property="article:tag" content="Think of Java">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="https://idzforjh.github.io/atom.xml" title="Fraser Porter Bridges" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="https://idzforjh.github.io/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://idzforjh.github.io/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="https://idzforjh.github.io/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="https://idzforjh.github.io/" id="logo">Fraser Porter Bridges</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="https://idzforjh.github.io/" id="subtitle">坐而言，不如起而行</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="https://idzforjh.github.io/">Home</a>
+        
+          <a class="main-nav-link" href="https://idzforjh.github.io/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="https://idzforjh.github.io/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://idzforjh.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-Multithreading Pt.2（多线程)" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="https://idzforjh.github.io/2020/10/09/Multithreading%20Pt.2%EF%BC%88%E5%A4%9A%E7%BA%BF%E7%A8%8B)/" class="article-date">
+  <time class="dt-published" datetime="2020-10-09T11:55:30.000Z" itemprop="datePublished">2020-10-09</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="https://idzforjh.github.io/categories/Java-Web/">Java Web</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Multithreading Pt.2 （多线程）
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>线程安全；由于一般情况下线程的执行顺序充满随机性，输出的结果往往与预计的相差甚远，这种情况就是线程的安全问题。</p>
+<p>非线程安全：多个线程对同一个对象中的同一个实例变量进行操作时会出现 值 被更改或 值 不同步的情况，进而影响程序的执行流程。</p>
+<span id="more"></span>
+
+<h2 id="解决线程安全问题"><a href="#解决线程安全问题" class="headerlink" title="解决线程安全问题"></a>解决线程安全问题</h2><p>使用 <code>synchronized</code> 关键字修改线程内的方法，使其保证调用执行顺序，保证线程安全。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Addition</span> <span class="keyword">implements</span> <span class="title class_">Runnable</span> &#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">private</span> <span class="type">int</span> count;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">public</span> <span class="title function_">Addition</span><span class="params">(<span class="type">int</span> count)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.count = count;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title function_">run</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">while</span> (count &gt; <span class="number">0</span>) &#123;</span><br><span class="line">      System.out.println(Thread.currentThread().getId() + <span class="string">&quot; 计算：count=&quot;</span> + count);</span><br><span class="line">      count--;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>对 <code>run()</code> 方法添加了 <code>synchronized</code> 关键字，当一个线程调用 <code>run</code> 前，会先判断有没有被上锁，如果上锁说明有其他线程正在调用 该方法，必须等其他线程对  <code>run</code> 方法调用结束后才可以执行方法。</p>
+</blockquote>
+<p><code>synchronized</code> 关键字可以将任意对象、方法、代码块 上锁，我们将加锁的代码称之为 <code>互斥区</code> 或 <code>临界区</code> </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">run</span><span class="params">()</span> &#123;</span><br><span class="line">  <span class="keyword">synchronized</span> (<span class="built_in">this</span>) &#123;</span><br><span class="line">    <span class="keyword">while</span> (count &gt; <span class="number">0</span>) &#123;</span><br><span class="line">      System.out.println(Thread.currentThread().getId() + <span class="string">&quot; 计算：count=&quot;</span> + count);</span><br><span class="line">      count--;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>注：</strong>网络编程中每个客户端的连接请求在服务端都需要启动一个线程响应，如果出现线程安全问题就会出现各种各样莫名其妙的问题。</p>
+<h2 id="多线程的核心方法"><a href="#多线程的核心方法" class="headerlink" title="多线程的核心方法"></a>多线程的核心方法</h2><h3 id="sleep-long-millis"><a href="#sleep-long-millis" class="headerlink" title="sleep(long millis):"></a>sleep(long millis):</h3><p>类方法（使用 关键词<code>static</code> 修饰，也叫静态方法），在指定的毫秒数内让当前正在执行的线程休眠（暂停执行）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">  Thread.sleep(<span class="number">500</span>);</span><br><span class="line">&#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">  e.printStackTrace();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="jion"><a href="#jion" class="headerlink" title="jion():"></a>jion():</h3><p>实例方法，启动线程后可以直接调用（等待该线程（子线程）终止，子线程调用<code>join()</code>方法的语句后面的代码，只有等到子线程结束了才能执行。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">AdditionTest</span> &#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">    <span class="type">Addition</span> <span class="variable">add</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Addition</span>(<span class="number">3</span>);</span><br><span class="line">    <span class="type">Thread</span> <span class="variable">threadA</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Thread</span>(add);</span><br><span class="line">    <span class="type">Thread</span> <span class="variable">threadB</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Thread</span>(add);</span><br><span class="line">    <span class="type">Thread</span> <span class="variable">threadC</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Thread</span>(add);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">      threadA.start();</span><br><span class="line">      threadA.join();</span><br><span class="line">      threadB.start();</span><br><span class="line">      threadB.join();</span><br><span class="line">      threadC.start();</span><br><span class="line">      threadC.join();</span><br><span class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">      e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    System.out.println(<span class="string">&quot;that&#x27;s the end.&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>示例程序较为简单，调用 <code>System.out.println</code>  输出。实际上在输出信息的时候有可能依赖前面线程的 执行结果 或 输出信息，在这种情况下由于线程不一定会执行完毕但是代码已经接着向下继续执行了，所以无法得到需要的线程执行结果。</p>
+<p>因此调用 <code>join()</code> 方法，后面的代码不会立刻执行，必须等子线程结束，所以该方法可以确保子线程能执行完毕，从而保证  <code>System.out.println</code> 可以从 对象 实例中获取到正确的数据。</p>
+<p>适用场景：</p>
+<ol>
+<li>后续代码需要依赖父线程的执行结果，使用 <code>join</code> 方法来确保线程完整执行。</li>
+<li>复杂、执行时间较长的线程，使用 <code>join</code> 方法来等待线程执行完毕。</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://idzforjh.github.io/2020/10/09/Multithreading%20Pt.2%EF%BC%88%E5%A4%9A%E7%BA%BF%E7%A8%8B)/" data-id="clj2k3snu000xd647dq6sbtps" data-title="Multithreading Pt.2 （多线程）" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="https://idzforjh.github.io/tags/Think-of-Java/" rel="tag">Think of Java</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="https://idzforjh.github.io/2020/10/10/ThreadPool/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          ThreadPool（线程池）
+        
+      </div>
+    </a>
+  
+  
+    <a href="https://idzforjh.github.io/2020/10/03/Pseudo-element%EF%BC%88%E4%BC%AA%E5%85%83%E7%B4%A0%EF%BC%89/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">Pseudo-element（伪元素）</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="https://idzforjh.github.io/categories/Algorithms/">Algorithms</a></li><li class="category-list-item"><a class="category-list-link" href="https://idzforjh.github.io/categories/Java-Web/">Java Web</a></li><li class="category-list-item"><a class="category-list-link" href="https://idzforjh.github.io/categories/Java%E5%9F%BA%E7%A1%80/">Java基础</a></li><li class="category-list-item"><a class="category-list-link" href="https://idzforjh.github.io/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="https://idzforjh.github.io/categories/Machine-Learning/">Machine Learning</a></li><li class="category-list-item"><a class="category-list-link" href="https://idzforjh.github.io/categories/Network-engerning/">Network engerning</a></li><li class="category-list-item"><a class="category-list-link" href="https://idzforjh.github.io/categories/Queen-s-Gambit/">Queen`s Gambit</a></li><li class="category-list-item"><a class="category-list-link" href="https://idzforjh.github.io/categories/Web-of-CTF/">Web of CTF</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="https://idzforjh.github.io/tags/Ad-hoc/" rel="tag">Ad-hoc</a></li><li class="tag-list-item"><a class="tag-list-link" href="https://idzforjh.github.io/tags/Algorithm/" rel="tag">Algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="https://idzforjh.github.io/tags/Algorithms/" rel="tag">Algorithms</a></li><li class="tag-list-item"><a class="tag-list-link" href="https://idzforjh.github.io/tags/CSS-3/" rel="tag">CSS 3</a></li><li class="tag-list-item"><a class="tag-list-link" href="https://idzforjh.github.io/tags/HTML/" rel="tag">HTML</a></li><li class="tag-list-item"><a class="tag-list-link" href="https://idzforjh.github.io/tags/HTML-5/" rel="tag">HTML 5</a></li><li class="tag-list-item"><a class="tag-list-link" href="https://idzforjh.github.io/tags/Kali/" rel="tag">Kali</a></li><li class="tag-list-item"><a class="tag-list-link" href="https://idzforjh.github.io/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="https://idzforjh.github.io/tags/OpenCV/" rel="tag">OpenCV</a></li><li class="tag-list-item"><a class="tag-list-link" href="https://idzforjh.github.io/tags/Screeps/" rel="tag">Screeps</a></li><li class="tag-list-item"><a class="tag-list-link" href="https://idzforjh.github.io/tags/Think-of-Java/" rel="tag">Think of Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="https://idzforjh.github.io/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="https://idzforjh.github.io/tags/Ad-hoc/" style="font-size: 10px;">Ad-hoc</a> <a href="https://idzforjh.github.io/tags/Algorithm/" style="font-size: 10px;">Algorithm</a> <a href="https://idzforjh.github.io/tags/Algorithms/" style="font-size: 16.67px;">Algorithms</a> <a href="https://idzforjh.github.io/tags/CSS-3/" style="font-size: 10px;">CSS 3</a> <a href="https://idzforjh.github.io/tags/HTML/" style="font-size: 10px;">HTML</a> <a href="https://idzforjh.github.io/tags/HTML-5/" style="font-size: 10px;">HTML 5</a> <a href="https://idzforjh.github.io/tags/Kali/" style="font-size: 10px;">Kali</a> <a href="https://idzforjh.github.io/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="https://idzforjh.github.io/tags/OpenCV/" style="font-size: 13.33px;">OpenCV</a> <a href="https://idzforjh.github.io/tags/Screeps/" style="font-size: 10px;">Screeps</a> <a href="https://idzforjh.github.io/tags/Think-of-Java/" style="font-size: 20px;">Think of Java</a> <a href="https://idzforjh.github.io/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 10px;">前端</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="https://idzforjh.github.io/archives/2021/08/">八月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="https://idzforjh.github.io/archives/2021/04/">四月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="https://idzforjh.github.io/archives/2021/03/">三月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="https://idzforjh.github.io/archives/2021/01/">一月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="https://idzforjh.github.io/archives/2020/12/">十二月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="https://idzforjh.github.io/archives/2020/11/">十一月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="https://idzforjh.github.io/archives/2020/10/">十月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="https://idzforjh.github.io/archives/2020/09/">九月 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="https://idzforjh.github.io/2021/08/11/%E9%80%92%E5%BD%92%E4%B8%8E%E6%A0%88/">递归与栈</a>
+          </li>
+        
+          <li>
+            <a href="https://idzforjh.github.io/2021/08/10/%E4%BA%8C%E5%8F%89%E6%A0%91/">二叉树</a>
+          </li>
+        
+          <li>
+            <a href="https://idzforjh.github.io/2021/08/05/%E7%BA%BF%E7%A8%8B%E6%B1%A0%E4%B8%8E%E4%BB%BB%E5%8A%A1%E9%98%9F%E5%88%97/">线程池与任务队列</a>
+          </li>
+        
+          <li>
+            <a href="https://idzforjh.github.io/2021/08/04/%E9%93%BE%E8%A1%A8/">链表</a>
+          </li>
+        
+          <li>
+            <a href="https://idzforjh.github.io/2021/04/12/Data/">Data</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 Fraser·Porter·Bridges·&#39;iDzforjh&#39;·Bu<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="https://idzforjh.github.io/" class="mobile-nav-link">Home</a>
+  
+    <a href="https://idzforjh.github.io/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="https://idzforjh.github.io/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="https://idzforjh.github.io/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="https://idzforjh.github.io/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

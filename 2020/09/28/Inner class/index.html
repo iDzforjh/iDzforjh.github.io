@@ -4,19 +4,22 @@
   <meta charset="utf-8">
   
   
-  <title>categories | Fraser Porter Bridges</title>
+  <title>Inner class | Fraser Porter Bridges</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="JIT, 2018, Network engineering Undergraduate student">
-<meta property="og:type" content="website">
-<meta property="og:title" content="categories">
-<meta property="og:url" content="https://idzforjh.github.io/categories/index.html">
+  <meta name="description" content="内部类（Inner class）是定义在另一个类中的类。有以下三点使用原因：  内部类方法可以访问该类定义所在的作用域中的数据，包括私有的数据。 内部类可以对同一个包中的其他类隐藏起来。 当想要定义一个回调函数且不想编写大量代码时，使用 匿名（anonymous）内部类比较便捷。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Inner class">
+<meta property="og:url" content="https://idzforjh.github.io/2020/09/28/Inner%20class/index.html">
 <meta property="og:site_name" content="Fraser Porter Bridges">
-<meta property="og:description" content="JIT, 2018, Network engineering Undergraduate student">
+<meta property="og:description" content="内部类（Inner class）是定义在另一个类中的类。有以下三点使用原因：  内部类方法可以访问该类定义所在的作用域中的数据，包括私有的数据。 内部类可以对同一个包中的其他类隐藏起来。 当想要定义一个回调函数且不想编写大量代码时，使用 匿名（anonymous）内部类比较便捷。">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-10-01T11:10:45.000Z">
-<meta property="article:modified_time" content="2023-06-19T02:47:14.969Z">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/iDzforjh/Resource@4.2/Java%E5%86%85%E9%83%A8%E7%B1%BB/%E5%86%85%E9%83%A8%E7%B1%BBUML.svg">
+<meta property="article:published_time" content="2020-09-28T10:33:38.000Z">
+<meta property="article:modified_time" content="2020-09-28T11:21:36.000Z">
 <meta property="article:author" content="Fraser·Porter·Bridges·&#39;iDzforjh&#39;·Bu">
+<meta property="article:tag" content="Think of Java">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/iDzforjh/Resource@4.2/Java%E5%86%85%E9%83%A8%E7%B1%BB/%E5%86%85%E9%83%A8%E7%B1%BBUML.svg">
   
     <link rel="alternate" href="https://idzforjh.github.io/atom.xml" title="Fraser Porter Bridges" type="application/atom+xml">
   
@@ -79,10 +82,10 @@
 </header>
 
       <div class="outer">
-        <section id="main"><article id="page-" class="h-entry article article-type-page" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+        <section id="main"><article id="post-Inner class" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="https://idzforjh.github.io/categories/index.html" class="article-date">
-  <time class="dt-published" datetime="2020-10-01T11:10:45.000Z" itemprop="datePublished">2020-10-01</time>
+    <a href="https://idzforjh.github.io/2020/09/28/Inner%20class/" class="article-date">
+  <time class="dt-published" datetime="2020-09-28T10:33:38.000Z" itemprop="datePublished">2020-09-28</time>
 </a>
     
   </div>
@@ -93,7 +96,7 @@
         
   
     <h1 class="p-name article-title" itemprop="headline name">
-      categories
+      Inner class
     </h1>
   
 
@@ -101,18 +104,60 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        
+        <p>内部类（Inner class）是定义在另一个类中的类。有以下三点使用原因：</p>
+<ul>
+<li>内部类方法可以访问该类定义所在的作用域中的数据，包括私有的数据。</li>
+<li>内部类可以对同一个包中的其他类隐藏起来。</li>
+<li>当想要定义一个回调函数且不想编写大量代码时，使用 匿名（anonymous）内部类比较便捷。</li>
+</ul>
+<span id="more"></span>
+
+<h1 id="Inner-class-内部类"><a href="#Inner-class-内部类" class="headerlink" title="Inner class 内部类"></a>Inner class 内部类</h1><p>内部类的语法比较复杂，先从简单语法开始讲起：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Outer</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">InnerTool</span> &#123; <span class="comment">// 内部类</span></span><br><span class="line">        <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">add</span><span class="params">(<span class="type">int</span> a,<span class="type">int</span> b)</span>&#123;</span><br><span class="line">            <span class="keyword">return</span> a+b;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在上述例子中，class Outer 是 外部类， class InnerTool是内部类。如果想要调用内部类那么首先必须要实例化它且只能在 内部类中 new。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">OuterUtil</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">InnerTool</span> &#123; <span class="comment">// 内部类</span></span><br><span class="line">        <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">add</span><span class="params">(<span class="type">int</span> a,<span class="type">int</span> b)</span>&#123;</span><br><span class="line">            <span class="keyword">return</span> a+b;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">InnerTool</span> <span class="variable">tool</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">InnerTool</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="UML图"><a href="#UML图" class="headerlink" title="UML图"></a>UML图</h2><p><img src="https://cdn.jsdelivr.net/gh/iDzforjh/Resource@4.2/Java%E5%86%85%E9%83%A8%E7%B1%BB/%E5%86%85%E9%83%A8%E7%B1%BBUML.svg" alt="https://cdn.jsdelivr.net/gh/iDzforjh/Resource@4.2/Java%E5%86%85%E9%83%A8%E7%B1%BB/%E5%86%85%E9%83%A8%E7%B1%BBUML.svg"></p>
+<h2 id="内部类实现："><a href="#内部类实现：" class="headerlink" title="内部类实现："></a>内部类实现：</h2><p><strong>实例化：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">OuterUtil</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">InnerTool</span> &#123; <span class="comment">// 内部类</span></span><br><span class="line">        <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">add</span><span class="params">(<span class="type">int</span> a,<span class="type">int</span> b)</span>&#123;</span><br><span class="line">            <span class="keyword">return</span> a+b;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">InnerTool</span> <span class="variable">tool</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">InnerTool</span>();</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">add</span><span class="params">(<span class="type">int</span> a,<span class="type">int</span> b,<span class="type">int</span> c)</span>&#123;</span><br><span class="line">       <span class="keyword">return</span> tool.add( tool.add(a,b) , c );</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>新增一个需求，实现数字加法。</p>
+</blockquote>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://idzforjh.github.io/categories/index.html" data-id="clj2k3sng0002d6474c5v5l2v" data-title="categories" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="https://idzforjh.github.io/2020/09/28/Inner%20class/" data-id="clj2k3sno000ed6474vqkbu01" data-title="Inner class" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="https://idzforjh.github.io/tags/Think-of-Java/" rel="tag">Think of Java</a></li></ul>
+
     </footer>
   </div>
   
     
+<nav id="article-nav">
+  
+    <a href="https://idzforjh.github.io/2020/09/29/Serialization/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          Serialization
+        
+      </div>
+    </a>
+  
+  
+    <a href="https://idzforjh.github.io/2020/09/27/Exception%20Handing/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">Exception Handing</div>
+    </a>
+  
+</nav>
+
   
 </article>
 
