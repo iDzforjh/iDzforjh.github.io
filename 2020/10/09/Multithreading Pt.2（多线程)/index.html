@@ -4,35 +4,36 @@
 
 <head>
     
-    <title>categories - Fraser Porter Bridges</title>
+    <title>Multithreading Pt.2 （多线程） - Fraser Porter Bridges</title>
     <meta charset="UTF-8">
     <meta name="keywords" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
     
     <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/iDzforjh/Resource@2.0/images/TCTD2.PNG" type="image/png" />
-    <meta name="description" content="JIT, 2018, Network engineering Undergraduate student">
-<meta property="og:type" content="website">
-<meta property="og:title" content="categories">
-<meta property="og:url" content="https://idzforjh.github.io/categories/index.html">
+    <meta name="description" content="线程安全；由于一般情况下线程的执行顺序充满随机性，输出的结果往往与预计的相差甚远，这种情况就是线程的安全问题。 非线程安全：多个线程对同一个对象中的同一个实例变量进行操作时会出现 值 被更改或 值 不同步的情况，进而影响程序的执行流程。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Multithreading Pt.2 （多线程）">
+<meta property="og:url" content="https://idzforjh.github.io/2020/10/09/Multithreading%20Pt.2%EF%BC%88%E5%A4%9A%E7%BA%BF%E7%A8%8B)/index.html">
 <meta property="og:site_name" content="Fraser Porter Bridges">
-<meta property="og:description" content="JIT, 2018, Network engineering Undergraduate student">
+<meta property="og:description" content="线程安全；由于一般情况下线程的执行顺序充满随机性，输出的结果往往与预计的相差甚远，这种情况就是线程的安全问题。 非线程安全：多个线程对同一个对象中的同一个实例变量进行操作时会出现 值 被更改或 值 不同步的情况，进而影响程序的执行流程。">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-10-01T11:10:45.000Z">
-<meta property="article:modified_time" content="2023-06-19T02:47:14.969Z">
+<meta property="article:published_time" content="2020-10-09T11:55:30.000Z">
+<meta property="article:modified_time" content="2020-10-25T09:05:29.000Z">
 <meta property="article:author" content="Fraser·Porter·Bridges·&#39;iDzforjh&#39;·Bu">
+<meta property="article:tag" content="Think of Java">
 <meta name="twitter:card" content="summary">
     
 <link rel="stylesheet" href="https://idzforjh.github.io/lib/fancybox/fancybox.css">
 <link rel="stylesheet" href="https://idzforjh.github.io/lib/mdui_043tiny/mdui.css">
 
 
-    <link rel="stylesheet" href="https://idzforjh.github.io/lib/iconfont/iconfont.css?v=1687142913197">
+    <link rel="stylesheet" href="https://idzforjh.github.io/lib/iconfont/iconfont.css?v=1687142913284">
     
-    <link rel="stylesheet" href="https://idzforjh.github.io/css/style.css?v=1687142913197">
+    <link rel="stylesheet" href="https://idzforjh.github.io/css/style.css?v=1687142913284">
 
     
         
-            <link rel="stylesheet" href="https://idzforjh.github.io/custom.css?v=1687142913197">
+            <link rel="stylesheet" href="https://idzforjh.github.io/custom.css?v=1687142913284">
         
     
 
@@ -41,7 +42,7 @@
 <script src="https://idzforjh.github.io/lib/fancybox/fancybox.umd.js" async></script>
 
 
-    <script async src="https://idzforjh.github.io/js/app.js?v=1687142913197"></script>
+    <script async src="https://idzforjh.github.io/js/app.js?v=1687142913284"></script>
     
      
 
@@ -386,15 +387,17 @@
     <div class="nexmoe-post">
   <article>
     
-        <div class="nexmoe-post-cover"> 
-            <img src="https://cdn.jsdelivr.net/gh/iDzforjh/Blog_pic@V1.1/image/background.jpg" alt="categories" loading="lazy">
-            <h1>categories</h1>
+        <div class="nexmoe-post-cover absolute" style="padding-top: 56.289308176100626%;"> 
+            <img src="https://cdn.jsdelivr.net/gh/iDzforjh/Resource@3.1/images/home.jpg" alt="Multithreading Pt.2 （多线程）" loading="lazy">
+            <h1>Multithreading Pt.2 （多线程）</h1>
         </div>
     
     
     <div class="nexmoe-post-meta">
     <div class="nexmoe-rainbow">
-        <a class="nexmoefont icon-calendar-fill">2020年10月01日</a>
+        <a class="nexmoefont icon-calendar-fill">2020年10月09日</a>
+        
+            <a class="nexmoefont icon-appstore-fill -link" href="https://idzforjh.github.io/categories/Java-Web/">Java Web</a>
         
         
     </div>
@@ -405,7 +408,34 @@
     
 </div>
 
-    
+    <p>线程安全；由于一般情况下线程的执行顺序充满随机性，输出的结果往往与预计的相差甚远，这种情况就是线程的安全问题。</p>
+<p>非线程安全：多个线程对同一个对象中的同一个实例变量进行操作时会出现 值 被更改或 值 不同步的情况，进而影响程序的执行流程。</p>
+<span id="more"></span>
+
+<h2 id="解决线程安全问题"><a href="#解决线程安全问题" class="headerlink" title="解决线程安全问题"></a>解决线程安全问题</h2><p>使用 <code>synchronized</code> 关键字修改线程内的方法，使其保证调用执行顺序，保证线程安全。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Addition</span> <span class="keyword">implements</span> <span class="title class_">Runnable</span> &#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">private</span> <span class="type">int</span> count;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">public</span> <span class="title function_">Addition</span><span class="params">(<span class="type">int</span> count)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.count = count;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title function_">run</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">while</span> (count &gt; <span class="number">0</span>) &#123;</span><br><span class="line">      System.out.println(Thread.currentThread().getId() + <span class="string">&quot; 计算：count=&quot;</span> + count);</span><br><span class="line">      count--;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>对 <code>run()</code> 方法添加了 <code>synchronized</code> 关键字，当一个线程调用 <code>run</code> 前，会先判断有没有被上锁，如果上锁说明有其他线程正在调用 该方法，必须等其他线程对  <code>run</code> 方法调用结束后才可以执行方法。</p>
+</blockquote>
+<p><code>synchronized</code> 关键字可以将任意对象、方法、代码块 上锁，我们将加锁的代码称之为 <code>互斥区</code> 或 <code>临界区</code> </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">run</span><span class="params">()</span> &#123;</span><br><span class="line">  <span class="keyword">synchronized</span> (<span class="built_in">this</span>) &#123;</span><br><span class="line">    <span class="keyword">while</span> (count &gt; <span class="number">0</span>) &#123;</span><br><span class="line">      System.out.println(Thread.currentThread().getId() + <span class="string">&quot; 计算：count=&quot;</span> + count);</span><br><span class="line">      count--;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>注：</strong>网络编程中每个客户端的连接请求在服务端都需要启动一个线程响应，如果出现线程安全问题就会出现各种各样莫名其妙的问题。</p>
+<h2 id="多线程的核心方法"><a href="#多线程的核心方法" class="headerlink" title="多线程的核心方法"></a>多线程的核心方法</h2><h3 id="sleep-long-millis"><a href="#sleep-long-millis" class="headerlink" title="sleep(long millis):"></a>sleep(long millis):</h3><p>类方法（使用 关键词<code>static</code> 修饰，也叫静态方法），在指定的毫秒数内让当前正在执行的线程休眠（暂停执行）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">  Thread.sleep(<span class="number">500</span>);</span><br><span class="line">&#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">  e.printStackTrace();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="jion"><a href="#jion" class="headerlink" title="jion():"></a>jion():</h3><p>实例方法，启动线程后可以直接调用（等待该线程（子线程）终止，子线程调用<code>join()</code>方法的语句后面的代码，只有等到子线程结束了才能执行。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">AdditionTest</span> &#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">    <span class="type">Addition</span> <span class="variable">add</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Addition</span>(<span class="number">3</span>);</span><br><span class="line">    <span class="type">Thread</span> <span class="variable">threadA</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Thread</span>(add);</span><br><span class="line">    <span class="type">Thread</span> <span class="variable">threadB</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Thread</span>(add);</span><br><span class="line">    <span class="type">Thread</span> <span class="variable">threadC</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Thread</span>(add);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">      threadA.start();</span><br><span class="line">      threadA.join();</span><br><span class="line">      threadB.start();</span><br><span class="line">      threadB.join();</span><br><span class="line">      threadC.start();</span><br><span class="line">      threadC.join();</span><br><span class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">      e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    System.out.println(<span class="string">&quot;that&#x27;s the end.&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>示例程序较为简单，调用 <code>System.out.println</code>  输出。实际上在输出信息的时候有可能依赖前面线程的 执行结果 或 输出信息，在这种情况下由于线程不一定会执行完毕但是代码已经接着向下继续执行了，所以无法得到需要的线程执行结果。</p>
+<p>因此调用 <code>join()</code> 方法，后面的代码不会立刻执行，必须等子线程结束，所以该方法可以确保子线程能执行完毕，从而保证  <code>System.out.println</code> 可以从 对象 实例中获取到正确的数据。</p>
+<p>适用场景：</p>
+<ol>
+<li>后续代码需要依赖父线程的执行结果，使用 <code>join</code> 方法来确保线程完整执行。</li>
+<li>复杂、执行时间较长的线程，使用 <code>join</code> 方法来等待线程执行完毕。</li>
+</ol>
+
     
   </article>
 
@@ -413,7 +443,7 @@
       
     <div class="nexmoe-post-copyright">
         <strong>本文作者：</strong>Fraser·Porter·Bridges·&#39;iDzforjh&#39;·Bu<br>
-        <strong>本文链接：</strong><a href="https://idzforjh.github.io/categories/index.html" title="https:&#x2F;&#x2F;idzforjh.github.io&#x2F;categories&#x2F;index.html" target="_blank" rel="noopener">https:&#x2F;&#x2F;idzforjh.github.io&#x2F;categories&#x2F;index.html</a><br>
+        <strong>本文链接：</strong><a href="https://idzforjh.github.io/2020/10/09/Multithreading%20Pt.2%EF%BC%88%E5%A4%9A%E7%BA%BF%E7%A8%8B)/" title="https:&#x2F;&#x2F;idzforjh.github.io&#x2F;2020&#x2F;10&#x2F;09&#x2F;Multithreading%20Pt.2%EF%BC%88%E5%A4%9A%E7%BA%BF%E7%A8%8B)&#x2F;" target="_blank" rel="noopener">https:&#x2F;&#x2F;idzforjh.github.io&#x2F;2020&#x2F;10&#x2F;09&#x2F;Multithreading%20Pt.2%EF%BC%88%E5%A4%9A%E7%BA%BF%E7%A8%8B)&#x2F;</a><br>
         
             <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
 
@@ -426,10 +456,12 @@
   <div class="nexmoe-post-meta nexmoe-rainbow">
    
     
+        <a class="nexmoefont icon-tag-fill -none-link" href="https://idzforjh.github.io/tags/Think-of-Java/" rel="tag">Think of Java</a>
+    
 </div>
   
   
-    <script async src="https://idzforjh.github.io/js/copy-codeblock.js?v=1687142913135"></script>
+    <script async src="https://idzforjh.github.io/js/copy-codeblock.js?v=1687142913149"></script>
   
 
   
@@ -447,6 +479,13 @@
                       
                         
                           
+                          
+                              <button class="mdui-fab catalog" style="overflow:unset;">
+                                  <i class="nexmoefont icon-i-catalog"></i>
+                                  <div class="nexmoe-toc">
+                                      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E9%97%AE%E9%A2%98"><span class="toc-number">1.</span> <span class="toc-text">解决线程安全问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%9A%84%E6%A0%B8%E5%BF%83%E6%96%B9%E6%B3%95"><span class="toc-number">2.</span> <span class="toc-text">多线程的核心方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#sleep-long-millis"><span class="toc-number">2.1.</span> <span class="toc-text">sleep(long millis):</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#jion"><span class="toc-number">2.2.</span> <span class="toc-text">jion():</span></a></li></ol></li></ol>
+                                  </div>
+                              </button>
                           
                           
                       

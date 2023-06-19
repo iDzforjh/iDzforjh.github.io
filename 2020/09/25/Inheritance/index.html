@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+
+<head>
+    
+    <title>Inheritance - Fraser Porter Bridges</title>
+    <meta charset="UTF-8">
+    <meta name="keywords" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+    
+    <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/iDzforjh/Resource@2.0/images/TCTD2.PNG" type="image/png" />
+    <meta name="description" content="爸爸，儿子，爷爷？！">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Inheritance">
+<meta property="og:url" content="https://idzforjh.github.io/2020/09/25/Inheritance/index.html">
+<meta property="og:site_name" content="Fraser Porter Bridges">
+<meta property="og:description" content="爸爸，儿子，爷爷？！">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://style.youkeda.com/img/ham/course/j2/dog.svg">
+<meta property="og:image" content="https://style.youkeda.com/img/ham/course/j2/extends.svg">
+<meta property="og:image" content="https://style.youkeda.com/img/ham/course/j2/dog2.svg">
+<meta property="og:image" content="https://style.youkeda.com/img/ham/course/j2/dog3.svg">
+<meta property="article:published_time" content="2020-09-25T11:21:44.000Z">
+<meta property="article:modified_time" content="2020-09-25T15:03:05.000Z">
+<meta property="article:author" content="Fraser·Porter·Bridges·&#39;iDzforjh&#39;·Bu">
+<meta property="article:tag" content="Think of Java">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://style.youkeda.com/img/ham/course/j2/dog.svg">
+    
+<link rel="stylesheet" href="https://idzforjh.github.io/lib/fancybox/fancybox.css">
+<link rel="stylesheet" href="https://idzforjh.github.io/lib/mdui_043tiny/mdui.css">
+
+
+    <link rel="stylesheet" href="https://idzforjh.github.io/lib/iconfont/iconfont.css?v=1687142913313">
+    
+    <link rel="stylesheet" href="https://idzforjh.github.io/css/style.css?v=1687142913313">
+
+    
+        
+            <link rel="stylesheet" href="https://idzforjh.github.io/custom.css?v=1687142913313">
+        
+    
+
+    
+<script src="https://idzforjh.github.io/lib/mdui_043tiny/mdui.js" async></script>
+<script src="https://idzforjh.github.io/lib/fancybox/fancybox.umd.js" async></script>
+
+
+    <script async src="https://idzforjh.github.io/js/app.js?v=1687142913313"></script>
+    
+     
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-4D4ZJ9G024"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag("js", new Date());
+
+  gtag("config", "G-4D4ZJ9G024");
+</script>
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="mdui-drawer-body-left">
+    <div id="nexmoe-background">
+        <div class="nexmoe-bg" 
+            style="background-image: url(https://cdn.jsdelivr.net/gh/iDzforjh/Blog_pic@V1.1/image/background.jpg)"
+        ></div>
+        <div class="mdui-appbar mdui-shadow-0">
+            <div class="mdui-toolbar">
+                <a mdui-drawer="{target: '#drawer', swipe: true}" title="menu" class="mdui-btn mdui-btn-icon mdui-ripple"><i class="mdui-icon nexmoefont icon-menu"></i></a>
+                <div class="mdui-toolbar-spacer"></div>
+                <!--<a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>-->
+                <a href="https://idzforjh.github.io/" title="Fraser·Porter·Bridges·&#39;iDzforjh&#39;·Bu" class="mdui-btn mdui-btn-icon"><img src="https://cdn.jsdelivr.net/gh/iDzforjh/Resource@2.0/images/avatar.jpg" alt="Fraser·Porter·Bridges·&#39;iDzforjh&#39;·Bu"></a>
+            </div>
+        </div>
+    </div>
+    <div id="nexmoe-header">
+        <div class="nexmoe-drawer mdui-drawer" id="drawer">
+    <div class="nexmoe-avatar mdui-ripple">
+        <a href="https://idzforjh.github.io/" title="Fraser·Porter·Bridges·&#39;iDzforjh&#39;·Bu">
+            <img src="https://cdn.jsdelivr.net/gh/iDzforjh/Resource@2.0/images/avatar.jpg" alt="Fraser·Porter·Bridges·&#39;iDzforjh&#39;·Bu" alt="Fraser·Porter·Bridges·&#39;iDzforjh&#39;·Bu">
+        </a>
+    </div>
+    <div class="nexmoe-count">
+        <div><span>文章</span>27</div>
+        <div><span>标签</span>12</div>
+        <div><span>分类</span>8</div>
+    </div>
+    <div class="nexmoe-list mdui-list" mdui-collapse="{accordion: true}">
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="https://idzforjh.github.io/" title="回到首页">
+            <i class="mdui-list-item-icon nexmoefont icon-home"></i>
+            <div class="mdui-list-item-content">
+                回到首页
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="https://idzforjh.github.io/archive.html" title="文章归档">
+            <i class="mdui-list-item-icon nexmoefont icon-container"></i>
+            <div class="mdui-list-item-content">
+                文章归档
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="https://idzforjh.github.io/PY.html" title="我的朋友">
+            <i class="mdui-list-item-icon nexmoefont icon-unorderedlist"></i>
+            <div class="mdui-list-item-content">
+                我的朋友
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="https://idzforjh.github.io/donate.html" title="给我赞助">
+            <i class="mdui-list-item-icon nexmoefont icon-coffee"></i>
+            <div class="mdui-list-item-content">
+                给我赞助
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="https://idzforjh.github.io/about.html" title="关于博主">
+            <i class="mdui-list-item-icon nexmoefont icon-info-circle"></i>
+            <div class="mdui-list-item-content">
+                关于博主
+            </div>
+        </a>
+        
+    </div>
+    <aside id="nexmoe-sidebar">
+        
+            
+            <div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-search">
+         
+            <form id="search_form" action_e="https://cn.bing.com/search?q=https://idzforjh.github.io/" onsubmit="return search();">
+                <label><input id="search_value" name="q" type="search" placeholder="搜索"></label>
+            </form>
+         
+    </div>
+</div>
+
+
+
+
+        
+            
+            <div class="nexmoe-widget-wrap">
+	<div class="nexmoe-widget nexmoe-social">
+		<a
+			class="mdui-ripple"
+			href="https://jq.qq.com/?_wv=1027&k=5CfKHun"
+			target="_blank"
+			mdui-tooltip="{content: 'QQ群'}"
+			style="
+				color: rgb(249, 174, 8);
+				background-color: rgba(249, 174, 8, .1);
+			"
+		>
+			<i
+				class="nexmoefont icon-QQ"
+			></i> </a
+		><a
+			class="mdui-ripple"
+			href="https://space.bilibili.com/20238211"
+			target="_blank"
+			mdui-tooltip="{content: '哔哩哔哩'}"
+			style="
+				color: rgb(231, 106, 141);
+				background-color: rgba(231, 106, 141, .1);
+			"
+		>
+			<i
+				class="nexmoefont icon-bilibili"
+			></i> </a
+		><a
+			class="mdui-ripple"
+			href="https://github.com/nexmoe/"
+			target="_blank"
+			mdui-tooltip="{content: 'GitHub'}"
+			style="
+				color: rgb(25, 23, 23);
+				background-color: rgba(25, 23, 23, .1);
+			"
+		>
+			<i
+				class="nexmoefont icon-github"
+			></i> </a
+		><a
+			class="mdui-ripple"
+			href="https://www.zhihu.com/people/nexmoe"
+			target="_blank"
+			mdui-tooltip="{content: '知乎'}"
+			style="
+				color: rgb(30, 136, 229);
+				background-color: rgba(30, 136, 229, .1);
+			"
+		>
+			<i
+				class="nexmoefont icon-zhihu"
+			></i> </a
+		><a
+			class="mdui-ripple"
+			href="https://twitter.com/nexmoe"
+			target="_blank"
+			mdui-tooltip="{content: 'Twitter'}"
+			style="
+				color: rgb(59, 151, 239);
+				background-color: rgba(59, 151, 239, .1);
+			"
+		>
+			<i
+				class="nexmoefont icon-twitter"
+			></i> </a
+		><a
+			class="mdui-ripple"
+			href="https://nexmoe.com/atom.xml"
+			target="_blank"
+			mdui-tooltip="{content: 'RSS'}"
+			style="
+				color: rgb(247, 132, 34);
+				background-color: rgba(247, 132, 34, .1);
+			"
+		>
+			<i
+				class="nexmoefont icon-rss"
+			></i> </a
+		>
+	</div>
+</div>
+
+        
+            
+            
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">文章分类</h3>
+    <div class="nexmoe-widget">
+
+      <ul class="category-list">
+
+        
+
+
+        
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="https://idzforjh.github.io/categories/Algorithms/">Algorithms</a>
+          <span class="category-list-count">3</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="https://idzforjh.github.io/categories/Java-Web/">Java Web</a>
+          <span class="category-list-count">3</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="https://idzforjh.github.io/categories/Java基础/">Java基础</a>
+          <span class="category-list-count">2</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="https://idzforjh.github.io/categories/Linux/">Linux</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="https://idzforjh.github.io/categories/Machine-Learning/">Machine Learning</a>
+          <span class="category-list-count">2</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="https://idzforjh.github.io/categories/Network-engerning/">Network engerning</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="https://idzforjh.github.io/categories/Queen-s-Gambit/">Queen`s Gambit</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="https://idzforjh.github.io/categories/Web-of-CTF/">Web of CTF</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+      </ul>
+
+    </div>
+  </div>
+
+
+        
+            
+            
+  <div class="nexmoe-widget-wrap">
+    <div id="randomtagcloud" class="nexmoe-widget tagcloud nexmoe-rainbow">
+      <a href="https://idzforjh.github.io/tags/Ad-hoc/" style="font-size: 10px;">Ad-hoc</a> <a href="https://idzforjh.github.io/tags/Algorithm/" style="font-size: 10px;">Algorithm</a> <a href="https://idzforjh.github.io/tags/Algorithms/" style="font-size: 16.67px;">Algorithms</a> <a href="https://idzforjh.github.io/tags/CSS-3/" style="font-size: 10px;">CSS 3</a> <a href="https://idzforjh.github.io/tags/HTML/" style="font-size: 10px;">HTML</a> <a href="https://idzforjh.github.io/tags/HTML-5/" style="font-size: 10px;">HTML 5</a> <a href="https://idzforjh.github.io/tags/Kali/" style="font-size: 10px;">Kali</a> <a href="https://idzforjh.github.io/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="https://idzforjh.github.io/tags/OpenCV/" style="font-size: 13.33px;">OpenCV</a> <a href="https://idzforjh.github.io/tags/Screeps/" style="font-size: 10px;">Screeps</a> <a href="https://idzforjh.github.io/tags/Think-of-Java/" style="font-size: 20px;">Think of Java</a> <a href="https://idzforjh.github.io/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 10px;">前端</a>
+    </div>
+    
+      <script>
+        var maxTagcloud = parseInt(17);
+        var tags_length = parseInt(12);
+        var tags_arr = [];
+        for(var i = 0; i < tags_length; i++){
+          tags_arr.push(i);
+        }
+        tags_arr.sort(function (l, r) {
+          return Math.random() > 0.5 ? -1 : 1;
+        });
+        tags_arr = tags_arr.slice(0, maxTagcloud < tags_length ? tags_length - maxTagcloud : 0);
+        for(var tag_i = 0; tag_i < tags_arr.length; tag_i++){
+          document.getElementById("randomtagcloud").children[tags_arr[tag_i]].style.display = 'none';
+        }
+      </script>
+    
+  </div>
+
+        
+            
+            
+            
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">文章归档</h3>
+    <div class="nexmoe-widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="https://idzforjh.github.io/archives/2021/">2021</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="https://idzforjh.github.io/archives/2020/">2020</a><span class="archive-list-count">20</span></li></ul>
+    </div>
+  </div>
+
+
+
+        
+            
+            
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">最新文章</h3>
+    <div class="nexmoe-widget">
+      <ul>
+        
+          <li>
+            <a href="https://idzforjh.github.io/2021/08/11/%E9%80%92%E5%BD%92%E4%B8%8E%E6%A0%88/">递归与栈</a>
+          </li>
+        
+          <li>
+            <a href="https://idzforjh.github.io/2021/08/10/%E4%BA%8C%E5%8F%89%E6%A0%91/">二叉树</a>
+          </li>
+        
+          <li>
+            <a href="https://idzforjh.github.io/2021/08/05/%E7%BA%BF%E7%A8%8B%E6%B1%A0%E4%B8%8E%E4%BB%BB%E5%8A%A1%E9%98%9F%E5%88%97/">线程池与任务队列</a>
+          </li>
+        
+          <li>
+            <a href="https://idzforjh.github.io/2021/08/04/%E9%93%BE%E8%A1%A8/">链表</a>
+          </li>
+        
+          <li>
+            <a href="https://idzforjh.github.io/2021/04/12/Data/">Data</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+        
+    </aside>
+    <div class="nexmoe-copyright">
+        &copy; 2023 Fraser·Porter·Bridges·&#39;iDzforjh&#39;·Bu
+        Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+        & <a href="https://github.com/theme-nexmoe/hexo-theme-nexmoe" target="_blank">Nexmoe</a>
+        
+    </div>
+</div><!-- .nexmoe-drawer -->
+    </div>
+    <div id="nexmoe-content">
+        <div class="nexmoe-primary">
+    <div class="nexmoe-post">
+  <article>
+    
+        <div class="nexmoe-post-cover absolute" style="padding-top: 56.25%;"> 
+            <img src="https://cdn.jsdelivr.net/gh/iDzforjh/Resource@3.0/images/java.jpg" alt="Inheritance" loading="lazy">
+            <h1>Inheritance</h1>
+        </div>
+    
+    
+    <div class="nexmoe-post-meta">
+    <div class="nexmoe-rainbow">
+        <a class="nexmoefont icon-calendar-fill">2020年09月25日</a>
+        
+        
+    </div>
+    
+    
+    
+    
+    
+</div>
+
+    <p>爸爸，儿子，爷爷？！</p>
+<span id="more"></span>
+
+<h1 id="Inheritance"><a href="#Inheritance" class="headerlink" title="Inheritance"></a>Inheritance</h1><p>继承已存在的类就是复用（继承）这些类的方法和域。</p>
+<h2 id="继承语法"><a href="#继承语法" class="headerlink" title="继承语法"></a>继承语法</h2><p>生活案例：</p>
+<p><img onerror="imgOnError(this);" data-fancybox="gallery" src="https://style.youkeda.com/img/ham/course/j2/dog.svg" alt="img" data-caption="img" loading="lazy"></p>
+<p>大多数情况下，动物可以拥有名称、年龄这两个属性，所以我们会发现这三个对象的属性相同。当然这三个动物还有很多其他属性，在此只是举例。</p>
+<p>当我们遇到这样具备相同的属性以及从属某一类别、领域的对象的时候就可以考虑使用 <strong>继承</strong> 来解决问题。</p>
+<p>在 Java 中继承的语法就是在创建类的时候 多添加一个 <strong>extends 关键字</strong></p>
+<p><img onerror="imgOnError(this);" data-fancybox="gallery" src="https://style.youkeda.com/img/ham/course/j2/extends.svg" alt="img" data-caption="img" loading="lazy"></p>
+<p>如上述实例中，当使用继承以后。Dog 成为 Animal 的 <strong>字类</strong>， Animal 称为 <strong>父类</strong>。</p>
+<p>完整代码：</p>
+<p><strong>Animal.java</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.youkeda.model;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Animal</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> age;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getName</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setName</span><span class="params">(String name)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">getAge</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> age;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setAge</span><span class="params">(<span class="type">int</span> age)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.age = age;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>Dog.java</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.youkeda.model;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Dog</span> <span class="keyword">extends</span> <span class="title class_">Animal</span>&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>Cat.java</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.youkeda.model;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Cat</span> <span class="keyword">extends</span> <span class="title class_">Animal</span>&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>Monkey.java</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.youkeda.model;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Monkey</span> <span class="keyword">extends</span> <span class="title class_">Animal</span>&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="UML-继承"><a href="#UML-继承" class="headerlink" title="UML 继承"></a>UML 继承</h2><p>继承关系同样可以使用 UML 来绘制：</p>
+<p><img onerror="imgOnError(this);" data-fancybox="gallery" src="https://style.youkeda.com/img/ham/course/j2/dog2.svg" alt="img" data-caption="img" loading="lazy"></p>
+<blockquote>
+<p>箭头指向父类，在继承关系中 private 级别的变量或者方法，字类是获取不到的，字类如果想获取父类的变量和方法可以设置父类的变量和方法为 protected 或者 public 访问控制符。</p>
+</blockquote>
+<h2 id="方法覆盖"><a href="#方法覆盖" class="headerlink" title="方法覆盖"></a>方法覆盖</h2><p>我们知道每个动物的饮食习惯都不尽相同，如果把这个行为转变为Java对象，就需要每个 对象 各自去实现 “吃” 这个方法，在父子类中，字类如果想要<strong>重写</strong>父类定义方法的行为称之为：<strong>方法覆盖</strong>。</p>
+<p><img onerror="imgOnError(this);" data-fancybox="gallery" src="https://style.youkeda.com/img/ham/course/j2/dog3.svg" alt="img" data-caption="img" loading="lazy"></p>
+<p>比如说，在 Dog 对象中覆盖 eat 方法，并打印出：“狗狗喜欢吃骨头”</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.youkeda.model;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Dog</span> <span class="keyword">extends</span> <span class="title class_">Animal</span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">eat</span><span class="params">()</span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;狗狗喜欢吃肉骨头&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>实例化 Dog 对象</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Test</span> &#123;</span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span>&#123;</span><br><span class="line">    <span class="comment">// 实例化 dog 对象</span></span><br><span class="line">    <span class="type">Dog</span> <span class="variable">d</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Dog</span>();</span><br><span class="line">    d.setName(<span class="string">&quot;小灰&quot;</span>);</span><br><span class="line">    d.setAge(<span class="number">3</span>);</span><br><span class="line">    System.out.println(d.getName()+<span class="string">&quot;---&quot;</span>+d.getAge());</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>实例化 Animal 对象</strong></p>
+<p>动物对象是一个抽象的对象，并没有指具体的某个动物，所以一般运用动物对象是要结合子类。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Test</span> &#123;</span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span>&#123;</span><br><span class="line">    <span class="comment">// 实例化 dog 对象并赋值给 Animal 对象</span></span><br><span class="line">    <span class="type">Animal</span> <span class="variable">d</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Dog</span>();</span><br><span class="line">    d.setName(<span class="string">&quot;小灰&quot;</span>);</span><br><span class="line">    d.setAge(<span class="number">3</span>);</span><br><span class="line">    System.out.println(d.getName()+<span class="string">&quot;---&quot;</span>+d.getAge());</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>不同：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Animal</span> <span class="variable">d</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Dog</span>();</span><br></pre></td></tr></table></figure>
+
+<p>父类对象是可以直接成为子类的实例，如果调用 d.eat() 方法代码依旧可以运行。虽然实例化的对象是Dog 子类，但是我们调用父类一样可以执行。同理，虽然调用了父类的 eat() 方法，但是由于 覆盖的原因直接执行子类的 eat() 方法。</p>
+<blockquote>
+<p>注：子类对象兼容父类对象，但是父类对象不能转化为子类。在上述例子中 </p>
+<p>Dog dog &#x3D; new Animal() 是错误的。</p>
+<p>警告：在覆盖一个方法的时候，子类的方法不能低于超类方法的可见性。特别是，如果超类方法是 public，子类的方法一定要声明为 public。经常会发生这种错误：在声明子类方法时候，遗漏了 public 修饰符。此时编辑器将会把它理解为试图提供更严格的访问权限。</p>
+</blockquote>
+<h2 id="Super-关键字"><a href="#Super-关键字" class="headerlink" title="Super 关键字"></a>Super 关键字</h2><p>通过 <strong>this</strong> 关键字，可以操作实例内的变量或者方法。</p>
+<p>如果想通过子类操作父类也有这样一个关键字：super。（super 只发生在子类中）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.youkeda.model;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Animal</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> age;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">eat</span><span class="params">()</span>&#123;</span><br><span class="line">       System.out.println(<span class="string">&quot;动物要饿肚子啦&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getName</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> name;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setName</span><span class="params">(String name)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">getAge</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> age;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setAge</span><span class="params">(<span class="type">int</span> age)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.age = age;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Dog</span> <span class="keyword">extends</span> <span class="title class_">Animal</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">eat</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="comment">// 调用父类的方法</span></span><br><span class="line">        <span class="built_in">super</span>.eat();</span><br><span class="line">        System.out.println(<span class="string">&quot;狗狗喜欢吃肉骨头&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>子类运用 super 调用父类一般会发生在父类有一些通用的逻辑可以被执行。</p>
+<h2 id="子类的构造函数"><a href="#子类的构造函数" class="headerlink" title="子类的构造函数"></a>子类的构造函数</h2><p>当父类只有一个参数的构造函数的时候，子类也必须要具备这个构造函数，或者调用 super 方法来实现新的构造函数。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">CustomFile</span>&#123;</span><br><span class="line">  <span class="comment">// 存储文件路径的变量</span></span><br><span class="line">  <span class="keyword">public</span> String filePath;</span><br><span class="line">  <span class="comment">// 存储文件后缀变量，通过后缀来区分文件类型</span></span><br><span class="line">  <span class="keyword">public</span> String ext;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 声明一个构造函数，接受文件路径</span></span><br><span class="line">  <span class="keyword">public</span> <span class="title function_">CustomFile</span><span class="params">(String filePath)</span>&#123;</span><br><span class="line">    <span class="comment">//给类变量 filePath 赋值</span></span><br><span class="line">    <span class="comment">//this代表的是当前类的实例</span></span><br><span class="line">    <span class="built_in">this</span>.filePath = filePath;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * 获取文件名称</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="keyword">public</span> String <span class="title function_">getName</span><span class="params">()</span>&#123;</span><br><span class="line">    <span class="comment">// 比如文件路径是 /Users/mac/work/face.png</span></span><br><span class="line">    <span class="comment">// 把文件路径分隔成数组（分隔符是 / ）</span></span><br><span class="line">    <span class="comment">// 数组的最后一位就是文件名</span></span><br><span class="line">    String[] paths = filePath.split(<span class="string">&quot;/&quot;</span>);</span><br><span class="line">    <span class="comment">// 数组的最后一位需要减1，因为数组是从索引0开始的。</span></span><br><span class="line">    <span class="keyword">return</span>  paths[paths.length-<span class="number">1</span>];</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>比如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">JavaFile</span> <span class="keyword">extends</span> <span class="title class_">CustomFile</span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 声明一个构造函数</span></span><br><span class="line">  <span class="keyword">public</span> <span class="title function_">JavaFile</span><span class="params">(String filePath)</span>&#123;</span><br><span class="line">    <span class="built_in">super</span>(filePath);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果父类有定义构造函数而子类未定义构造函数：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[kind=ERROR, line=1, message=无法将类 CustomFile中的构造器 CustomFile应用到给定类型;</span><br><span class="line">  需要: java.lang.String</span><br><span class="line">  找到: 没有参数</span><br><span class="line">  原因: 实际参数列表和形式参数列表长度不同]</span><br></pre></td></tr></table></figure>
+
+<p>如果需要定义新的构造函数：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">JavaFile</span> <span class="keyword">extends</span> <span class="title class_">CustomFile</span>&#123;</span><br><span class="line">  <span class="keyword">private</span> String packageName;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 声明一个构造函数</span></span><br><span class="line">  <span class="keyword">public</span> <span class="title function_">JavaFile</span><span class="params">(String filePath,String packageName)</span>&#123;</span><br><span class="line">    <span class="built_in">super</span>(filePath);</span><br><span class="line">    <span class="built_in">this</span>.packageName = packageName;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">public</span> String <span class="title function_">getPackageName</span><span class="params">()</span>&#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="built_in">this</span>.packageName;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>注意：构造函数里的 super 方法必须在第一行。</p>
+<p>如果不在第一行会与没有定义构造函数报错一样。</p>
+</blockquote>
+
+    
+  </article>
+
+  
+      
+    <div class="nexmoe-post-copyright">
+        <strong>本文作者：</strong>Fraser·Porter·Bridges·&#39;iDzforjh&#39;·Bu<br>
+        <strong>本文链接：</strong><a href="https://idzforjh.github.io/2020/09/25/Inheritance/" title="https:&#x2F;&#x2F;idzforjh.github.io&#x2F;2020&#x2F;09&#x2F;25&#x2F;Inheritance&#x2F;" target="_blank" rel="noopener">https:&#x2F;&#x2F;idzforjh.github.io&#x2F;2020&#x2F;09&#x2F;25&#x2F;Inheritance&#x2F;</a><br>
+        
+            <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
+
+        
+    </div>
+
+
+  
+  
+  <div class="nexmoe-post-meta nexmoe-rainbow">
+   
+    
+        <a class="nexmoefont icon-tag-fill -none-link" href="https://idzforjh.github.io/tags/Think-of-Java/" rel="tag">Think of Java</a>
+    
+</div>
+  
+  
+    <script async src="https://idzforjh.github.io/js/copy-codeblock.js?v=1687142913154"></script>
+  
+
+  
+      <div class="nexmoe-post-footer">
+          请在你的配置文件中设置 slotComment
+
+      </div>
+  
+</div>
+</div>
+        <div class="nexmoe-post-right">
+              <div class="nexmoe-fixed">
+                  <div class="nexmoe-tool"> 
+                    
+                      
+                        
+                          
+                          
+                              <button class="mdui-fab catalog" style="overflow:unset;">
+                                  <i class="nexmoefont icon-i-catalog"></i>
+                                  <div class="nexmoe-toc">
+                                      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Inheritance"><span class="toc-number">1.</span> <span class="toc-text">Inheritance</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%A7%E6%89%BF%E8%AF%AD%E6%B3%95"><span class="toc-number">1.1.</span> <span class="toc-text">继承语法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#UML-%E7%BB%A7%E6%89%BF"><span class="toc-number">1.2.</span> <span class="toc-text">UML 继承</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B9%E6%B3%95%E8%A6%86%E7%9B%96"><span class="toc-number">1.3.</span> <span class="toc-text">方法覆盖</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Super-%E5%85%B3%E9%94%AE%E5%AD%97"><span class="toc-number">1.4.</span> <span class="toc-text">Super 关键字</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%90%E7%B1%BB%E7%9A%84%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0"><span class="toc-number">1.5.</span> <span class="toc-text">子类的构造函数</span></a></li></ol></li></ol>
+                                  </div>
+                              </button>
+                          
+                          
+                      
+                    
+                      <a href="#nexmoe-content" class="toc-link" aria-label="Back To Top" title="top"><button class="mdui-fab mdui-ripple"><i class="nexmoefont icon-caret-top"></i></button></a>
+                  </div>
+              </div>
+            </div>
+    </div>
+    <div id="nexmoe-search-space">
+	<div class="search-container">
+		<div class="search-header">
+			<div class="search-input-container">
+				<input
+					class="search-input"
+					type="text"
+					placeholder="搜索"
+					oninput="sinput();"
+				/>
+			</div>
+			<a class="search-close" onclick="sclose();">×</a>
+		</div>
+		<div class="search-body"></div>
+	</div>
+</div>
+
+    
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2058306854838448" crossorigin="anonymous"></script>
+
+</body>
+
+</html>

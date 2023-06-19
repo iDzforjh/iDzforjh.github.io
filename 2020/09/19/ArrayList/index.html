@@ -4,35 +4,36 @@
 
 <head>
     
-    <title>About - Fraser Porter Bridges</title>
+    <title>ArrayList - Fraser Porter Bridges</title>
     <meta charset="UTF-8">
     <meta name="keywords" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
     
     <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/iDzforjh/Resource@2.0/images/TCTD2.PNG" type="image/png" />
-    <meta name="description" content="关于你好，陌生人。 很高兴能与你在这个互联网的小小角落里相识，亦或是重逢。  我JIT, 2018, Network engineering Undergraduate student. 不善于沟通，轻微的社交困难。（当然也很乐于分享自己的所见所闻。） 学习方向 Research interests：华为路由交换、协议分析、密码学、深度学习、Java全栈。 熟悉语言：Java Web, Pytho">
-<meta property="og:type" content="website">
-<meta property="og:title" content="About">
-<meta property="og:url" content="https://idzforjh.github.io/about.html">
+    <meta name="description" content="数组容器 奇怪奇怪真奇怪，奇怪奇怪不奇怪。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ArrayList">
+<meta property="og:url" content="https://idzforjh.github.io/2020/09/19/ArrayList/index.html">
 <meta property="og:site_name" content="Fraser Porter Bridges">
-<meta property="og:description" content="关于你好，陌生人。 很高兴能与你在这个互联网的小小角落里相识，亦或是重逢。  我JIT, 2018, Network engineering Undergraduate student. 不善于沟通，轻微的社交困难。（当然也很乐于分享自己的所见所闻。） 学习方向 Research interests：华为路由交换、协议分析、密码学、深度学习、Java全栈。 熟悉语言：Java Web, Pytho">
+<meta property="og:description" content="数组容器 奇怪奇怪真奇怪，奇怪奇怪不奇怪。">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-09-16T16:00:01.000Z">
-<meta property="article:modified_time" content="2023-06-19T01:19:50.111Z">
+<meta property="article:published_time" content="2020-09-19T11:09:06.000Z">
+<meta property="article:modified_time" content="2020-09-25T12:53:50.000Z">
 <meta property="article:author" content="Fraser·Porter·Bridges·&#39;iDzforjh&#39;·Bu">
+<meta property="article:tag" content="Think of Java">
 <meta name="twitter:card" content="summary">
     
 <link rel="stylesheet" href="https://idzforjh.github.io/lib/fancybox/fancybox.css">
 <link rel="stylesheet" href="https://idzforjh.github.io/lib/mdui_043tiny/mdui.css">
 
 
-    <link rel="stylesheet" href="https://idzforjh.github.io/lib/iconfont/iconfont.css?v=1687142913189">
+    <link rel="stylesheet" href="https://idzforjh.github.io/lib/iconfont/iconfont.css?v=1687142913324">
     
-    <link rel="stylesheet" href="https://idzforjh.github.io/css/style.css?v=1687142913189">
+    <link rel="stylesheet" href="https://idzforjh.github.io/css/style.css?v=1687142913324">
 
     
         
-            <link rel="stylesheet" href="https://idzforjh.github.io/custom.css?v=1687142913190">
+            <link rel="stylesheet" href="https://idzforjh.github.io/custom.css?v=1687142913324">
         
     
 
@@ -41,7 +42,7 @@
 <script src="https://idzforjh.github.io/lib/fancybox/fancybox.umd.js" async></script>
 
 
-    <script async src="https://idzforjh.github.io/js/app.js?v=1687142913190"></script>
+    <script async src="https://idzforjh.github.io/js/app.js?v=1687142913324"></script>
     
      
 
@@ -113,7 +114,7 @@
             </div>
         </a>
         
-        <a class="nexmoe-list-item mdui-list-item mdui-ripple true" href="https://idzforjh.github.io/about.html" title="关于博主">
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="https://idzforjh.github.io/about.html" title="关于博主">
             <i class="mdui-list-item-icon nexmoefont icon-info-circle"></i>
             <div class="mdui-list-item-content">
                 关于博主
@@ -387,14 +388,14 @@
   <article>
     
         <div class="nexmoe-post-cover absolute" style="padding-top: 56.25%;"> 
-            <img src="https://cdn.jsdelivr.net/gh/iDzforjh/Resource@3.0/other/p0.jpg" alt="About" loading="lazy">
-            <h1>About</h1>
+            <img src="https://cdn.jsdelivr.net/gh/iDzforjh/Resource@3.0/images/java.jpg" alt="ArrayList" loading="lazy">
+            <h1>ArrayList</h1>
         </div>
     
     
     <div class="nexmoe-post-meta">
     <div class="nexmoe-rainbow">
-        <a class="nexmoefont icon-calendar-fill">2020年09月17日</a>
+        <a class="nexmoefont icon-calendar-fill">2020年09月19日</a>
         
         
     </div>
@@ -405,20 +406,39 @@
     
 </div>
 
-    <h2 id="关于"><a href="#关于" class="headerlink" title="关于"></a>关于</h2><p>你好，陌生人。 很高兴能与你在这个互联网的小小角落里相识，亦或是重逢。 </p>
-<h2 id="我"><a href="#我" class="headerlink" title="我"></a>我</h2><p>JIT, 2018, Network engineering Undergraduate student.</p>
-<p>不善于沟通，轻微的社交困难。（当然也很乐于分享自己的所见所闻。）</p>
-<p>学习方向 Research interests：华为路由交换、协议分析、密码学、深度学习、Java全栈。</p>
-<p>熟悉语言：Java Web, Python, C&#x2F;C++, C#</p>
-<p>深度学习框架 Deeplearning Framework: Pytorch, Mxnet</p>
-<p>爱好 Hobby: 指弹(Fingerstyle guitar)、竞技反曲(Archery)</p>
-<h2 id="已发表论文"><a href="#已发表论文" class="headerlink" title="已发表论文"></a>已发表论文</h2><p><a target="_blank" rel="noopener" href="https://ieeexplore.ieee.org/document/9498867">https://ieeexplore.ieee.org/document/9498867</a></p>
-<h2 id="未来"><a href="#未来" class="headerlink" title="未来"></a>未来</h2><ul>
-<li>TOEFL：110</li>
-<li>GRE：320+3</li>
-<li>GPA：3.0</li>
-<li>以第一作者身份发表SCI</li>
+    <p>数组容器</p>
+<p>奇怪奇怪真奇怪，奇怪奇怪不奇怪。</p>
+<span id="more"></span>
+
+<h1 id="ArrayList-语法"><a href="#ArrayList-语法" class="headerlink" title="ArrayList 语法"></a>ArrayList 语法</h1><p>ArratList 本质是一个动态数组对象，可以方便存储集合对象，一般来说我们会把同一个类型的数据存储在这个ArrayList里。我们如果要使用ArrayList就必须要先实例化，实例化的语法都是一样的，使用 <code>new</code> 关键字，并且需要指定对象类型。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 这里的 Java 对象类型可以是任意的对象类型</span></span><br><span class="line"><span class="comment">// 比如 String、Integer、House 等</span></span><br><span class="line"><span class="comment">// 这里的 &lt;&gt; 是 Java 泛型的规范,记住这个语法就行了</span></span><br><span class="line">ArrayList&lt;Java 对象类型&gt; list = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>ArrayList 对象是存放在<code>java.util</code>包下的，所以如果需要使用它就需要先进行 <code>import</code> 引入<br><code>import java.util.ArrayList;</code></p>
+</blockquote>
+<h2 id="add-方法"><a href="#add-方法" class="headerlink" title="add 方法"></a>add 方法</h2><p>完成ArrayList实例化之后，就可以使用ArrayList的<code>add</code>方法来进行数据的添加。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ArrayListTest1</span>&#123;</span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span>&#123;</span><br><span class="line">    <span class="comment">// 创建一个 ArrayList 存储字符串集合</span></span><br><span class="line">    ArrayList&lt;String&gt; strs = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">    <span class="comment">// 添加数据到 ArrayList 实例里</span></span><br><span class="line">    strs.add(<span class="string">&quot;张三&quot;</span>);</span><br><span class="line">    strs.add(<span class="string">&quot;李四&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="get-x2F-size-方法"><a href="#get-x2F-size-方法" class="headerlink" title="get&#x2F;size 方法"></a>get&#x2F;size 方法</h2><p>ArrayList 是动态数组也就具备如下特点：</p>
+<ul>
+<li>可以获取长度 <code>size()</code></li>
+<li>可以根据索引获取具体的值 <code>get(索引)</code>，ArrayList的索引是从0开始的。</li>
 </ul>
+<p><strong>索引  index:</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 返回指定字符在字符串中第一次出现处的索引，如果此字符串中没有这样的字符，则返回 -1。</span></span><br><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">indexOf</span><span class="params">(<span class="type">int</span> ch)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//返回从 fromIndex 位置开始查找指定字符在字符串中第一次出现处的索引，如果此字符串中没有这样的字符，则返回 -1。</span></span><br><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">indexOf</span><span class="params">(<span class="type">int</span> ch, <span class="type">int</span> fromIndex)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//返回指定字符在字符串中第一次出现处的索引，如果此字符串中没有这样的字符，则返回 -1。</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">indexOf</span><span class="params">(String str)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 返回从 fromIndex 位置开始查找指定字符在字符串中第一次出现处的索引，如果此字符串中没有这样的字符，则返回 -1</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">indexOf</span><span class="params">(String str, <span class="type">int</span> fromIndex)</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ArrayListTest1</span>&#123;</span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span>&#123;</span><br><span class="line">    <span class="comment">// 创建一个 ArrayList 存储字符串集合</span></span><br><span class="line">    ArrayList&lt;String&gt; strs = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">    <span class="comment">// 添加数据到 ArrayList 实例里</span></span><br><span class="line">    strs.add(<span class="string">&quot;张三&quot;</span>);</span><br><span class="line">    strs.add(<span class="string">&quot;李四&quot;</span>);</span><br><span class="line">    <span class="comment">// 获取集合的长度</span></span><br><span class="line">    <span class="type">int</span> <span class="variable">size</span> <span class="operator">=</span> strs.size();</span><br><span class="line">    <span class="comment">// 使用 for 循环迭代每一条记录</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;size;i++)&#123;</span><br><span class="line">       <span class="comment">// 根据索引获取值，值的类型是 String</span></span><br><span class="line">       <span class="type">String</span> <span class="variable">str</span> <span class="operator">=</span> strs.get(i);</span><br><span class="line">       System.out.println(str);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="for-语句迭代集合"><a href="#for-语句迭代集合" class="headerlink" title="for 语句迭代集合"></a>for 语句迭代集合</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ArrayListTest1</span>&#123;</span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span>&#123;</span><br><span class="line">    <span class="comment">// 创建一个 ArrayList 存储字符串集合</span></span><br><span class="line">    ArrayList&lt;String&gt; strs = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">    <span class="comment">// 添加数据到 ArrayList 实例里</span></span><br><span class="line">    strs.add(<span class="string">&quot;张三&quot;</span>);</span><br><span class="line">    strs.add(<span class="string">&quot;李四&quot;</span>);</span><br><span class="line">    <span class="comment">// 获取集合的长度</span></span><br><span class="line">    <span class="type">int</span> <span class="variable">size</span> <span class="operator">=</span> strs.size();</span><br><span class="line">    <span class="comment">// 使用 for 循环迭代每一条记录</span></span><br><span class="line">    <span class="keyword">for</span>(String str : strs)&#123;</span><br><span class="line">       System.out.println(str);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>语法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>( 集合变量的类型 变量名称 : 集合变量 )</span><br></pre></td></tr></table></figure>
+
+<p>在上述例子中使用的集合是字符串集合，所以使用的是</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(String str : strs)&#123; &#125;</span><br></pre></td></tr></table></figure>
+
+<p>与之前的 <code>for i</code> 语句的区别在于，遍历集合的时候能否得到 <code>i</code> 值。</p>
 
     
   </article>
@@ -427,7 +447,7 @@
       
     <div class="nexmoe-post-copyright">
         <strong>本文作者：</strong>Fraser·Porter·Bridges·&#39;iDzforjh&#39;·Bu<br>
-        <strong>本文链接：</strong><a href="https://idzforjh.github.io/about.html" title="https:&#x2F;&#x2F;idzforjh.github.io&#x2F;about.html" target="_blank" rel="noopener">https:&#x2F;&#x2F;idzforjh.github.io&#x2F;about.html</a><br>
+        <strong>本文链接：</strong><a href="https://idzforjh.github.io/2020/09/19/ArrayList/" title="https:&#x2F;&#x2F;idzforjh.github.io&#x2F;2020&#x2F;09&#x2F;19&#x2F;ArrayList&#x2F;" target="_blank" rel="noopener">https:&#x2F;&#x2F;idzforjh.github.io&#x2F;2020&#x2F;09&#x2F;19&#x2F;ArrayList&#x2F;</a><br>
         
             <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
 
@@ -440,10 +460,12 @@
   <div class="nexmoe-post-meta nexmoe-rainbow">
    
     
+        <a class="nexmoefont icon-tag-fill -none-link" href="https://idzforjh.github.io/tags/Think-of-Java/" rel="tag">Think of Java</a>
+    
 </div>
   
   
-    <script async src="https://idzforjh.github.io/js/copy-codeblock.js?v=1687142913134"></script>
+    <script async src="https://idzforjh.github.io/js/copy-codeblock.js?v=1687142913155"></script>
   
 
   
@@ -465,7 +487,7 @@
                               <button class="mdui-fab catalog" style="overflow:unset;">
                                   <i class="nexmoefont icon-i-catalog"></i>
                                   <div class="nexmoe-toc">
-                                      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B3%E4%BA%8E"><span class="toc-number">1.</span> <span class="toc-text">关于</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%88%91"><span class="toc-number">2.</span> <span class="toc-text">我</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B7%B2%E5%8F%91%E8%A1%A8%E8%AE%BA%E6%96%87"><span class="toc-number">3.</span> <span class="toc-text">已发表论文</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%AA%E6%9D%A5"><span class="toc-number">4.</span> <span class="toc-text">未来</span></a></li></ol>
+                                      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#ArrayList-%E8%AF%AD%E6%B3%95"><span class="toc-number">1.</span> <span class="toc-text">ArrayList 语法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#add-%E6%96%B9%E6%B3%95"><span class="toc-number">1.1.</span> <span class="toc-text">add 方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#get-x2F-size-%E6%96%B9%E6%B3%95"><span class="toc-number">1.2.</span> <span class="toc-text">get&#x2F;size 方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#for-%E8%AF%AD%E5%8F%A5%E8%BF%AD%E4%BB%A3%E9%9B%86%E5%90%88"><span class="toc-number">1.3.</span> <span class="toc-text">for 语句迭代集合</span></a></li></ol></li></ol>
                                   </div>
                               </button>
                           
