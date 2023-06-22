@@ -26,13 +26,13 @@
 <link rel="stylesheet" href="https://idzforjh.github.io/lib/mdui_043tiny/mdui.css">
 
 
-    <link rel="stylesheet" href="https://idzforjh.github.io/lib/iconfont/iconfont.css?v=1687321844432">
+    <link rel="stylesheet" href="https://idzforjh.github.io/lib/iconfont/iconfont.css?v=1687420161555">
     
-    <link rel="stylesheet" href="https://idzforjh.github.io/css/style.css?v=1687321844432">
+    <link rel="stylesheet" href="https://idzforjh.github.io/css/style.css?v=1687420161555">
 
     
         
-            <link rel="stylesheet" href="https://idzforjh.github.io/custom.css?v=1687321844432">
+            <link rel="stylesheet" href="https://idzforjh.github.io/custom.css?v=1687420161555">
         
     
 
@@ -41,7 +41,7 @@
 <script src="https://idzforjh.github.io/lib/fancybox/fancybox.umd.js" async></script>
 
 
-    <script async src="https://idzforjh.github.io/js/app.js?v=1687321844432"></script>
+    <script async src="https://idzforjh.github.io/js/app.js?v=1687420161556"></script>
     
      
 
@@ -474,12 +474,27 @@
 </div>
   
   
-    <script async src="https://idzforjh.github.io/js/copy-codeblock.js?v=1687321844365"></script>
+    <script async src="https://idzforjh.github.io/js/copy-codeblock.js?v=1687420161508"></script>
   
 
   
       <div class="nexmoe-post-footer">
-          [object Object]
+          <div id="container"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+  var gitment = new Gitment({
+    id: location.href, // 可选。默认为 location.href
+    owner: iDzforjh, // 可以是你的GitHub用户名，也可以是github id
+    repo: BlogComment,
+    oauth: {
+      client_id: 6c973088d50f1672529e	,
+      client_secret: bc61b99550feec2054d49edc3945c1deac56231c ,
+    },
+  })
+  gitment.render('container')
+</script>
+
       </div>
   
 </div>
