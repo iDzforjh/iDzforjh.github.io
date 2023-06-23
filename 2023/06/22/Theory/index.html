@@ -4,33 +4,36 @@
 
 <head>
     
-    <title>标签：Algorithm - Fraser Porter Bridges</title>
+    <title>Automata Theory - Fraser Porter Bridges</title>
     <meta charset="UTF-8">
     <meta name="keywords" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
     
     <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/iDzforjh/Resource@2.0/images/TCTD2.PNG" type="image/png" />
-    <meta name="description" content="JIT, 2018, Network engineering Undergraduate student">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Fraser Porter Bridges">
-<meta property="og:url" content="https://idzforjh.github.io/tags/Algorithm/index.html">
+    <meta name="description" content="Introduction of Automata Theory摘要：计算机的基本能力和限制是什么？  [可计算性理论] 哪些问题，可以通过计算解决？   [计算复杂性理论] 解决可计算的问题，究竟需要多少资源？">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Automata Theory">
+<meta property="og:url" content="https://idzforjh.github.io/2023/06/22/Theory/index.html">
 <meta property="og:site_name" content="Fraser Porter Bridges">
-<meta property="og:description" content="JIT, 2018, Network engineering Undergraduate student">
+<meta property="og:description" content="Introduction of Automata Theory摘要：计算机的基本能力和限制是什么？  [可计算性理论] 哪些问题，可以通过计算解决？   [计算复杂性理论] 解决可计算的问题，究竟需要多少资源？">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-06-22T15:16:18.000Z">
+<meta property="article:modified_time" content="2023-06-23T04:40:08.388Z">
 <meta property="article:author" content="Fraser·Porter·Bridges·&#39;iDzforjh&#39;·Bu">
+<meta property="article:tag" content="Algorithms">
 <meta name="twitter:card" content="summary">
     
 <link rel="stylesheet" href="https://idzforjh.github.io/lib/fancybox/fancybox.css">
 <link rel="stylesheet" href="https://idzforjh.github.io/lib/mdui_043tiny/mdui.css">
 
 
-    <link rel="stylesheet" href="https://idzforjh.github.io/lib/iconfont/iconfont.css?v=1687495223253">
+    <link rel="stylesheet" href="https://idzforjh.github.io/lib/iconfont/iconfont.css?v=1687495223051">
     
-    <link rel="stylesheet" href="https://idzforjh.github.io/css/style.css?v=1687495223253">
+    <link rel="stylesheet" href="https://idzforjh.github.io/css/style.css?v=1687495223051">
 
     
         
-            <link rel="stylesheet" href="https://idzforjh.github.io/custom.css?v=1687495223253">
+            <link rel="stylesheet" href="https://idzforjh.github.io/custom.css?v=1687495223051">
         
     
 
@@ -39,7 +42,7 @@
 <script src="https://idzforjh.github.io/lib/fancybox/fancybox.umd.js" async></script>
 
 
-    <script async src="https://idzforjh.github.io/js/app.js?v=1687495223253"></script>
+    <script async src="https://idzforjh.github.io/js/app.js?v=1687495223051"></script>
     
      
 
@@ -412,21 +415,18 @@
     </div>
     <div id="nexmoe-content">
         <div class="nexmoe-primary">
-    <section class="nexmoe-posts">
-    
     <div class="nexmoe-post">
-        <a href="https://idzforjh.github.io/2021/01/09/algorithm/">
-            
-                <div class="nexmoe-post-cover mdui-ripple absolute" style="padding-top: 56.25%;"> 
-                    <img src="https://cdn.jsdelivr.net/gh/iDzforjh/Resource@20/images/Queen%60s%20gambit3.png" alt="Algorithm" loading="lazy">
-                    <h1>Algorithm</h1>
-                </div>
-            
-        </a>
-
-        <div class="nexmoe-post-meta">
+  <article>
+    
+        <div class="nexmoe-post-cover absolute" style="padding-top: 56.25%;"> 
+            <img src="https://cdn.jsdelivr.net/gh/iDzforjh/Blog_pic@V1.2/image/book.jpeg" alt="Automata Theory" loading="lazy">
+            <h1>Automata Theory</h1>
+        </div>
+    
+    
+    <div class="nexmoe-post-meta">
     <div class="nexmoe-rainbow">
-        <a class="nexmoefont icon-calendar-fill">2021年01月09日</a>
+        <a class="nexmoefont icon-calendar-fill">2023年06月22日</a>
         
         
     </div>
@@ -437,13 +437,124 @@
     
 </div>
 
-        <article>
-            
-        </article>
+    <h1 id="Introduction-of-Automata-Theory"><a href="#Introduction-of-Automata-Theory" class="headerlink" title="Introduction of Automata Theory"></a>Introduction of Automata Theory</h1><h2 id="摘要："><a href="#摘要：" class="headerlink" title="摘要："></a>摘要：</h2><p>计算机的基本能力和限制是什么？</p>
+<ul>
+<li>[可计算性理论] 哪些问题，可以通过计算解决？  </li>
+<li>[计算复杂性理论] 解决可计算的问题，究竟需要多少资源？</li>
+</ul>
+<span id="more"></span>
+
+<h2 id="目录-Table-of-Contents："><a href="#目录-Table-of-Contents：" class="headerlink" title="目录 Table of Contents："></a>目录 Table of Contents：</h2><ol>
+<li>自动机：方法与体验</li>
+<li>有穷自动机</li>
+<li>正则表达式与正则语言</li>
+<li>正则语言的性质</li>
+<li>上下文无关文法及上下文无关语言</li>
+<li>下推自动机</li>
+<li>上下文无关语言的性质</li>
+<li>图灵机导引</li>
+</ol>
+<h2 id="1-Automata-The-Methods-and-the-Madness"><a href="#1-Automata-The-Methods-and-the-Madness" class="headerlink" title="1. Automata: The Methods and the Madness"></a>1. Automata: The Methods and the Madness</h2><p><strong>基本概念：</strong></p>
+<ol>
+<li><p>字母表 Alphabet：符号（字符）的非空又穷集</p>
+<blockquote>
+<p>[P.29] An <code>alphabet</code> is a nite, nonempty set of symbols. Conventionally, we use the symbol ∑ for an alphabet.Common alphabets include:</p>
+<ol>
+<li><p>∑ &#x3D; {0,1}, the binary alphabet.</p>
+</li>
+<li><p>∑ &#x3D; {a,b,…,z}, the set of all lower-case letters.</p>
+</li>
+<li><p>The set of all ASCII characters, or the set of all printable ASCII characters.</p>
+</li>
+</ol>
+</blockquote>
+</li>
+<li><p>字符串 Strings：由某字母表中符号组成的又穷序列</p>
+<blockquote>
+<p>[P.29] A <code>string</code> (or sometimes word) is a nite sequence of symbols chosen from some alphabet. For example, 01101 is a string from the binary alphabet ∑ &#x3D; {0,1}. The string 111 is another string chosen from this alphabet.</p>
+</blockquote>
+</li>
+<li><p>空串 ø </p>
+<blockquote>
+<p>[P.29] The <code>empty string</code> is the string with zero occurrences of symbols. This string, denoted , is a string that may be chosen from any alphabet whatsoever. This string, denoted ε, is a string that may be chosen from any alphabet whatsoever.</p>
+</blockquote>
+</li>
+<li><p>字符串的<code>长度</code>：字符串中符号所占位置的个数,记做 |w|。若字母表为 $∑$ ，可以 递归定义 为：<br>$$<br>|w| &#x3D;<br>\begin{cases}<br>0&amp; {w&#x3D;ε}\<br>|x|+1&amp; {w&#x3D;xa}<br>\end{cases}<br>$$<br>其中 $a$ $\in$ $∑$, $w$ 和 $x$ 是 ∑ 中字符组成的字符串。</p>
+<blockquote>
+<p>It is often useful to classify strings by their <code>length</code>, that is, the number of positions for symbols in the string. For instance, 01101 has length 5. It is common to say that the length of a string is “the number of symbols” in the string; this statement is colloquially accepted but not strictly correct. Thus, there are only two symbols, 0 and 1 in the string 01101, but there are five<code>positions</code>for symbols, and its length is 5. However, you should generally expect that “the number of symbols” can be used when “number of positions” is meant.</p>
+</blockquote>
+</li>
+<li><p>字符串 $x$ 和 $y$ 的连接：将首尾相连得到新字符串的运算，记做 $x·y$ 或 $xy$ 同样可递归定义为<br>$$<br>x · y &#x3D; \begin{cases}<br>x&amp; {y&#x3D;ε}\<br>(x·z)a&amp; {y&#x3D;za}<br>\end{cases}<br>$$<br>其中 $a$ $\in$ $∑$, $x,y,z$ 都是字符串。</p>
+<blockquote>
+<p>Let $x$ and $y$ be strings. Then $xy$ denotes the <code>concatenation</code> of $x$ and $y$, that is, the string formed by making a copy of $x$ and following it by a copy of $y$. More precisely, if $x$ is the string composed of $i$ symbols $x &#x3D; a_1a_2…a_i$ and $y$ is the string composed of $j$ symbols $y&#x3D;b_1b_2…b_j$ , then $xy$ is the string of length $i+j:xy&#x3D;a_1a_2…a_ib_1b_2…b_j$.</p>
+</blockquote>
+</li>
+<li><p>字符串 $x$ 的 $n$ 次幂($n&gt;&#x3D; 0$), 递归定义为<br>$$<br>x^n &#x3D; \begin{cases}<br>ε &amp; {n&#x3D;0}\<br>x^{n-1}x &amp;{n&gt;0}<br>\end{cases}<br>$$<br>例如，若 $\sum &#x3D; {a, b}$ ，那么<br>$$<br>(ba)^2<br>&#x3D; {ba}^1ba<br>&#x3D; {ba}^0baba<br>&#x3D; εbaba<br>&#x3D; baba \<br>ba^2 &#x3D; ba^1a<br>&#x3D;ba^0aa<br>&#x3D;bεaa<br>&#x3D;baa<br>$$</p>
+</li>
+<li><p>集合 $A$ 和 $B$ 的连接，记为 $A·B$ 或 $AB$, 定义为<br>$$<br>A·B &#x3D; {w|w&#x3D;x·y,\quad x\in A \quad and \quad  y \in B}<br>$$</p>
+</li>
+<li><p>集合 $A$ 的 $n$ 次幂($n&gt;&#x3D;0$), 递归定义为<br>$$<br>A^n &#x3D; \begin{cases}<br>{ε} &amp; n&#x3D;0 \<br>A^{n-1}A &amp; n &gt;&#x3D; 1<br>\end{cases}<br>$$</p>
+<blockquote>
+<p>If $∑$ is an alphabet, we can express the set of all strings of a certain length from that alphabet by using an exponential notation. We define $∑^k$ to be the set of strings of length $k$, each of whose symbols is in $∑$.</p>
+</blockquote>
+<p>若，$∑$ 为字母表，则 $∑^n$ 为 $∑$ 上长度为 $n$ 的字符串集合。如果 $∑ &#x3D; {0,1}$ ，有<br>$$<br>∑^0 &#x3D; {ε},\quad ∑^1&#x3D;{0,1},\quad  ∑^2&#x3D;{00,01,10,11}, \<br>∑^3 &#x3D; {000,001,010,011,100,101,110,111}<br>$$</p>
+<blockquote>
+<p>and so on. Note that there is a slight confusion between $∑$ and $∑^1$. The former is an alphabet; its members 0 and 1 are symbols. The latter is a set of strings; its members are the strings 0 and 1, each of which is of length 1. We shall not try to use separate notations for the two sets, relying on context to make it clear whether ${0,1}$ or similar sets are alphabets or sets of strings.</p>
+</blockquote>
+</li>
+<li><p>克林闭包(Kleene Closure)：<br>$$<br>∑^* &#x3D; \bigcup_{i&#x3D;0}^{\infty}∑^i \quad &#x3D; ∑^0\cup∑^1\cup∑^2\cup…∑^{\infty}<br>$$</p>
+</li>
+</ol>
+<h3 id="1-1"><a href="#1-1" class="headerlink" title="1.1"></a>1.1</h3><h2 id="2-Finite-Automata"><a href="#2-Finite-Automata" class="headerlink" title="2. Finite Automata"></a>2. Finite Automata</h2><h2 id="3-Regular-Expressions-and-Languages"><a href="#3-Regular-Expressions-and-Languages" class="headerlink" title="3. Regular Expressions and Languages"></a>3. Regular Expressions and Languages</h2><h2 id="4-Properties-of-Regular-Languages"><a href="#4-Properties-of-Regular-Languages" class="headerlink" title="4. Properties of Regular Languages"></a>4. Properties of Regular Languages</h2><h2 id="5-Context-Free-Grammars-and-Languages"><a href="#5-Context-Free-Grammars-and-Languages" class="headerlink" title="5. Context-Free Grammars and Languages"></a>5. Context-Free Grammars and Languages</h2><h2 id="6-Pushdown-Automata"><a href="#6-Pushdown-Automata" class="headerlink" title="6. Pushdown Automata"></a>6. Pushdown Automata</h2><h2 id="7-Properties-of-Context-Free-Languages"><a href="#7-Properties-of-Context-Free-Languages" class="headerlink" title="7. Properties of Context-Free Languages"></a>7. Properties of Context-Free Languages</h2><h2 id="8-Introduction-to-Turing-Machines"><a href="#8-Introduction-to-Turing-Machines" class="headerlink" title="8. Introduction to Turing Machines"></a>8. Introduction to Turing Machines</h2>
+    
+  </article>
+
+  
+      
+    <div class="nexmoe-post-copyright">
+        <strong>本文作者：</strong>Fraser·Porter·Bridges·&#39;iDzforjh&#39;·Bu<br>
+        <strong>本文链接：</strong><a href="https://idzforjh.github.io/2023/06/22/Theory/" title="https:&#x2F;&#x2F;idzforjh.github.io&#x2F;2023&#x2F;06&#x2F;22&#x2F;Theory&#x2F;" target="_blank" rel="noopener">https:&#x2F;&#x2F;idzforjh.github.io&#x2F;2023&#x2F;06&#x2F;22&#x2F;Theory&#x2F;</a><br>
+        
+            <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
+
+        
     </div>
 
-</section>
 
+  
+  
+  <div class="nexmoe-post-meta nexmoe-rainbow">
+   
+    
+        <a class="nexmoefont icon-tag-fill -none-link" href="https://idzforjh.github.io/tags/Algorithms/" rel="tag">Algorithms</a>
+    
+</div>
+  
+  
+    <script async src="https://idzforjh.github.io/js/copy-codeblock.js?v=1687495222985"></script>
+  
+
+  
+      <div class="nexmoe-post-footer">
+          <div id="container"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+  var gitment = new Gitment({
+    id: location.href, // 可选。默认为 location.href
+    owner: iDzforjh, // 可以是你的GitHub用户名，也可以是github id
+    repo: BlogComment,
+    oauth: {
+      client_id: 6c973088d50f1672529e	,
+      client_secret: bc61b99550feec2054d49edc3945c1deac56231c ,
+    },
+  })
+  gitment.render('container')
+</script>
+
+      </div>
+  
+</div>
 </div>
         <div class="nexmoe-post-right">
               <div class="nexmoe-fixed">
@@ -452,6 +563,13 @@
                       
                         
                           
+                          
+                              <button class="mdui-fab catalog" style="overflow:unset;">
+                                  <i class="nexmoefont icon-i-catalog"></i>
+                                  <div class="nexmoe-toc">
+                                      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Introduction-of-Automata-Theory"><span class="toc-number">1.</span> <span class="toc-text">Introduction of Automata Theory</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%91%98%E8%A6%81%EF%BC%9A"><span class="toc-number">1.1.</span> <span class="toc-text">摘要：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9B%AE%E5%BD%95-Table-of-Contents%EF%BC%9A"><span class="toc-number">1.2.</span> <span class="toc-text">目录 Table of Contents：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Automata-The-Methods-and-the-Madness"><span class="toc-number">1.3.</span> <span class="toc-text">1. Automata: The Methods and the Madness</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1"><span class="toc-number">1.3.1.</span> <span class="toc-text">1.1</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Finite-Automata"><span class="toc-number">1.4.</span> <span class="toc-text">2. Finite Automata</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-Regular-Expressions-and-Languages"><span class="toc-number">1.5.</span> <span class="toc-text">3. Regular Expressions and Languages</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-Properties-of-Regular-Languages"><span class="toc-number">1.6.</span> <span class="toc-text">4. Properties of Regular Languages</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-Context-Free-Grammars-and-Languages"><span class="toc-number">1.7.</span> <span class="toc-text">5. Context-Free Grammars and Languages</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-Pushdown-Automata"><span class="toc-number">1.8.</span> <span class="toc-text">6. Pushdown Automata</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-Properties-of-Context-Free-Languages"><span class="toc-number">1.9.</span> <span class="toc-text">7. Properties of Context-Free Languages</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-Introduction-to-Turing-Machines"><span class="toc-number">1.10.</span> <span class="toc-text">8. Introduction to Turing Machines</span></a></li></ol></li></ol>
+                                  </div>
+                              </button>
                           
                           
                       
