@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+
+<head>
+    
+    <title>BurpSuite - Fraser Porter Bridges</title>
+    <meta charset="UTF-8">
+    <meta name="keywords" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+    
+    <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/iDzforjh/Resource@2.0/images/TCTD2.PNG" type="image/png" />
+    <meta name="description" content="Burp Suit(A.K.A Burp) 一款Web安全领域跨平台工具，基于Java开发。集成了Proxy、Spider、Scanner、Intruder、Repeater等常见Web漏洞模块。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="BurpSuite">
+<meta property="og:url" content="https://idzforjh.github.io/2020/11/07/BurpSuite/index.html">
+<meta property="og:site_name" content="Fraser Porter Bridges">
+<meta property="og:description" content="Burp Suit(A.K.A Burp) 一款Web安全领域跨平台工具，基于Java开发。集成了Proxy、Spider、Scanner、Intruder、Repeater等常见Web漏洞模块。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://idzforjh.github.io/Library/Application%20Support/typora-user-images/image-20201108103724889.png">
+<meta property="og:image" content="https://idzforjh.github.io/Library/Application%20Support/typora-user-images/image-20201108104019082.png">
+<meta property="og:image" content="https://idzforjh.github.io/Library/Application%20Support/typora-user-images/image-20201108104152828.png">
+<meta property="og:image" content="https://idzforjh.github.io/Library/Application%20Support/typora-user-images/image-20201108104425129.png">
+<meta property="og:image" content="https://idzforjh.github.io/Library/Application%20Support/typora-user-images/image-20201108110348984.png">
+<meta property="og:image" content="https://idzforjh.github.io/Library/Application%20Support/typora-user-images/image-20201108110828603.png">
+<meta property="og:image" content="https://idzforjh.github.io/Library/Application%20Support/typora-user-images/image-20201108111042051.png">
+<meta property="og:image" content="https://idzforjh.github.io/Library/Application%20Support/typora-user-images/image-20201108111347124.png">
+<meta property="og:image" content="https://idzforjh.github.io/Library/Application%20Support/typora-user-images/image-20201108111527665.png">
+<meta property="og:image" content="https://idzforjh.github.io/Library/Application%20Support/typora-user-images/image-20201108142559348.png">
+<meta property="og:image" content="https://idzforjh.github.io/Library/Application%20Support/typora-user-images/image-20201108143515256.png">
+<meta property="og:image" content="https://idzforjh.github.io/Library/Application%20Support/typora-user-images/image-20201108151540426.png">
+<meta property="article:published_time" content="2020-11-08T02:15:14.000Z">
+<meta property="article:modified_time" content="2020-11-08T07:19:19.000Z">
+<meta property="article:author" content="Fraser·Porter·Bridges·&#39;iDzforjh&#39;·Bu">
+<meta property="article:tag" content="Kali">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://idzforjh.github.io/Library/Application%20Support/typora-user-images/image-20201108103724889.png">
+    
+<link rel="stylesheet" href="https://idzforjh.github.io/lib/fancybox/fancybox.css">
+<link rel="stylesheet" href="https://idzforjh.github.io/lib/mdui_043tiny/mdui.css">
+
+
+    <link rel="stylesheet" href="https://idzforjh.github.io/lib/iconfont/iconfont.css?v=1728762145748">
+    
+    <link rel="stylesheet" href="https://idzforjh.github.io/css/style.css?v=1728762145748">
+
+    
+        
+            <link rel="stylesheet" href="https://idzforjh.github.io/custom.css?v=1728762145748">
+        
+    
+
+    
+<script src="https://idzforjh.github.io/lib/mdui_043tiny/mdui.js" async></script>
+<script src="https://idzforjh.github.io/lib/fancybox/fancybox.umd.js" async></script>
+
+
+    <script async src="https://idzforjh.github.io/js/app.js?v=1728762145748"></script>
+    
+     
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-4D4ZJ9G024"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag("js", new Date());
+
+  gtag("config", "G-4D4ZJ9G024");
+</script>
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="mdui-drawer-body-left">
+    <div id="nexmoe-background">
+        <div class="nexmoe-bg" 
+            style="background-image: url(https://cdn.jsdelivr.net/gh/iDzforjh/Blog_pic@V1.1/image/background.jpg)"
+        ></div>
+        <div class="mdui-appbar mdui-shadow-0">
+            <div class="mdui-toolbar">
+                <a mdui-drawer="{target: '#drawer', swipe: true}" title="menu" class="mdui-btn mdui-btn-icon mdui-ripple"><i class="mdui-icon nexmoefont icon-menu"></i></a>
+                <div class="mdui-toolbar-spacer"></div>
+                <!--<a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>-->
+                <a href="https://idzforjh.github.io/" title="Fraser·Porter·Bridges·&#39;iDzforjh&#39;·Bu" class="mdui-btn mdui-btn-icon"><img src="https://cdn.jsdelivr.net/gh/iDzforjh/Resource@2.0/images/avatar.jpg" alt="Fraser·Porter·Bridges·&#39;iDzforjh&#39;·Bu"></a>
+            </div>
+        </div>
+    </div>
+    <div id="nexmoe-header">
+        <div class="nexmoe-drawer mdui-drawer" id="drawer">
+    <div class="nexmoe-avatar mdui-ripple">
+        <a href="https://idzforjh.github.io/" title="Fraser·Porter·Bridges·&#39;iDzforjh&#39;·Bu">
+            <img src="https://cdn.jsdelivr.net/gh/iDzforjh/Resource@2.0/images/avatar.jpg" alt="Fraser·Porter·Bridges·&#39;iDzforjh&#39;·Bu" alt="Fraser·Porter·Bridges·&#39;iDzforjh&#39;·Bu">
+        </a>
+    </div>
+    <div class="nexmoe-count">
+        <div><span>文章</span>31</div>
+        <div><span>标签</span>14</div>
+        <div><span>分类</span>9</div>
+    </div>
+    <div class="nexmoe-list mdui-list" mdui-collapse="{accordion: true}">
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="https://idzforjh.github.io/" title="回到首页">
+            <i class="mdui-list-item-icon nexmoefont icon-home"></i>
+            <div class="mdui-list-item-content">
+                回到首页
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="https://idzforjh.github.io/archive.html" title="文章归档">
+            <i class="mdui-list-item-icon nexmoefont icon-container"></i>
+            <div class="mdui-list-item-content">
+                文章归档
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="https://idzforjh.github.io/friend.html" title="我的朋友">
+            <i class="mdui-list-item-icon nexmoefont icon-unorderedlist"></i>
+            <div class="mdui-list-item-content">
+                我的朋友
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="https://idzforjh.github.io/donate.html" title="给我赞助">
+            <i class="mdui-list-item-icon nexmoefont icon-coffee"></i>
+            <div class="mdui-list-item-content">
+                给我赞助
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="https://idzforjh.github.io/about.html" title="关于博主">
+            <i class="mdui-list-item-icon nexmoefont icon-info-circle"></i>
+            <div class="mdui-list-item-content">
+                关于博主
+            </div>
+        </a>
+        
+    </div>
+    <aside id="nexmoe-sidebar">
+        
+            
+            <div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-search">
+         
+            <form id="search_form" action_e="https://cn.bing.com/search?q=site:nexmoe.com" onsubmit="return search();">
+                <label><input id="search_value" name="q" type="search" placeholder="搜索"></label>
+            </form>
+         
+    </div>
+</div>
+
+
+
+
+        
+            
+            <div class="nexmoe-widget-wrap">
+	<div class="nexmoe-widget nexmoe-social">
+		<a
+			class="mdui-ripple"
+			href="https://idzforjh.github.io/null"
+			target="_blank"
+			mdui-tooltip="{content: 'QQ群(暂无)'}"
+			style="
+				color: rgb(249, 174, 8);
+				background-color: rgba(249, 174, 8, .1);
+			"
+		>
+			<i
+				class="nexmoefont icon-QQ"
+			></i> </a
+		><a
+			class="mdui-ripple"
+			href="https://space.bilibili.com/21645780?spm_id_from=333.1007.0.0"
+			target="_blank"
+			mdui-tooltip="{content: '哔哩哔哩'}"
+			style="
+				color: rgb(231, 106, 141);
+				background-color: rgba(231, 106, 141, .1);
+			"
+		>
+			<i
+				class="nexmoefont icon-bilibili"
+			></i> </a
+		><a
+			class="mdui-ripple"
+			href="https://github.com/iDzforjh"
+			target="_blank"
+			mdui-tooltip="{content: 'GitHub'}"
+			style="
+				color: rgb(25, 23, 23);
+				background-color: rgba(25, 23, 23, .1);
+			"
+		>
+			<i
+				class="nexmoefont icon-github"
+			></i> </a
+		><a
+			class="mdui-ripple"
+			href="https://www.zhihu.com/people/han-shuang-86-13"
+			target="_blank"
+			mdui-tooltip="{content: '知乎'}"
+			style="
+				color: rgb(30, 136, 229);
+				background-color: rgba(30, 136, 229, .1);
+			"
+		>
+			<i
+				class="nexmoefont icon-zhihu"
+			></i> </a
+		><a
+			class="mdui-ripple"
+			href="https://idzforjh.github.io/null"
+			target="_blank"
+			mdui-tooltip="{content: 'Twitter(暂无)'}"
+			style="
+				color: rgb(59, 151, 239);
+				background-color: rgba(59, 151, 239, .1);
+			"
+		>
+			<i
+				class="nexmoefont icon-twitter"
+			></i> </a
+		><a
+			class="mdui-ripple"
+			href="https://idzforjh.github.io/null"
+			target="_blank"
+			mdui-tooltip="{content: 'RSS'}"
+			style="
+				color: rgb(247, 132, 34);
+				background-color: rgba(247, 132, 34, .1);
+			"
+		>
+			<i
+				class="nexmoefont icon-rss"
+			></i> </a
+		>
+	</div>
+</div>
+
+        
+            
+            
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">文章分类</h3>
+    <div class="nexmoe-widget">
+
+      <ul class="category-list">
+
+        
+
+
+        
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="https://idzforjh.github.io/categories/Algorithms/">Algorithms</a>
+          <span class="category-list-count">3</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="https://idzforjh.github.io/categories/CSYE6200/">CSYE6200</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="https://idzforjh.github.io/categories/Java-Web/">Java Web</a>
+          <span class="category-list-count">3</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="https://idzforjh.github.io/categories/Java基础/">Java基础</a>
+          <span class="category-list-count">2</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="https://idzforjh.github.io/categories/Linux/">Linux</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="https://idzforjh.github.io/categories/Machine-Learning/">Machine Learning</a>
+          <span class="category-list-count">2</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="https://idzforjh.github.io/categories/Network-engerning/">Network engerning</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="https://idzforjh.github.io/categories/Queen-s-Gambit/">Queen`s Gambit</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="https://idzforjh.github.io/categories/Web-of-CTF/">Web of CTF</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+      </ul>
+
+    </div>
+  </div>
+
+
+        
+            
+            
+  <div class="nexmoe-widget-wrap">
+    <div id="randomtagcloud" class="nexmoe-widget tagcloud nexmoe-rainbow">
+      <a href="https://idzforjh.github.io/tags/Ad-hoc/" style="font-size: 10px;">Ad-hoc</a> <a href="https://idzforjh.github.io/tags/Algorithm/" style="font-size: 10px;">Algorithm</a> <a href="https://idzforjh.github.io/tags/Algorithms/" style="font-size: 16.67px;">Algorithms</a> <a href="https://idzforjh.github.io/tags/CSS-3/" style="font-size: 10px;">CSS 3</a> <a href="https://idzforjh.github.io/tags/HTML/" style="font-size: 10px;">HTML</a> <a href="https://idzforjh.github.io/tags/HTML-5/" style="font-size: 10px;">HTML 5</a> <a href="https://idzforjh.github.io/tags/Java/" style="font-size: 10px;">Java</a> <a href="https://idzforjh.github.io/tags/Kali/" style="font-size: 10px;">Kali</a> <a href="https://idzforjh.github.io/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="https://idzforjh.github.io/tags/Machine-Learning/" style="font-size: 10px;">Machine Learning</a> <a href="https://idzforjh.github.io/tags/OpenCV/" style="font-size: 13.33px;">OpenCV</a> <a href="https://idzforjh.github.io/tags/Screeps/" style="font-size: 10px;">Screeps</a> <a href="https://idzforjh.github.io/tags/Think-of-Java/" style="font-size: 20px;">Think of Java</a> <a href="https://idzforjh.github.io/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 10px;">前端</a>
+    </div>
+    
+      <script>
+        var maxTagcloud = parseInt(17);
+        var tags_length = parseInt(14);
+        var tags_arr = [];
+        for(var i = 0; i < tags_length; i++){
+          tags_arr.push(i);
+        }
+        tags_arr.sort(function (l, r) {
+          return Math.random() > 0.5 ? -1 : 1;
+        });
+        tags_arr = tags_arr.slice(0, maxTagcloud < tags_length ? tags_length - maxTagcloud : 0);
+        for(var tag_i = 0; tag_i < tags_arr.length; tag_i++){
+          document.getElementById("randomtagcloud").children[tags_arr[tag_i]].style.display = 'none';
+        }
+      </script>
+    
+  </div>
+
+        
+            
+            
+            
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">文章归档</h3>
+    <div class="nexmoe-widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="https://idzforjh.github.io/archives/2024/">2024</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="https://idzforjh.github.io/archives/2023/">2023</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="https://idzforjh.github.io/archives/2021/">2021</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="https://idzforjh.github.io/archives/2020/">2020</a><span class="archive-list-count">20</span></li></ul>
+    </div>
+  </div>
+
+
+
+        
+            
+            
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">最新文章</h3>
+    <div class="nexmoe-widget">
+      <ul>
+        
+          <li>
+            <a href="https://idzforjh.github.io/2024/10/12/Housekeeping/">Housekeeping</a>
+          </li>
+        
+          <li>
+            <a href="https://idzforjh.github.io/2023/12/10/AlgoNote/">AlgoNote</a>
+          </li>
+        
+          <li>
+            <a href="https://idzforjh.github.io/2023/06/22/Introduction%20of%20Automata%20Theory/">Automata Theory</a>
+          </li>
+        
+          <li>
+            <a href="https://idzforjh.github.io/2023/06/21/Convolution%20Model%20Step/">Convolutional Neural Networks Step by Step</a>
+          </li>
+        
+          <li>
+            <a href="https://idzforjh.github.io/2021/08/10/%E9%80%92%E5%BD%92%E4%B8%8E%E6%A0%88/">递归与栈</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+        
+            
+            <div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-link">
+		<ul>
+        
+            <li>
+                <a href="" target="_blank" >
+                    <img src="" alt=""></img>
+                    <p></p>
+                </a>
+            </li>
+        
+		</ul>
+    </div>
+</div>
+<style>
+.nexmoe-widget-wrap .nexmoe-link ul li a {
+    text-align : center;
+}
+.nexmoe-widget-wrap .nexmoe-link ul li a img {
+    max-width : 100%;
+}
+.nexmoe-widget-wrap .nexmoe-link ul li a p {
+    margin: 10px 0;
+}
+</style>
+
+        
+    </aside>
+    <div class="nexmoe-copyright">
+        &copy; 2024 Fraser·Porter·Bridges·&#39;iDzforjh&#39;·Bu
+        Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+        & <a href="https://github.com/theme-nexmoe/hexo-theme-nexmoe" target="_blank">Nexmoe</a>
+        <br><a target="_blank" href="</a>
+<br><a target="_blank" href="">
+<img src="" width="150px"></a>
+
+    </div>
+</div><!-- .nexmoe-drawer -->
+    </div>
+    <div id="nexmoe-content">
+        <div class="nexmoe-primary">
+    <div class="nexmoe-post">
+  <article>
+    
+        <div class="nexmoe-post-cover absolute" style="padding-top: 56.25%;"> 
+            <img src="https://cdn.jsdelivr.net/gh/iDzforjh/Resource@20/images/Queen%60s%20ganbit.png" alt="BurpSuite" loading="lazy">
+            <h1>BurpSuite</h1>
+        </div>
+    
+    
+    <div class="nexmoe-post-meta">
+    <div class="nexmoe-rainbow">
+        <a class="nexmoefont icon-calendar-fill">2020年11月07日</a>
+        
+            <a class="nexmoefont icon-appstore-fill -link" href="https://idzforjh.github.io/categories/Web-of-CTF/">Web of CTF</a>
+        
+        
+    </div>
+    
+    
+    
+    
+    
+</div>
+
+    <p>Burp Suit(A.K.A Burp) 一款Web安全领域跨平台工具，基于Java开发。集成了Proxy、Spider、Scanner、Intruder、Repeater等常见Web漏洞模块。</p>
+<span id="more"></span>
+
+<h1 id="工具安装以及使用"><a href="#工具安装以及使用" class="headerlink" title="工具安装以及使用"></a>工具安装以及使用</h1><h2 id="Burp-Suite"><a href="#Burp-Suite" class="headerlink" title="Burp Suite"></a>Burp Suite</h2><h3 id="1-Proxy-代理模块"><a href="#1-Proxy-代理模块" class="headerlink" title="1. Proxy 代理模块"></a>1. Proxy 代理模块</h3><p>代理模块是 Brup 的核心模块，也是我们使用最多的一个模块，主要用来截获并修改浏览器、手机App 等客户端的HTTP&#x2F;HTTPS包。</p>
+<p>首先设置代理端口。 在Burp Suit软件中依次选择Proxuy - Options - Proxy Listeners - Add 增加代理</p>
+<p> <img onerror="imgOnError(this);" data-fancybox="gallery" src="https://idzforjh.github.io/Library/Application%20Support/typora-user-images/image-20201108103724889.png" alt="image-20201108103724889" data-caption="image-20201108103724889" loading="lazy"></p>
+<p>在Bind to port栏中填写侦听端口，这里以8080为例。</p>
+<p>如果是在本机使用则将 Bind to address 设置为 Loopback only;</p>
+<p>如果是在局域网内的设备使用代理则选择 All interfaces。</p>
+<p><img onerror="imgOnError(this);" data-fancybox="gallery" src="https://idzforjh.github.io/Library/Application%20Support/typora-user-images/image-20201108104019082.png" alt="image-20201108104019082" data-caption="image-20201108104019082" loading="lazy"></p>
+<p>随后在火狐浏览器中添加代理插件</p>
+<p><img onerror="imgOnError(this);" data-fancybox="gallery" src="https://idzforjh.github.io/Library/Application%20Support/typora-user-images/image-20201108104152828.png" alt="image-20201108104152828" data-caption="image-20201108104152828" loading="lazy"></p>
+<p>随后选择添加代理（右上角插件小狐狸，单击），代理IP为上一步所选的 地址，端口为8080。设置完成后就可以通过Burp代理来抓取IE数据包了。</p>
+<p><img onerror="imgOnError(this);" data-fancybox="gallery" src="https://idzforjh.github.io/Library/Application%20Support/typora-user-images/image-20201108104425129.png" alt="image-20201108104425129" data-caption="image-20201108104425129" loading="lazy"></p>
+<p>接下来，在Proxy - Intercept 选项卡下设置 Intercept is on，如果设置 off，则不会拦截数据包，而是会在 HTTP history 中记录该请求。</p>
+<p><img onerror="imgOnError(this);" data-fancybox="gallery" src="https://idzforjh.github.io/Library/Application%20Support/typora-user-images/image-20201108110348984.png" alt="image-20201108110348984" data-caption="image-20201108110348984" loading="lazy"></p>
+<p>随后打开插件，选择Burpsuit_test。然后访问一个网址，但此时浏览器会报错，原因是缺少安全证书。</p>
+<p><img onerror="imgOnError(this);" data-fancybox="gallery" src="https://idzforjh.github.io/Library/Application%20Support/typora-user-images/image-20201108110828603.png" alt="image-20201108110828603" data-caption="image-20201108110828603" loading="lazy"></p>
+<p>通过浏览器访问 <a target="_blank" rel="noopener" href="https://burp/">https://burp</a> 选择右上角的 CA Certificate 下载证书。</p>
+<p><img onerror="imgOnError(this);" data-fancybox="gallery" src="https://idzforjh.github.io/Library/Application%20Support/typora-user-images/image-20201108111042051.png" alt="image-20201108111042051" data-caption="image-20201108111042051" loading="lazy"></p>
+<p>在火狐浏览器中选择 首选项-隐私与安全-证书 中查看证书选项。</p>
+<p><img onerror="imgOnError(this);" data-fancybox="gallery" src="https://idzforjh.github.io/Library/Application%20Support/typora-user-images/image-20201108111347124.png" alt="image-20201108111347124" data-caption="image-20201108111347124" loading="lazy"></p>
+<p>点击导入证书，选择我们刚刚下载好的证书导入到浏览器中，并选择全部信任。</p>
+<p><img onerror="imgOnError(this);" data-fancybox="gallery" src="https://idzforjh.github.io/Library/Application%20Support/typora-user-images/image-20201108111527665.png" alt="image-20201108111527665" data-caption="image-20201108111527665" loading="lazy"></p>
+<h3 id="2-Repeater-重放模块"><a href="#2-Repeater-重放模块" class="headerlink" title="2.Repeater 重放模块"></a>2.Repeater 重放模块</h3><p>在需要手工测试HTTP Header中的 Cookie 或 User-Agent 等浏览器不可修改的字段是否存在注入点，以及需要发现复杂的POST数据包是否存在SSRF时，一般需要用到Repeater模块。</p>
+<p>在Proxy模块中单击右键（Ctrl+r）就可以将截获的数据发送到Repeater模块。</p>
+<p><img onerror="imgOnError(this);" data-fancybox="gallery" src="https://idzforjh.github.io/Library/Application%20Support/typora-user-images/image-20201108142559348.png" alt="image-20201108142559348" data-caption="image-20201108142559348" loading="lazy"></p>
+<p>在模块中，左侧为要发送的原始HTTP请求，右侧为服务器返回的数据。在左侧可以方便的修改将要发送的数据包，用于手工测试 Payload 等操作，修改完成后点击Go按钮，即可在右侧收到服务器的响应</p>
+<p><img onerror="imgOnError(this);" data-fancybox="gallery" src="https://idzforjh.github.io/Library/Application%20Support/typora-user-images/image-20201108143515256.png" alt="image-20201108143515256" data-caption="image-20201108143515256" loading="lazy"></p>
+<p>Headers模块中可以方便、快捷地修改HTTP头部内容，有时会遇到检查IP的题目，此时可以添加X-Forwarded-Fro | X-Real-IP等HTTP头尝试绕过。</p>
+<p><img onerror="imgOnError(this);" data-fancybox="gallery" src="https://idzforjh.github.io/Library/Application%20Support/typora-user-images/image-20201108151540426.png" alt="image-20201108151540426" data-caption="image-20201108151540426" loading="lazy"></p>
+<h3 id="3-Intruder暴力破解模块"><a href="#3-Intruder暴力破解模块" class="headerlink" title="3.Intruder暴力破解模块"></a>3.Intruder暴力破解模块</h3>
+    
+  </article>
+
+  
+      
+    <div class="nexmoe-post-copyright">
+        <strong>本文作者：</strong>Fraser·Porter·Bridges·&#39;iDzforjh&#39;·Bu<br>
+        <strong>本文链接：</strong><a href="https://idzforjh.github.io/2020/11/07/BurpSuite/" title="https:&#x2F;&#x2F;idzforjh.github.io&#x2F;2020&#x2F;11&#x2F;07&#x2F;BurpSuite&#x2F;" target="_blank" rel="noopener">https:&#x2F;&#x2F;idzforjh.github.io&#x2F;2020&#x2F;11&#x2F;07&#x2F;BurpSuite&#x2F;</a><br>
+        
+            <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
+
+        
+    </div>
+
+
+  
+  
+  <div class="nexmoe-post-meta nexmoe-rainbow">
+   
+    
+        <a class="nexmoefont icon-tag-fill -none-link" href="https://idzforjh.github.io/tags/Kali/" rel="tag">Kali</a>
+    
+</div>
+  
+  
+    <script async src="https://idzforjh.github.io/js/copy-codeblock.js?v=1728762145680"></script>
+  
+
+  
+      <div class="nexmoe-post-footer">
+          <div id="container"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+  var gitment = new Gitment({
+    id: location.href, // 可选。默认为 location.href
+    owner: iDzforjh, // 可以是你的GitHub用户名，也可以是github id
+    repo: BlogComment,
+    oauth: {
+      client_id: 6c973088d50f1672529e	,
+      client_secret: bc61b99550feec2054d49edc3945c1deac56231c ,
+    },
+  })
+  gitment.render('container')
+</script>
+
+      </div>
+  
+</div>
+</div>
+        <div class="nexmoe-post-right">
+              <div class="nexmoe-fixed">
+                  <div class="nexmoe-tool"> 
+                    
+                      
+                        
+                          
+                          
+                              <button class="mdui-fab catalog" style="overflow:unset;">
+                                  <i class="nexmoefont icon-i-catalog"></i>
+                                  <div class="nexmoe-toc">
+                                      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E4%BD%BF%E7%94%A8"><span class="toc-number">1.</span> <span class="toc-text">工具安装以及使用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Burp-Suite"><span class="toc-number">1.1.</span> <span class="toc-text">Burp Suite</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-Proxy-%E4%BB%A3%E7%90%86%E6%A8%A1%E5%9D%97"><span class="toc-number">1.1.1.</span> <span class="toc-text">1. Proxy 代理模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-Repeater-%E9%87%8D%E6%94%BE%E6%A8%A1%E5%9D%97"><span class="toc-number">1.1.2.</span> <span class="toc-text">2.Repeater 重放模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-Intruder%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3%E6%A8%A1%E5%9D%97"><span class="toc-number">1.1.3.</span> <span class="toc-text">3.Intruder暴力破解模块</span></a></li></ol></li></ol></li></ol>
+                                  </div>
+                              </button>
+                          
+                          
+                      
+                    
+                      <a href="#nexmoe-content" class="toc-link" aria-label="Back To Top" title="top"><button class="mdui-fab mdui-ripple"><i class="nexmoefont icon-caret-top"></i></button></a>
+                  </div>
+              </div>
+            </div>
+    </div>
+    <div id="nexmoe-search-space">
+	<div class="search-container">
+		<div class="search-header">
+			<div class="search-input-container">
+				<input
+					class="search-input"
+					type="text"
+					placeholder="搜索"
+					oninput="sinput();"
+				/>
+			</div>
+			<a class="search-close" onclick="sclose();">×</a>
+		</div>
+		<div class="search-body"></div>
+	</div>
+</div>
+
+    
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2058306854838448" crossorigin="anonymous"></script>
+
+</body>
+
+</html>

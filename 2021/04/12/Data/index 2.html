@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+
+<head>
+    
+    <title>Data - Fraser Porter Bridges</title>
+    <meta charset="UTF-8">
+    <meta name="keywords" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+    
+    <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/iDzforjh/Resource@2.0/images/TCTD2.PNG" type="image/png" />
+    <meta name="description" content="科研日记概述此次实验是本人学术生涯中真正意义上的第一次实验，本markdown文档用于记录每一次的实验过程，以及解决方案和心得。源于张旭老师所提出的课题有关无线自组织网络（Ad-hoc network）中的AODV协议进行分析并改进项目，本项目由我（卜飏）作为科研实践主力，张旭老师以及其他通信相关专业同学提供理论技术支持。 目前项目暂定分为如下几步实行：  阅读论文，复现实验，基础知识积累">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Data">
+<meta property="og:url" content="https://idzforjh.github.io/2021/04/12/Data/index.html">
+<meta property="og:site_name" content="Fraser Porter Bridges">
+<meta property="og:description" content="科研日记概述此次实验是本人学术生涯中真正意义上的第一次实验，本markdown文档用于记录每一次的实验过程，以及解决方案和心得。源于张旭老师所提出的课题有关无线自组织网络（Ad-hoc network）中的AODV协议进行分析并改进项目，本项目由我（卜飏）作为科研实践主力，张旭老师以及其他通信相关专业同学提供理论技术支持。 目前项目暂定分为如下几步实行：  阅读论文，复现实验，基础知识积累">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://idzforjh.github.io/Library/Application%20Support/typora-user-images/image-20210416092857372.png">
+<meta property="article:published_time" content="2021-04-12T13:47:35.000Z">
+<meta property="article:modified_time" content="2023-06-19T13:56:15.200Z">
+<meta property="article:author" content="Fraser·Porter·Bridges·&#39;iDzforjh&#39;·Bu">
+<meta property="article:tag" content="Ad-hoc">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://idzforjh.github.io/Library/Application%20Support/typora-user-images/image-20210416092857372.png">
+    
+<link rel="stylesheet" href="https://idzforjh.github.io/lib/fancybox/fancybox.css">
+<link rel="stylesheet" href="https://idzforjh.github.io/lib/mdui_043tiny/mdui.css">
+
+
+    <link rel="stylesheet" href="https://idzforjh.github.io/lib/iconfont/iconfont.css?v=1687495223150">
+    
+    <link rel="stylesheet" href="https://idzforjh.github.io/css/style.css?v=1687495223150">
+
+    
+        
+            <link rel="stylesheet" href="https://idzforjh.github.io/custom.css?v=1687495223150">
+        
+    
+
+    
+<script src="https://idzforjh.github.io/lib/mdui_043tiny/mdui.js" async></script>
+<script src="https://idzforjh.github.io/lib/fancybox/fancybox.umd.js" async></script>
+
+
+    <script async src="https://idzforjh.github.io/js/app.js?v=1687495223150"></script>
+    
+     
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-4D4ZJ9G024"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag("js", new Date());
+
+  gtag("config", "G-4D4ZJ9G024");
+</script>
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="mdui-drawer-body-left">
+    <div id="nexmoe-background">
+        <div class="nexmoe-bg" 
+            style="background-image: url(https://cdn.jsdelivr.net/gh/iDzforjh/Blog_pic@V1.1/image/background.jpg)"
+        ></div>
+        <div class="mdui-appbar mdui-shadow-0">
+            <div class="mdui-toolbar">
+                <a mdui-drawer="{target: '#drawer', swipe: true}" title="menu" class="mdui-btn mdui-btn-icon mdui-ripple"><i class="mdui-icon nexmoefont icon-menu"></i></a>
+                <div class="mdui-toolbar-spacer"></div>
+                <!--<a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>-->
+                <a href="https://idzforjh.github.io/" title="Fraser·Porter·Bridges·&#39;iDzforjh&#39;·Bu" class="mdui-btn mdui-btn-icon"><img src="https://cdn.jsdelivr.net/gh/iDzforjh/Resource@2.0/images/avatar.jpg" alt="Fraser·Porter·Bridges·&#39;iDzforjh&#39;·Bu"></a>
+            </div>
+        </div>
+    </div>
+    <div id="nexmoe-header">
+        <div class="nexmoe-drawer mdui-drawer" id="drawer">
+    <div class="nexmoe-avatar mdui-ripple">
+        <a href="https://idzforjh.github.io/" title="Fraser·Porter·Bridges·&#39;iDzforjh&#39;·Bu">
+            <img src="https://cdn.jsdelivr.net/gh/iDzforjh/Resource@2.0/images/avatar.jpg" alt="Fraser·Porter·Bridges·&#39;iDzforjh&#39;·Bu" alt="Fraser·Porter·Bridges·&#39;iDzforjh&#39;·Bu">
+        </a>
+    </div>
+    <div class="nexmoe-count">
+        <div><span>文章</span>29</div>
+        <div><span>标签</span>13</div>
+        <div><span>分类</span>8</div>
+    </div>
+    <div class="nexmoe-list mdui-list" mdui-collapse="{accordion: true}">
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="https://idzforjh.github.io/" title="回到首页">
+            <i class="mdui-list-item-icon nexmoefont icon-home"></i>
+            <div class="mdui-list-item-content">
+                回到首页
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="https://idzforjh.github.io/archive.html" title="文章归档">
+            <i class="mdui-list-item-icon nexmoefont icon-container"></i>
+            <div class="mdui-list-item-content">
+                文章归档
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="https://idzforjh.github.io/friend.html" title="我的朋友">
+            <i class="mdui-list-item-icon nexmoefont icon-unorderedlist"></i>
+            <div class="mdui-list-item-content">
+                我的朋友
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="https://idzforjh.github.io/donate.html" title="给我赞助">
+            <i class="mdui-list-item-icon nexmoefont icon-coffee"></i>
+            <div class="mdui-list-item-content">
+                给我赞助
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="https://idzforjh.github.io/about.html" title="关于博主">
+            <i class="mdui-list-item-icon nexmoefont icon-info-circle"></i>
+            <div class="mdui-list-item-content">
+                关于博主
+            </div>
+        </a>
+        
+    </div>
+    <aside id="nexmoe-sidebar">
+        
+            
+            <div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-search">
+         
+            <form id="search_form" action_e="https://cn.bing.com/search?q=site:nexmoe.com" onsubmit="return search();">
+                <label><input id="search_value" name="q" type="search" placeholder="搜索"></label>
+            </form>
+         
+    </div>
+</div>
+
+
+
+
+        
+            
+            <div class="nexmoe-widget-wrap">
+	<div class="nexmoe-widget nexmoe-social">
+		<a
+			class="mdui-ripple"
+			href="https://idzforjh.github.io/null"
+			target="_blank"
+			mdui-tooltip="{content: 'QQ群(暂无)'}"
+			style="
+				color: rgb(249, 174, 8);
+				background-color: rgba(249, 174, 8, .1);
+			"
+		>
+			<i
+				class="nexmoefont icon-QQ"
+			></i> </a
+		><a
+			class="mdui-ripple"
+			href="https://space.bilibili.com/21645780?spm_id_from=333.1007.0.0"
+			target="_blank"
+			mdui-tooltip="{content: '哔哩哔哩'}"
+			style="
+				color: rgb(231, 106, 141);
+				background-color: rgba(231, 106, 141, .1);
+			"
+		>
+			<i
+				class="nexmoefont icon-bilibili"
+			></i> </a
+		><a
+			class="mdui-ripple"
+			href="https://github.com/iDzforjh"
+			target="_blank"
+			mdui-tooltip="{content: 'GitHub'}"
+			style="
+				color: rgb(25, 23, 23);
+				background-color: rgba(25, 23, 23, .1);
+			"
+		>
+			<i
+				class="nexmoefont icon-github"
+			></i> </a
+		><a
+			class="mdui-ripple"
+			href="https://www.zhihu.com/people/han-shuang-86-13"
+			target="_blank"
+			mdui-tooltip="{content: '知乎'}"
+			style="
+				color: rgb(30, 136, 229);
+				background-color: rgba(30, 136, 229, .1);
+			"
+		>
+			<i
+				class="nexmoefont icon-zhihu"
+			></i> </a
+		><a
+			class="mdui-ripple"
+			href="https://idzforjh.github.io/null"
+			target="_blank"
+			mdui-tooltip="{content: 'Twitter(暂无)'}"
+			style="
+				color: rgb(59, 151, 239);
+				background-color: rgba(59, 151, 239, .1);
+			"
+		>
+			<i
+				class="nexmoefont icon-twitter"
+			></i> </a
+		><a
+			class="mdui-ripple"
+			href="https://idzforjh.github.io/null"
+			target="_blank"
+			mdui-tooltip="{content: 'RSS'}"
+			style="
+				color: rgb(247, 132, 34);
+				background-color: rgba(247, 132, 34, .1);
+			"
+		>
+			<i
+				class="nexmoefont icon-rss"
+			></i> </a
+		>
+	</div>
+</div>
+
+        
+            
+            
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">文章分类</h3>
+    <div class="nexmoe-widget">
+
+      <ul class="category-list">
+
+        
+
+
+        
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="https://idzforjh.github.io/categories/Algorithms/">Algorithms</a>
+          <span class="category-list-count">3</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="https://idzforjh.github.io/categories/Java-Web/">Java Web</a>
+          <span class="category-list-count">3</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="https://idzforjh.github.io/categories/Java基础/">Java基础</a>
+          <span class="category-list-count">2</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="https://idzforjh.github.io/categories/Linux/">Linux</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="https://idzforjh.github.io/categories/Machine-Learning/">Machine Learning</a>
+          <span class="category-list-count">2</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="https://idzforjh.github.io/categories/Network-engerning/">Network engerning</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="https://idzforjh.github.io/categories/Queen-s-Gambit/">Queen`s Gambit</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="https://idzforjh.github.io/categories/Web-of-CTF/">Web of CTF</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+      </ul>
+
+    </div>
+  </div>
+
+
+        
+            
+            
+  <div class="nexmoe-widget-wrap">
+    <div id="randomtagcloud" class="nexmoe-widget tagcloud nexmoe-rainbow">
+      <a href="https://idzforjh.github.io/tags/Ad-hoc/" style="font-size: 10px;">Ad-hoc</a> <a href="https://idzforjh.github.io/tags/Algorithm/" style="font-size: 10px;">Algorithm</a> <a href="https://idzforjh.github.io/tags/Algorithms/" style="font-size: 16.67px;">Algorithms</a> <a href="https://idzforjh.github.io/tags/CSS-3/" style="font-size: 10px;">CSS 3</a> <a href="https://idzforjh.github.io/tags/HTML/" style="font-size: 10px;">HTML</a> <a href="https://idzforjh.github.io/tags/HTML-5/" style="font-size: 10px;">HTML 5</a> <a href="https://idzforjh.github.io/tags/Kali/" style="font-size: 10px;">Kali</a> <a href="https://idzforjh.github.io/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="https://idzforjh.github.io/tags/Machine-Learning/" style="font-size: 10px;">Machine Learning</a> <a href="https://idzforjh.github.io/tags/OpenCV/" style="font-size: 13.33px;">OpenCV</a> <a href="https://idzforjh.github.io/tags/Screeps/" style="font-size: 10px;">Screeps</a> <a href="https://idzforjh.github.io/tags/Think-of-Java/" style="font-size: 20px;">Think of Java</a> <a href="https://idzforjh.github.io/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 10px;">前端</a>
+    </div>
+    
+      <script>
+        var maxTagcloud = parseInt(17);
+        var tags_length = parseInt(13);
+        var tags_arr = [];
+        for(var i = 0; i < tags_length; i++){
+          tags_arr.push(i);
+        }
+        tags_arr.sort(function (l, r) {
+          return Math.random() > 0.5 ? -1 : 1;
+        });
+        tags_arr = tags_arr.slice(0, maxTagcloud < tags_length ? tags_length - maxTagcloud : 0);
+        for(var tag_i = 0; tag_i < tags_arr.length; tag_i++){
+          document.getElementById("randomtagcloud").children[tags_arr[tag_i]].style.display = 'none';
+        }
+      </script>
+    
+  </div>
+
+        
+            
+            
+            
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">文章归档</h3>
+    <div class="nexmoe-widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="https://idzforjh.github.io/archives/2023/">2023</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="https://idzforjh.github.io/archives/2021/">2021</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="https://idzforjh.github.io/archives/2020/">2020</a><span class="archive-list-count">20</span></li></ul>
+    </div>
+  </div>
+
+
+
+        
+            
+            
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">最新文章</h3>
+    <div class="nexmoe-widget">
+      <ul>
+        
+          <li>
+            <a href="https://idzforjh.github.io/2023/06/22/Theory/">Automata Theory</a>
+          </li>
+        
+          <li>
+            <a href="https://idzforjh.github.io/2023/06/21/Convolution%20Model%20Step/">Convolutional Neural Networks Step by Step</a>
+          </li>
+        
+          <li>
+            <a href="https://idzforjh.github.io/2021/08/11/%E9%80%92%E5%BD%92%E4%B8%8E%E6%A0%88/">递归与栈</a>
+          </li>
+        
+          <li>
+            <a href="https://idzforjh.github.io/2021/08/10/%E4%BA%8C%E5%8F%89%E6%A0%91/">二叉树</a>
+          </li>
+        
+          <li>
+            <a href="https://idzforjh.github.io/2021/08/05/%E7%BA%BF%E7%A8%8B%E6%B1%A0%E4%B8%8E%E4%BB%BB%E5%8A%A1%E9%98%9F%E5%88%97/">线程池与任务队列</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+        
+            
+            <div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-link">
+		<ul>
+        
+            <li>
+                <a href="" target="_blank" >
+                    <img src="" alt=""></img>
+                    <p></p>
+                </a>
+            </li>
+        
+		</ul>
+    </div>
+</div>
+<style>
+.nexmoe-widget-wrap .nexmoe-link ul li a {
+    text-align : center;
+}
+.nexmoe-widget-wrap .nexmoe-link ul li a img {
+    max-width : 100%;
+}
+.nexmoe-widget-wrap .nexmoe-link ul li a p {
+    margin: 10px 0;
+}
+</style>
+
+        
+    </aside>
+    <div class="nexmoe-copyright">
+        &copy; 2023 Fraser·Porter·Bridges·&#39;iDzforjh&#39;·Bu
+        Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+        & <a href="https://github.com/theme-nexmoe/hexo-theme-nexmoe" target="_blank">Nexmoe</a>
+        <br><a target="_blank" href="</a>
+<br><a target="_blank" href="">
+<img src="" width="150px"></a>
+
+    </div>
+</div><!-- .nexmoe-drawer -->
+    </div>
+    <div id="nexmoe-content">
+        <div class="nexmoe-primary">
+    <div class="nexmoe-post">
+  <article>
+    
+        <div class="nexmoe-post-cover absolute" style="padding-top: 56.25%;"> 
+            <img src="https://cdn.jsdelivr.net/gh/iDzforjh/Blog_pic@V1.1/image/code.png" alt="Data" loading="lazy">
+            <h1>Data</h1>
+        </div>
+    
+    
+    <div class="nexmoe-post-meta">
+    <div class="nexmoe-rainbow">
+        <a class="nexmoefont icon-calendar-fill">2021年04月12日</a>
+        
+            <a class="nexmoefont icon-appstore-fill -link" href="https://idzforjh.github.io/categories/Network-engerning/">Network engerning</a>
+        
+        
+    </div>
+    
+    
+    
+    
+    
+</div>
+
+    <span id="more"></span>
+
+<h1 id="科研日记"><a href="#科研日记" class="headerlink" title="科研日记"></a>科研日记</h1><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>此次实验是本人学术生涯中真正意义上的第一次实验，本markdown文档用于记录每一次的实验过程，以及解决方案和心得。源于张旭老师所提出的课题有关无线自组织网络（Ad-hoc network）中的AODV协议进行分析并改进项目，本项目由我（卜飏）作为科研实践主力，张旭老师以及其他通信相关专业同学提供理论技术支持。</p>
+<p>目前项目暂定分为如下几步实行：</p>
+<ul>
+<li><p>阅读论文，复现实验，基础知识积累</p>
+</li>
+<li><p>构建自己的模型，并对协议中部分参数进行修改并观察现象</p>
+</li>
+<li><p>确定结果，发表论文</p>
+<p>​																														——2021.4.12 修改</p>
+</li>
+</ul>
+<h2 id="NS2-仿真软件安装"><a href="#NS2-仿真软件安装" class="headerlink" title="NS2 仿真软件安装"></a>NS2 仿真软件安装</h2><p>啊，这个 主要是参照csdn论坛。我自己也是照着做的地址放在下面了：</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_43715228/article/details/85057295%EF%BC%88Ubuntu18.04.1">https://blog.csdn.net/qq_43715228/article/details/85057295（Ubuntu18.04.1</a> 64位 安装ns2.35全过程–水逆选手必看！！高版本Ubuntu必看！！）</p>
+<p>也是张旭老师推荐的，我的linux入门也是装这个玩意学会的，主要就是多敲就好。这个博客是使用的18.04.1不过我在写段话的时候已经是21年了ubuntu也不可避免的默认提供20.04版本了，所以还是要找，不过我准备送佛送到西直接把我的下载地址贴在下面吧。（希望这些不靠谱的连接都不会失效。互联网是个大海很多好东西都随着时间再也找不到了，唉…）</p>
+<p><a target="_blank" rel="noopener" href="https://releases.ubuntu.com/18.04/?_ga=2.244558597.1623985578.1617688314-1984527312.1617688314">https://releases.ubuntu.com/18.04/?_ga=2.244558597.1623985578.1617688314-1984527312.1617688314</a></p>
+<p>这个是官方的下载地址，慢的话走迅雷下吧，迅雷不会用 vmware 或者 vbox不会用我就要看不起你了，所以高傲的我不想再花口水教这些很基础的东西。</p>
+<p>em 经过我的亲生经历，20.04版本也能装ns2 但是需要换清华源，才能安装老版本的gcc（5.4最低）但是帖子里是4.8 但是 我觉得问题不大，但是但是但是（套娃开始）我在最终安装完毕后有出现 sudo su 切换成管理员模式后找不到 ns 命令的情况，还有各种奇怪的运行错误，但是我又不好判断是不是人为的，事实上直到我后来开始采集数据ns以及相关tcl文件都是用的很熟练的情况下依旧会出现人为问题。而且截止到写这段话（2020.4.12）之前我都没法解决，只能删掉重新开始但是扯远了别害怕，我的学弟们有提过一个方案就是安装老版本的 ubuntu 好像是12 版本的？还是14来着的… 但是我个人是很摈弃这个做法的，因为就缺少了很多去亲身解决linux问题的过程，这个在大三老丁开设linux课程的时候很不利（想想别人花了1个多小时还没搞定你只要半个小时，而且还有妹子来问你怎么办，嘿嘿嘿）。大概就是这样吧，慢慢来。</p>
+<h2 id="NS2-小工具说明"><a href="#NS2-小工具说明" class="headerlink" title="NS2 小工具说明"></a>NS2 小工具说明</h2><p>NS2仿真实验——多媒体和无线网络通信（柯志亨）,详细使用说明可参考。</p>
+<h3 id="cbrgen"><a href="#cbrgen" class="headerlink" title="cbrgen"></a>cbrgen</h3><p>软件目录位置：</p>
+<p>&#x2F;ns-allinone-2.35&#x2F;ns-2.35&#x2F;indep-utils&#x2F;cmu-scen-gen</p>
+<p>使用方法：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">usage: cbrgen.tcl [-type cbr|tcp] [-nn nodes] [-seed seed] [-mc connections] [-rate rate]</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="setdesk"><a href="#setdesk" class="headerlink" title="setdesk"></a>setdesk</h3><p>软件目录位置：</p>
+<p>&#x2F;ns-allinone-2.35&#x2F;ns-2.35&#x2F;indep-utils&#x2F;cmu-scen-gen&#x2F;setdest</p>
+<p>使用方法：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">usage:  ./setdest	-v &lt;1&gt; -n &lt;nodes&gt; -p &lt;pause time&gt; -M &lt;max speed&gt; -t &lt;simulation time&gt; -x &lt;max X&gt; -y &lt;max Y&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="代码说明"><a href="#代码说明" class="headerlink" title="代码说明"></a>代码说明</h2><p>关于这点我必须要好好说说了，以前天天看笑话（第一年：这个程序怎么执行？第二年：这个函数是干嘛的？第三年：这是我写的代码？）。没想到有一天自己遇到了，重拾一年前的项目看着熟悉又陌生的代码整个人都要没了，又不好意思跟老师说（我的骄傲不允许低头！当然 问了也挺尴尬的…）。总之在此留下代码注释，这个模块应该会做很多次修改但是就不一定会在这里写了，因为要做版本控制嘛，每次更新都附上日期以及修改内容就好了一切以最终版本为参考。</p>
+<h3 id="adhoc-tcl"><a href="#adhoc-tcl" class="headerlink" title="adhoc.tcl"></a>adhoc.tcl</h3><p>好的，这个就是模拟仿真需要用到的主要tcl脚本文件了，使用方法如下：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Usage: 		ns adhoc.tcl  Routing_Protocol Traffic_Pattern Scene_Pattern</span><br><span class="line"></span><br><span class="line">Example:	ns adhoc.tcl DSDV cbr-50-10-8 scene-50-0-20</span><br></pre></td></tr></table></figure>
+
+<p>唉其实下面都已经写了但是 我还是要说一下 显得专业一点，需要&#x2F;可以修改的参数放在下面的引用里了。</p>
+<figure class="highlight tcl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> &#123;<span class="variable">$argc</span> !=<span class="number">3</span>&#125; &#123;</span><br><span class="line">       <span class="keyword">puts</span> <span class="string">&quot;Usage: ns adhoc.tcl  Routing_Protocol Traffic_Pattern Scene_Pattern&quot;</span></span><br><span class="line">       <span class="keyword">puts</span> <span class="string">&quot;Example:ns adhoc.tcl DSDV cbr-50-10-8 scene-50-0-20&quot;</span></span><br><span class="line">       <span class="keyword">exit</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">set</span> par1 [<span class="keyword">lindex</span> <span class="variable">$argv</span> <span class="number">0</span>]</span><br><span class="line"><span class="keyword">set</span> par2 [<span class="keyword">lindex</span> <span class="variable">$argv</span> <span class="number">1</span>]</span><br><span class="line"><span class="keyword">set</span> par3 [<span class="keyword">lindex</span> <span class="variable">$argv</span> <span class="number">2</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">set</span> val(<span class="keyword">chan</span>)           Channel/WirelessChannel    <span class="comment">;# channel type</span></span><br><span class="line"><span class="keyword">set</span> val(prop)           Propagation/TwoRayGround   <span class="comment">;# radio-propagationmodel</span></span><br><span class="line"><span class="keyword">set</span> val(netif)          Phy/WirelessPhy            <span class="comment">;# network interface type</span></span><br><span class="line"><span class="keyword">set</span> val(mac)            Mac/<span class="number">802</span>_11                 <span class="comment">;# MAC type</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> &#123; <span class="variable">$par1</span>==<span class="string">&quot;DSR&quot;</span>&#125; &#123;</span><br><span class="line">  <span class="keyword">set</span> val(ifq)           CMUPriQueue</span><br><span class="line">&#125; else &#123;</span><br><span class="line">  <span class="keyword">set</span> val(ifq)          Queue/DropTail/PriQueue    <span class="comment">;# interface queue type</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">set</span> val(ll)             LL                         <span class="comment">;# link layer type</span></span><br><span class="line"><span class="keyword">set</span> val(ant)            Antenna/OmniAntenna        <span class="comment">;# antenna model</span></span><br><span class="line"><span class="keyword">set</span> val(ifqlen)         <span class="number">50</span>                         <span class="comment">;# max packet in ifq</span></span><br><span class="line"><span class="keyword">set</span> val(rp)             <span class="variable">$par1</span>                      <span class="comment">;# routing protocol</span></span><br><span class="line"><span class="keyword">set</span> val(x)              <span class="number">2000</span></span><br><span class="line"><span class="keyword">set</span> val(y)              <span class="number">2000</span></span><br><span class="line"><span class="keyword">set</span> val(seed)           <span class="number">0.0</span></span><br><span class="line"><span class="keyword">set</span> val(tr)             temp.tr</span><br><span class="line"><span class="keyword">set</span> val(nn)             <span class="number">10</span></span><br><span class="line"><span class="keyword">set</span> val(cp)             <span class="variable">$par2</span></span><br><span class="line"><span class="keyword">set</span> val(sc)             <span class="variable">$par3</span></span><br><span class="line"><span class="keyword">set</span> val(stop)           <span class="number">100.0</span></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>$par1&#x3D;&#x3D;”DSR”：  <code>$</code>符号是shell语言里的应用符代表执行变量，而其后的 <code>DSR</code>参数则对应你需要实验的路由协议，如 AODV 、DSDV啥的 </p>
+<p>set val(ifqlen)：这段代码我不是很清楚其定义，暂且将其理解为最大的发（数据）包数。</p>
+<p>set val(x) 、set val(y)：不用多说，来设定 模拟环境的大小</p>
+<p>set val(seed)：种子，对数据的影响有待考究，容我看看在说</p>
+<p>set val(nn) ：节点数，这个一定要和cbr文件里的设定的nn（number of nodes）数量一样不然会报错，可以和scan里的不一样也就是setdest工具生成的那个文件，但是如果这么做实验数据还能不能用 我不太敢保证。</p>
+<p>set val(stop) ：个人理解是运行时间，但我怀疑是节点的暂停等待时间（移动啥的）。</p>
+</blockquote>
+<h3 id="F-H-Gv3-0-tcl"><a href="#F-H-Gv3-0-tcl" class="headerlink" title="F_H_Gv3.0.tcl"></a>F_H_Gv3.0.tcl</h3><p>当当当，允许我隆重的介绍18届科研小组最重要的成果，缝合怪(F_H_G)v3.0 版本的发布（其实我那段时间有点沉迷魔兽）。当然那会我还很菜，主要工作是由网络工程（统）班的 何健翔同学创造的，我主要是负责一些修改，以及参数微调，这里选取的是第45行开始的。其实本质上这个代码就是由张旭老师的3个原始元件合并而成，算是小小的重构吧毕竟节省了很多事情。这段代码原理是使用正则表达式来匹配term.tr仿真结果文件中的数据，并对其进行汇总最后得出丢包率等等需要的信息。</p>
+<figure class="highlight tcl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">         <span class="keyword">if</span>((($<span class="number">1</span>==<span class="string">&quot;s&quot;</span>) || ($<span class="number">1</span>==<span class="string">&quot;f&quot;</span>)) &amp;&amp; ($<span class="number">19</span>==<span class="string">&quot;RTR&quot;</span>) &amp;&amp; (($<span class="number">35</span>==<span class="string">&quot;AODV&quot;</span>)||($<span class="number">35</span>==<span class="string">&quot;message&quot;</span>)))</span><br><span class="line">         &#123;</span><br><span class="line">                   <span class="keyword">load</span>++;</span><br><span class="line">         &#125;</span><br><span class="line">        &#125;</span><br><span class="line">END&#123;</span><br><span class="line">         <span class="keyword">for</span>(packet_id = <span class="number">0</span>; packet_id &lt;= highest_packet_id; packet_id++) &#123;</span><br><span class="line">                   start=start_time[packet_id];</span><br><span class="line">                   end=end_time[packet_id];</span><br><span class="line">                   <span class="keyword">if</span>(end != <span class="number">-1</span> &amp;&amp; start &lt; end) &#123;</span><br><span class="line">                   packet_duration=end - start;</span><br><span class="line">                   duration_total = duration_total + packet_duration;</span><br><span class="line">                   &#125;</span><br><span class="line">         &#125;</span><br><span class="line">        printf(<span class="string">&quot;Delay:%.4f\n&quot;</span>,duration_total/receives);</span><br><span class="line">        printf(<span class="string">&quot;CBR_F/TCP_F Sent:%d Receive:%d, r/s Ratio:%.4f, f:%d \n&quot;</span>, sendLine, recvLine, (recvLine/sendLine*<span class="number">100</span>),fowardLine);</span><br><span class="line">        Normalized_load=<span class="keyword">load</span>/recvLine_1;</span><br><span class="line">        printf(<span class="string">&quot;Load:%d,N_Load:%.4f\n&quot;</span>,<span class="keyword">load</span>,Normalized_load);</span><br><span class="line">&#125;</span><br><span class="line">                                                                                           </span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>全代码只有一个地方需要修改：</p>
+<p>第45行的 <code>(($35==&quot;AODV&quot;)|</code> 中间部分需要换成仿真时使用到的协议。</p>
+</blockquote>
+<h2 id="科研日志"><a href="#科研日志" class="headerlink" title="科研日志"></a>科研日志</h2><h3 id="Day1"><a href="#Day1" class="headerlink" title="Day1"></a>Day1</h3><p>实验配置：</p>
+<p>cbrgen:</p>
+<table>
+<thead>
+<tr>
+<th>type</th>
+<th>nn</th>
+<th><strong>seed</strong></th>
+<th>mc</th>
+<th>rate</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>cbr</td>
+<td>80</td>
+<td>3</td>
+<td>10</td>
+<td>100.0</td>
+</tr>
+<tr>
+<td>cbr</td>
+<td>90</td>
+<td>3</td>
+<td>10</td>
+<td>100.0</td>
+</tr>
+<tr>
+<td>cbr</td>
+<td>100</td>
+<td>3</td>
+<td>10</td>
+<td>100.0</td>
+</tr>
+<tr>
+<td>cbr</td>
+<td>110</td>
+<td>3</td>
+<td>10</td>
+<td>100.0</td>
+</tr>
+<tr>
+<td>cbr</td>
+<td>120</td>
+<td>3</td>
+<td>10</td>
+<td>100.0</td>
+</tr>
+<tr>
+<td>cbr</td>
+<td>130</td>
+<td>3</td>
+<td>10</td>
+<td>100.0</td>
+</tr>
+<tr>
+<td>cbr</td>
+<td>140</td>
+<td>3</td>
+<td>10</td>
+<td>100.0</td>
+</tr>
+<tr>
+<td>cbr</td>
+<td>150</td>
+<td>3</td>
+<td>10</td>
+<td>100.0</td>
+</tr>
+<tr>
+<td>cbr</td>
+<td>160</td>
+<td>3</td>
+<td>10</td>
+<td>100.0</td>
+</tr>
+</tbody></table>
+<p>Setdest:</p>
+<table>
+<thead>
+<tr>
+<th>nn</th>
+<th>p</th>
+<th>M</th>
+<th>t</th>
+<th>x</th>
+<th>y</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>80</td>
+<td>5</td>
+<td>100</td>
+<td>100</td>
+<td>2000</td>
+<td>2000</td>
+</tr>
+<tr>
+<td>90</td>
+<td>5</td>
+<td>100</td>
+<td>100</td>
+<td>2000</td>
+<td>2000</td>
+</tr>
+<tr>
+<td>100</td>
+<td>5</td>
+<td>100</td>
+<td>100</td>
+<td>2000</td>
+<td>2000</td>
+</tr>
+<tr>
+<td>110</td>
+<td>5</td>
+<td>100</td>
+<td>100</td>
+<td>2000</td>
+<td>2000</td>
+</tr>
+<tr>
+<td>120</td>
+<td>5</td>
+<td>100</td>
+<td>100</td>
+<td>2000</td>
+<td>2000</td>
+</tr>
+<tr>
+<td>130</td>
+<td>5</td>
+<td>100</td>
+<td>100</td>
+<td>2000</td>
+<td>2000</td>
+</tr>
+<tr>
+<td>140</td>
+<td>5</td>
+<td>100</td>
+<td>100</td>
+<td>2000</td>
+<td>2000</td>
+</tr>
+<tr>
+<td>150</td>
+<td>5</td>
+<td>100</td>
+<td>100</td>
+<td>2000</td>
+<td>2000</td>
+</tr>
+<tr>
+<td>160</td>
+<td>5</td>
+<td>100</td>
+<td>100</td>
+<td>2000</td>
+<td>2000</td>
+</tr>
+</tbody></table>
+<p>实验结果：</p>
+<table>
+<thead>
+<tr>
+<th>nn</th>
+<th>Delay</th>
+<th>CBR Sent</th>
+<th>Receive</th>
+<th>r&#x2F;s Rate</th>
+<th>forward</th>
+<th>load</th>
+<th>n_load</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>80</td>
+<td>0.0064</td>
+<td>1002</td>
+<td>1001</td>
+<td>99.9002</td>
+<td>0</td>
+<td>80</td>
+<td>0.0799</td>
+</tr>
+<tr>
+<td>90</td>
+<td>0.2779</td>
+<td>277</td>
+<td>190</td>
+<td>68.59</td>
+<td>258</td>
+<td>91</td>
+<td>0.4789</td>
+</tr>
+<tr>
+<td>100</td>
+<td>1.3544</td>
+<td>501</td>
+<td>102</td>
+<td>20.3593</td>
+<td>418</td>
+<td>205</td>
+<td>2.0098</td>
+</tr>
+<tr>
+<td>110</td>
+<td>0.526</td>
+<td>629</td>
+<td>524</td>
+<td>81.717</td>
+<td>519</td>
+<td>111</td>
+<td>0.216</td>
+</tr>
+<tr>
+<td>120</td>
+<td>0.5205</td>
+<td>576</td>
+<td>9</td>
+<td>1.5625</td>
+<td>50</td>
+<td>364</td>
+<td>40.444</td>
+</tr>
+<tr>
+<td>130</td>
+<td>0.8161</td>
+<td>641</td>
+<td>328</td>
+<td>51.17</td>
+<td>740</td>
+<td>132</td>
+<td>0.4024</td>
+</tr>
+<tr>
+<td>140</td>
+<td>0.5323</td>
+<td>932</td>
+<td>728</td>
+<td>79.2696</td>
+<td>773</td>
+<td>141</td>
+<td>0.1911</td>
+</tr>
+<tr>
+<td>150</td>
+<td>0.7229</td>
+<td>228</td>
+<td>85</td>
+<td>32.2807</td>
+<td>277</td>
+<td>153</td>
+<td>1.8</td>
+</tr>
+<tr>
+<td>160</td>
+<td>0.6567</td>
+<td>256</td>
+<td>13</td>
+<td>5.0781</td>
+<td>115</td>
+<td>325</td>
+<td>25</td>
+</tr>
+</tbody></table>
+<p><strong>结果分析：</strong></p>
+<p>初步怀疑收发率低下是否是由转发报文太多引起，但是现象不明显还需要多试试，我准备以120n为基准尝试不同的种子（模拟随机条件）。</p>
+<h4 id="关于mc最大联机数问题"><a href="#关于mc最大联机数问题" class="headerlink" title="关于mc最大联机数问题"></a>关于mc最大联机数问题</h4><p>就目前的结果来看似乎并没有太大关系，3组实验数据完全一致。</p>
+<p><img onerror="imgOnError(this);" data-fancybox="gallery" src="https://idzforjh.github.io/Library/Application%20Support/typora-user-images/image-20210416092857372.png" alt="image-20210416092857372" data-caption="image-20210416092857372" loading="lazy"></p>
+
+    
+  </article>
+
+  
+      
+    <div class="nexmoe-post-copyright">
+        <strong>本文作者：</strong>Fraser·Porter·Bridges·&#39;iDzforjh&#39;·Bu<br>
+        <strong>本文链接：</strong><a href="https://idzforjh.github.io/2021/04/12/Data/" title="https:&#x2F;&#x2F;idzforjh.github.io&#x2F;2021&#x2F;04&#x2F;12&#x2F;Data&#x2F;" target="_blank" rel="noopener">https:&#x2F;&#x2F;idzforjh.github.io&#x2F;2021&#x2F;04&#x2F;12&#x2F;Data&#x2F;</a><br>
+        
+            <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
+
+        
+    </div>
+
+
+  
+  
+  <div class="nexmoe-post-meta nexmoe-rainbow">
+   
+    
+        <a class="nexmoefont icon-tag-fill -none-link" href="https://idzforjh.github.io/tags/Ad-hoc/" rel="tag">Ad-hoc</a>
+    
+</div>
+  
+  
+    <script async src="https://idzforjh.github.io/js/copy-codeblock.js?v=1687495222989"></script>
+  
+
+  
+      <div class="nexmoe-post-footer">
+          <div id="container"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+  var gitment = new Gitment({
+    id: location.href, // 可选。默认为 location.href
+    owner: iDzforjh, // 可以是你的GitHub用户名，也可以是github id
+    repo: BlogComment,
+    oauth: {
+      client_id: 6c973088d50f1672529e	,
+      client_secret: bc61b99550feec2054d49edc3945c1deac56231c ,
+    },
+  })
+  gitment.render('container')
+</script>
+
+      </div>
+  
+</div>
+</div>
+        <div class="nexmoe-post-right">
+              <div class="nexmoe-fixed">
+                  <div class="nexmoe-tool"> 
+                    
+                      
+                        
+                          
+                          
+                              <button class="mdui-fab catalog" style="overflow:unset;">
+                                  <i class="nexmoefont icon-i-catalog"></i>
+                                  <div class="nexmoe-toc">
+                                      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%A7%91%E7%A0%94%E6%97%A5%E8%AE%B0"><span class="toc-number">1.</span> <span class="toc-text">科研日记</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A6%82%E8%BF%B0"><span class="toc-number">1.1.</span> <span class="toc-text">概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#NS2-%E4%BB%BF%E7%9C%9F%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85"><span class="toc-number">1.2.</span> <span class="toc-text">NS2 仿真软件安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#NS2-%E5%B0%8F%E5%B7%A5%E5%85%B7%E8%AF%B4%E6%98%8E"><span class="toc-number">1.3.</span> <span class="toc-text">NS2 小工具说明</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#cbrgen"><span class="toc-number">1.3.1.</span> <span class="toc-text">cbrgen</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#setdesk"><span class="toc-number">1.3.2.</span> <span class="toc-text">setdesk</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E8%AF%B4%E6%98%8E"><span class="toc-number">1.4.</span> <span class="toc-text">代码说明</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#adhoc-tcl"><span class="toc-number">1.4.1.</span> <span class="toc-text">adhoc.tcl</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#F-H-Gv3-0-tcl"><span class="toc-number">1.4.2.</span> <span class="toc-text">F_H_Gv3.0.tcl</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A7%91%E7%A0%94%E6%97%A5%E5%BF%97"><span class="toc-number">1.5.</span> <span class="toc-text">科研日志</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Day1"><span class="toc-number">1.5.1.</span> <span class="toc-text">Day1</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%B3%E4%BA%8Emc%E6%9C%80%E5%A4%A7%E8%81%94%E6%9C%BA%E6%95%B0%E9%97%AE%E9%A2%98"><span class="toc-number">1.5.1.1.</span> <span class="toc-text">关于mc最大联机数问题</span></a></li></ol></li></ol></li></ol></li></ol>
+                                  </div>
+                              </button>
+                          
+                          
+                      
+                    
+                      <a href="#nexmoe-content" class="toc-link" aria-label="Back To Top" title="top"><button class="mdui-fab mdui-ripple"><i class="nexmoefont icon-caret-top"></i></button></a>
+                  </div>
+              </div>
+            </div>
+    </div>
+    <div id="nexmoe-search-space">
+	<div class="search-container">
+		<div class="search-header">
+			<div class="search-input-container">
+				<input
+					class="search-input"
+					type="text"
+					placeholder="搜索"
+					oninput="sinput();"
+				/>
+			</div>
+			<a class="search-close" onclick="sclose();">×</a>
+		</div>
+		<div class="search-body"></div>
+	</div>
+</div>
+
+    
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2058306854838448" crossorigin="anonymous"></script>
+
+</body>
+
+</html>
